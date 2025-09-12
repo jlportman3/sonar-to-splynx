@@ -1,0 +1,599 @@
+{
+  "metadata": {
+    "analyzed_at": "2025-09-12T03:55:48.434479",
+    "total_endpoints": 3,
+    "total_records": 48429,
+    "api_base_url": "https://alamobb.sonar.software/api/v1"
+  },
+  "discovery": {
+    "discovered_endpoints": [
+      "accounts",
+      "tickets",
+      "users"
+    ],
+    "categorized_endpoints": {
+      "accounts": [
+        "accounts"
+      ],
+      "billing": [],
+      "services": [],
+      "network": [],
+      "infrastructure": [],
+      "operations": [
+        "tickets"
+      ],
+      "monitoring": [],
+      "users": [
+        "users"
+      ],
+      "system": [],
+      "integration": [],
+      "usage": [],
+      "documents": [],
+      "voip": [],
+      "financial": [],
+      "reporting": [],
+      "other": []
+    },
+    "high_value_endpoints": [
+      {
+        "endpoint": "tickets",
+        "record_count": 38285,
+        "field_count": 20
+      },
+      {
+        "endpoint": "accounts",
+        "record_count": 10114,
+        "field_count": 14
+      },
+      {
+        "endpoint": "users",
+        "record_count": 30,
+        "field_count": 8
+      }
+    ]
+  },
+  "schemas": {
+    "accounts": {
+      "endpoint": "accounts",
+      "available": true,
+      "total_records": 10114,
+      "pagination": {
+        "total_count": 10114,
+        "total_pages": 1012,
+        "current_page": 1,
+        "limit": 10
+      },
+      "sample_record_count": 10,
+      "fields": {
+        "id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "9263",
+            "10174",
+            "10178"
+          ]
+        },
+        "name": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "Steve Whittley",
+            "Margie Vega",
+            "Clint Christian"
+          ]
+        },
+        "account_type_id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "1"
+          ]
+        },
+        "account_status_id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "5",
+            "2",
+            "3"
+          ]
+        },
+        "account_groups": {
+          "type": "list",
+          "nullable": false,
+          "sample_values": [
+            "[1, 3]",
+            "[]",
+            "[1]"
+          ]
+        },
+        "balance_due": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "0.00"
+          ]
+        },
+        "balance_total": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "0.00"
+          ]
+        },
+        "total_balance": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "0.00"
+          ]
+        },
+        "sub_accounts": {
+          "type": "list",
+          "nullable": false,
+          "sample_values": [
+            "[105467]",
+            "[106328]",
+            "[]"
+          ]
+        },
+        "next_bill_date": {
+          "type": "str",
+          "nullable": true,
+          "sample_values": [
+            "2025-09-01",
+            "2025-10-01",
+            "2025-02-16"
+          ]
+        },
+        "delinquent": {
+          "type": "bool",
+          "nullable": false,
+          "sample_values": [
+            "False"
+          ]
+        },
+        "company_id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "1"
+          ]
+        },
+        "next_recurring_charge_amount": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "76.95",
+            "46.95",
+            "0.00"
+          ]
+        },
+        "available_funds": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "0.00"
+          ]
+        }
+      },
+      "sample_records": [
+        {
+          "id": 9263,
+          "name": "Margie Vega",
+          "account_type_id": 1,
+          "account_status_id": 5,
+          "account_groups": [
+            1
+          ],
+          "balance_due": "0.00",
+          "balance_total": "0.00",
+          "total_balance": "0.00",
+          "sub_accounts": [
+            105467
+          ],
+          "next_bill_date": "2025-09-01",
+          "delinquent": false,
+          "company_id": 1,
+          "next_recurring_charge_amount": "46.95",
+          "available_funds": "0.00"
+        },
+        {
+          "id": 10174,
+          "name": "Clint Christian",
+          "account_type_id": 1,
+          "account_status_id": 3,
+          "account_groups": [],
+          "balance_due": "0.00",
+          "balance_total": "0.00",
+          "total_balance": "0.00",
+          "sub_accounts": [],
+          "next_bill_date": null,
+          "delinquent": false,
+          "company_id": 1,
+          "next_recurring_charge_amount": "0.00",
+          "available_funds": "0.00"
+        }
+      ]
+    },
+    "tickets": {
+      "endpoint": "tickets",
+      "available": true,
+      "total_records": 38285,
+      "pagination": {
+        "total_count": 38285,
+        "total_pages": 3829,
+        "current_page": 1,
+        "limit": 10
+      },
+      "sample_record_count": 10,
+      "fields": {
+        "id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "40356",
+            "40357",
+            "40358"
+          ]
+        },
+        "subject": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "Fixed Wireless - Cannot connect with any devices",
+            "Job 16069 Service Call With Maintenance completed successfully",
+            "Billing - Make a payment"
+          ]
+        },
+        "type": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "internal",
+            "public"
+          ]
+        },
+        "ticket_group_id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "10",
+            "3",
+            "1"
+          ]
+        },
+        "user_id": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": []
+        },
+        "assignee": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "accounts"
+          ]
+        },
+        "assignee_id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "62825",
+            "100937",
+            "107141"
+          ]
+        },
+        "due_date": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": []
+        },
+        "priority": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "4"
+          ]
+        },
+        "category_ids": {
+          "type": "list",
+          "nullable": false,
+          "sample_values": [
+            "[]",
+            "[1]"
+          ]
+        },
+        "open": {
+          "type": "bool",
+          "nullable": false,
+          "sample_values": [
+            "False",
+            "True"
+          ]
+        },
+        "parent_ticket_id": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": []
+        },
+        "child_ticket_ids": {
+          "type": "list",
+          "nullable": false,
+          "sample_values": [
+            "[]"
+          ]
+        },
+        "inbound_email_account_id": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": [
+            "3",
+            "1"
+          ]
+        },
+        "spam": {
+          "type": "bool",
+          "nullable": false,
+          "sample_values": [
+            "False"
+          ]
+        },
+        "last_reply_incoming": {
+          "type": "bool",
+          "nullable": false,
+          "sample_values": [
+            "False",
+            "True"
+          ]
+        },
+        "email_address": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": [
+            "jecbr28@feedback.alamobroadband.com",
+            "jonathan@govyvora.com"
+          ]
+        },
+        "closed_at": {
+          "type": "str",
+          "nullable": true,
+          "sample_values": [
+            "2025-09-12 02:25:06"
+          ]
+        },
+        "closed_by_user_id": {
+          "type": "int",
+          "nullable": true,
+          "sample_values": [
+            "14"
+          ]
+        },
+        "created_at": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "2025-09-11 23:01:18",
+            "2025-09-11 23:58:29",
+            "2025-09-12 02:25:05"
+          ]
+        }
+      },
+      "sample_records": [
+        {
+          "id": 40358,
+          "subject": "Billing - Make a payment",
+          "type": "internal",
+          "ticket_group_id": 3,
+          "user_id": null,
+          "assignee": "accounts",
+          "assignee_id": 100937,
+          "due_date": null,
+          "priority": 4,
+          "category_ids": [
+            1
+          ],
+          "open": false,
+          "parent_ticket_id": null,
+          "child_ticket_ids": [],
+          "inbound_email_account_id": null,
+          "spam": false,
+          "last_reply_incoming": false,
+          "email_address": null,
+          "closed_at": "2025-09-12 02:25:06",
+          "closed_by_user_id": 14,
+          "created_at": "2025-09-12 02:25:05"
+        },
+        {
+          "id": 40357,
+          "subject": "Fixed Wireless - Cannot connect with any devices",
+          "type": "internal",
+          "ticket_group_id": 1,
+          "user_id": null,
+          "assignee": "accounts",
+          "assignee_id": 62825,
+          "due_date": null,
+          "priority": 4,
+          "category_ids": [
+            1
+          ],
+          "open": true,
+          "parent_ticket_id": null,
+          "child_ticket_ids": [],
+          "inbound_email_account_id": null,
+          "spam": false,
+          "last_reply_incoming": false,
+          "email_address": null,
+          "closed_at": null,
+          "closed_by_user_id": null,
+          "created_at": "2025-09-11 23:58:29"
+        }
+      ]
+    },
+    "users": {
+      "endpoint": "users",
+      "available": true,
+      "total_records": 30,
+      "pagination": {
+        "total_count": 30,
+        "total_pages": 3,
+        "current_page": 1,
+        "limit": 10
+      },
+      "sample_record_count": 10,
+      "fields": {
+        "id": {
+          "type": "int",
+          "nullable": false,
+          "sample_values": [
+            "3",
+            "2",
+            "1"
+          ]
+        },
+        "username": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "sonya",
+            "sonar",
+            "admin"
+          ]
+        },
+        "name": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "Sonya",
+            "sonar",
+            "Joe Portman"
+          ]
+        },
+        "public_name": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "Sonya Portman",
+            "Sonar",
+            "Joe Portman"
+          ]
+        },
+        "locale": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "en"
+          ]
+        },
+        "role_id": {
+          "type": "NoneType",
+          "nullable": true,
+          "sample_values": [
+            "4",
+            "2",
+            "6"
+          ]
+        },
+        "email_address": {
+          "type": "str",
+          "nullable": false,
+          "sample_values": [
+            "sonya@portman.net",
+            "baron@baron.com",
+            "support@sonar.software"
+          ]
+        },
+        "mobile_number": {
+          "type": "int",
+          "nullable": true,
+          "sample_values": [
+            "5195746696",
+            "2103162300"
+          ]
+        }
+      },
+      "sample_records": [
+        {
+          "id": 1,
+          "username": "admin",
+          "name": "Joe Portman",
+          "public_name": "Joe Portman",
+          "locale": "en",
+          "role_id": null,
+          "email_address": "baron@baron.com",
+          "mobile_number": 2103162300
+        },
+        {
+          "id": 2,
+          "username": "sonya",
+          "name": "Sonya",
+          "public_name": "Sonya Portman",
+          "locale": "en",
+          "role_id": null,
+          "email_address": "sonya@portman.net",
+          "mobile_number": null
+        }
+      ]
+    }
+  },
+  "field_analysis": {
+    "common_fields": {
+      "id": {
+        "endpoints": [
+          "accounts",
+          "tickets",
+          "users"
+        ],
+        "types": [
+          "int"
+        ],
+        "nullable_count": 0
+      },
+      "name": {
+        "endpoints": [
+          "accounts",
+          "users"
+        ],
+        "types": [
+          "str"
+        ],
+        "nullable_count": 0
+      },
+      "email_address": {
+        "endpoints": [
+          "tickets",
+          "users"
+        ],
+        "types": [
+          "NoneType",
+          "str"
+        ],
+        "nullable_count": 1
+      }
+    },
+    "total_unique_fields": 38
+  },
+  "migration_insights": {
+    "priority_endpoints": [
+      "accounts"
+    ],
+    "high_priority_record_count": 10114,
+    "complex_endpoints": [
+      "tickets",
+      "accounts"
+    ],
+    "recommended_migration_order": [
+      "accounts",
+      "services",
+      "billing",
+      "network",
+      "infrastructure",
+      "operations",
+      "users",
+      "system"
+    ],
+    "estimated_complexity": "low"
+  }
+}

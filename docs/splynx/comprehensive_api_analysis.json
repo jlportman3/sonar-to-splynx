@@ -1,0 +1,7364 @@
+{
+  "analysis_date": "2025-09-12T07:12:55.190461",
+  "splynx_url": "http://10.0.60.125",
+  "api_version": "2.0",
+  "full_permissions_enabled": true,
+  "endpoint_analysis": {
+    "admin/api/check": {
+      "url": "http://10.0.60.125/api/2.0/admin/api/check",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [],
+      "fields": [
+        "status",
+        "message",
+        "same_server"
+      ],
+      "sample_data": {
+        "status": "ok",
+        "message": "API is valid",
+        "same_server": 0
+      },
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/customers/customer": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "mrr_total",
+            "title": "Monthly recurring revenue",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gdpr_agreed",
+            "title": "GDPR agreement",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "parent_id",
+            "title": "Main account",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "billing_type",
+            "title": "Billing type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Portal login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Full name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "title": "Email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_email",
+            "title": "Billing email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "title": "Phone number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "street_1",
+            "title": "Street",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "zip_code",
+            "title": "ZIP Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "city",
+            "title": "City",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "subdivision_id",
+            "title": "State/Province",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_add",
+            "title": "Date added",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "last_online",
+            "title": "Last online",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_update",
+            "title": "Last update",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "daily_prepaid_cost",
+            "title": "Daily prepaid cost",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "gps",
+            "title": "Geo data",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "conversion_date",
+            "title": "Convert date",
+            "type": "datetime",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/customers/customer-statistics": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer-statistics",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "#",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tariff_id",
+            "title": "Plan",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "nas_id",
+            "title": "Nas_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "in_bytes",
+            "title": "Download bytes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "out_bytes",
+            "title": "Upload bytes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "start_date",
+            "title": "Start date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "start_time",
+            "title": "Start time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "title": "End date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "end_time",
+            "title": "End time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv4",
+            "title": "IPv4 address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6",
+            "title": "IPv6 address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "mac",
+            "title": "MAC",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "call_to",
+            "title": "Called-Station-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "port",
+            "title": "NAS-Port-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "error",
+            "title": "Error",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "error_repeat",
+            "title": "Error repeat",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "session_id",
+            "title": "Session ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "terminate_cause",
+            "title": "Termination cause",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/customers/customers-online": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customers-online",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tariff_id",
+            "title": "Plan",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "nas_id",
+            "title": "Routers",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "username_real",
+            "title": "User name real",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "in_bytes",
+            "title": "Download MB",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "out_bytes",
+            "title": "Upload MB",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "start_session",
+            "title": "Start session",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv4",
+            "title": "IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6",
+            "title": "IPv6",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6_prefix",
+            "title": "IPv6 prefix",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "mac",
+            "title": "MAC/IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "call_to",
+            "title": "Called-Station-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "port",
+            "title": "NAS-Port-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "time_on",
+            "title": "Time online",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_change",
+            "title": "Last update",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login_is",
+            "title": "Login is",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "session_id",
+            "title": "Session ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "blocked",
+            "title": "Blocked",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "nas_identifier",
+            "title": "Nas_identifier",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "kill",
+            "title": "X",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fup",
+            "title": "Rule",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "signal",
+            "title": "Signal Strength",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_router_id",
+            "title": "Routers",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_sector_id",
+            "title": "Router contention",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_login",
+            "title": "Service login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_ipv4",
+            "title": "IPs",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_ipv4_route",
+            "title": "Additional networks",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_mac",
+            "title": "MAC",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_unit_price",
+            "title": "Internet service price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_start_date",
+            "title": "Internet services start date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_end_date",
+            "title": "Internet services end date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_description",
+            "title": "Description",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/customers/location": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/location",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/customers/contact": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/contact",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/customers/lead": {
+      "url": "http://10.0.60.125/api/2.0/admin/customers/lead",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/tariffs/internet": {
+      "url": "http://10.0.60.125/api/2.0/admin/tariffs/internet",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "speed_download",
+            "title": "Download speed (kbps)",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "speed_upload",
+            "title": "Upload speed (kbps)",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "speed_limit_type",
+            "title": "Speed limit type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "speed_limit_at",
+            "title": "Guaranteed speed limit at",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "speed_limit_fixed_up",
+            "title": "Guaranteed upload speed limit",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "speed_limit_fixed_down",
+            "title": "Guaranteed download speed limit",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "aggregation",
+            "title": "Aggregation",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_type",
+            "title": "Burst type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "burst_limit",
+            "title": "Burst limit",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_limit_fixed_up",
+            "title": "Upload burst limit",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_limit_fixed_down",
+            "title": "Download burst limit",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_threshold",
+            "title": "Burst threshold",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_threshold_fixed_up",
+            "title": "Upload burst threshold",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_threshold_fixed_down",
+            "title": "Download burst threshold",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "burst_time",
+            "title": "Burst time",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "priority",
+            "title": "Priority",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "exclude_traffic_classes",
+            "title": "Exclude traffic classes from accounting",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "services",
+            "title": "Services",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "service_name",
+            "title": "Service description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_days_count",
+            "title": "Days",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "available_for_services",
+            "title": "Enabled",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "billing_types",
+            "title": "Types of billing",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "custom_period",
+            "title": "Prepaid period",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id",
+            "title": "Transaction category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "vat_percent",
+            "title": "Tax %",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "with_vat",
+            "title": "Tax included",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "show_on_customer_portal",
+            "title": "Show tariff on Customer portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "hide_on_admin_portal",
+            "title": "Hide tariff on Admin portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "available_for_locations",
+            "title": "Available locations",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "customer_categories",
+            "title": "Customer category",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "tax_id",
+            "title": "Tax name",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/tariffs/voice": {
+      "url": "http://10.0.60.125/api/2.0/admin/tariffs/voice",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "customer_rate_table_id",
+            "title": "Rate table",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "buy_price_increase",
+            "title": "Buy price increase",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "connection_cost_included",
+            "title": "Included pricing should cover the connection cost",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id_for_calls",
+            "title": "Transaction category for calls",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id_for_messages",
+            "title": "Transaction category for messages",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id_for_data",
+            "title": "Transaction category for data",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "services",
+            "title": "Services",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "service_name",
+            "title": "Service description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_days_count",
+            "title": "Days",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "available_for_services",
+            "title": "Enabled",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "billing_types",
+            "title": "Types of billing",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "custom_period",
+            "title": "Prepaid period",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id",
+            "title": "Transaction category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "vat_percent",
+            "title": "Tax %",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "with_vat",
+            "title": "Tax included",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "show_on_customer_portal",
+            "title": "Show tariff on Customer portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "hide_on_admin_portal",
+            "title": "Hide tariff on Admin portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "available_for_locations",
+            "title": "Available locations",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "customer_categories",
+            "title": "Customer category",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "tax_id",
+            "title": "Tax name",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/tariffs/recurring": {
+      "url": "http://10.0.60.125/api/2.0/admin/tariffs/recurring",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/tariffs/bundle": {
+      "url": "http://10.0.60.125/api/2.0/admin/tariffs/bundle",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "service_description",
+            "title": "Service description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_days_count",
+            "title": "Days",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customers",
+            "title": "Customers",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_types",
+            "title": "Types of billing",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "activation_fee",
+            "title": "Activation fee",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "get_activation_fee_when",
+            "title": "Get activation fee when",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "issue_invoice_while_service_creation",
+            "title": "Issue an invoice",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "contract_duration",
+            "title": "Contract duration",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "automatic_renewal",
+            "title": "Automatic renewal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "auto_reactivate",
+            "title": "Auto reactivate",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "cancellation_fee",
+            "title": "Cancellation fee",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "prior_cancellation_fee",
+            "title": "Prior cancellation fee",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "change_to_other_bundle_fee",
+            "title": "Change to other bundle fee",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "discount_period",
+            "title": "Discount period",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "discount_value",
+            "title": "Discount value",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "discount_type",
+            "title": "Discount type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "available_for_services",
+            "title": "Enabled",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "internet_tariffs",
+            "title": "Internet tariffs plans",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "voice_tariffs",
+            "title": "Voice tariffs plans",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "custom_tariffs",
+            "title": "Recurring tariffs plans",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "custom_period",
+            "title": "Prepaid period",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services",
+            "title": "Services",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id",
+            "title": "Transaction category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "vat_percent",
+            "title": "Tax",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "with_vat",
+            "title": "Tax included",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "show_on_customer_portal",
+            "title": "Show tariff on Customer portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "hide_on_admin_portal",
+            "title": "Hide tariff on Admin portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "available_for_locations",
+            "title": "Available locations",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "customer_categories",
+            "title": "Customer category",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "deleted",
+            "title": "Deleted",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tax_id",
+            "title": "Tax name",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/tariffs/one-time": {
+      "url": "http://10.0.60.125/api/2.0/admin/tariffs/one-time",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "service_description",
+            "title": "Service description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "enabled",
+            "title": "Enabled",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "transaction_category_id",
+            "title": "Transaction category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "vat_percent",
+            "title": "Tax %",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "with_vat",
+            "title": "Tax included",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "show_on_customer_portal",
+            "title": "Show tariff on Customer portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "hide_on_admin_portal",
+            "title": "Hide tariff on Admin portal",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "available_for_locations",
+            "title": "Available locations",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "customer_categories",
+            "title": "Customer category",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "tax_id",
+            "title": "Tax name",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/services/internet": {
+      "url": "http://10.0.60.125/api/2.0/admin/services/internet",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/services/voice": {
+      "url": "http://10.0.60.125/api/2.0/admin/services/voice",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/services/custom": {
+      "url": "http://10.0.60.125/api/2.0/admin/services/custom",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/services/ipv4": {
+      "url": "http://10.0.60.125/api/2.0/admin/services/ipv4",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/services/ipv6": {
+      "url": "http://10.0.60.125/api/2.0/admin/services/ipv6",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/finance/transactions": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/transactions",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "quantity",
+            "title": "Quantity",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "unit",
+            "title": "Unit",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "tax_percent",
+            "title": "Tax %",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "total",
+            "title": "Total",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "remind_amount",
+            "title": "Remind amount",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "date",
+            "title": "Transaction date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "description",
+            "title": "Description",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "period_from",
+            "title": "From",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "period_to",
+            "title": "To",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "service_id",
+            "title": "Service ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "title": "Payment",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "credit_note_id",
+            "title": "Credit note ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "invoice_id",
+            "title": "Invoice ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "invoiced_by_id",
+            "title": "Invoiced by ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "to_invoice",
+            "title": "Include transaction in next recurring invoice",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "service_type",
+            "title": "Service type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tax_id",
+            "title": "Tax name",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "sub_account_id",
+            "title": "Account ID",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/finance/invoices": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/invoices",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "date_created",
+            "title": "Document date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "real_create_datetime",
+            "title": "Created",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_updated",
+            "title": "Last update",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "date_payment",
+            "title": "Payment date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_till",
+            "title": "Payment due date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "use_transactions",
+            "title": "Use transactions",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "memo",
+            "title": "Memo",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "number",
+            "title": "Number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "total",
+            "title": "Total",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "due",
+            "title": "Due",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "title": "Payment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payd_from_deposit",
+            "title": "Payd_from_deposit",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_sent",
+            "title": "Sent?",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by",
+            "type": "numeric",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/finance/payments": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/payments",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "invoice_id",
+            "title": "Invoice",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "credit_note_id",
+            "title": "Credit note",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "request_id",
+            "title": "Proforma Invoice",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "transaction_id",
+            "title": "Transaction",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "payment_statement_id",
+            "title": "Payment_statement_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_type",
+            "title": "Payment type",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "receipt_number",
+            "title": "Receipt Number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date",
+            "title": "Date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "real_create_datetime",
+            "title": "Created",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "amount",
+            "title": "Sum",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "remind_amount",
+            "title": "Unallocated amount",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_sent",
+            "title": "Sent?",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "field_1",
+            "title": "Payer",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "field_2",
+            "title": "#2",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "field_3",
+            "title": "#3",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "field_4",
+            "title": "#4",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "field_5",
+            "title": "#5",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "memo",
+            "title": "Memo",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by",
+            "type": "numeric",
+            "required": false
+          },
+          {
+            "name": "updated_at",
+            "title": "Updated_at",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/finance/payment-methods": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/payment-methods",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "name",
+        "is_active",
+        "name_1",
+        "name_2",
+        "name_3",
+        "name_4",
+        "name_5",
+        "accounting_bank_accounts_id",
+        "einvoicing_payment_methods_id"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "name": "Cash",
+          "is_active": "1",
+          "name_1": "Payer",
+          "name_2": "",
+          "name_3": "",
+          "name_4": "",
+          "name_5": "",
+          "accounting_bank_accounts_id": 0,
+          "einvoicing_payment_methods_id": 0
+        },
+        {
+          "id": 2,
+          "name": "Bank transfer",
+          "is_active": "1",
+          "name_1": "Account",
+          "name_2": "Transaction ID",
+          "name_3": "",
+          "name_4": "",
+          "name_5": "",
+          "accounting_bank_accounts_id": 0,
+          "einvoicing_payment_methods_id": 0
+        },
+        {
+          "id": 3,
+          "name": "Credit card",
+          "is_active": "1",
+          "name_1": "Number",
+          "name_2": "Transaction ID",
+          "name_3": "",
+          "name_4": "",
+          "name_5": "",
+          "accounting_bank_accounts_id": 0,
+          "einvoicing_payment_methods_id": 0
+        },
+        {
+          "id": 5,
+          "name": "Other",
+          "is_active": "1",
+          "name_1": "",
+          "name_2": "",
+          "name_3": "",
+          "name_4": "",
+          "name_5": "",
+          "accounting_bank_accounts_id": 0,
+          "einvoicing_payment_methods_id": 0
+        },
+        {
+          "id": 6,
+          "name": "Refill card",
+          "is_active": "1",
+          "name_1": "Card",
+          "name_2": "",
+          "name_3": "",
+          "name_4": "",
+          "name_5": "",
+          "accounting_bank_accounts_id": 0,
+          "einvoicing_payment_methods_id": 0
+        }
+      ],
+      "record_count": 5,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_active",
+            "title": "Active",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "name_1",
+            "title": "Field 1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name_2",
+            "title": "Field 2",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name_3",
+            "title": "Field 3",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name_4",
+            "title": "Field 4",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name_5",
+            "title": "Field 5",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "accounting_bank_accounts_id",
+            "title": "Accounting bank accounts ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "einvoicing_payment_methods_id",
+            "title": "Einvoicing_payment_methods_id",
+            "type": "integer",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/finance/transaction-categories": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/transaction-categories",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "name",
+        "is_base",
+        "accounting_category_id",
+        "einvoicing_category_id",
+        "einvoicing_private_person_category_id",
+        "einvoicing_type_id",
+        "einvoicing_private_person_type_id"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "name": "Service",
+          "is_base": "1",
+          "accounting_category_id": null,
+          "einvoicing_category_id": 0,
+          "einvoicing_private_person_category_id": 0,
+          "einvoicing_type_id": 0,
+          "einvoicing_private_person_type_id": 0
+        },
+        {
+          "id": 2,
+          "name": "Discount",
+          "is_base": "1",
+          "accounting_category_id": null,
+          "einvoicing_category_id": 0,
+          "einvoicing_private_person_category_id": 0,
+          "einvoicing_type_id": 0,
+          "einvoicing_private_person_type_id": 0
+        },
+        {
+          "id": 3,
+          "name": "Payment",
+          "is_base": "1",
+          "accounting_category_id": null,
+          "einvoicing_category_id": 0,
+          "einvoicing_private_person_category_id": 0,
+          "einvoicing_type_id": 0,
+          "einvoicing_private_person_type_id": 0
+        },
+        {
+          "id": 4,
+          "name": "Refund",
+          "is_base": "1",
+          "accounting_category_id": null,
+          "einvoicing_category_id": 0,
+          "einvoicing_private_person_category_id": 0,
+          "einvoicing_type_id": 0,
+          "einvoicing_private_person_type_id": 0
+        },
+        {
+          "id": 5,
+          "name": "Correction",
+          "is_base": "1",
+          "accounting_category_id": null,
+          "einvoicing_category_id": 0,
+          "einvoicing_private_person_category_id": 0,
+          "einvoicing_type_id": 0,
+          "einvoicing_private_person_type_id": 0
+        }
+      ],
+      "record_count": 5,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_base",
+            "title": "Is base",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "accounting_category_id",
+            "title": "Accounting category ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "einvoicing_category_id",
+            "title": "eInvoicing category ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "einvoicing_private_person_category_id",
+            "title": "eInvoicing private person category ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "einvoicing_type_id",
+            "title": "eInvoicing type ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "einvoicing_private_person_type_id",
+            "title": "eInvoicing private person type ID",
+            "type": "integer",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/finance/bank-accounts": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/bank-accounts",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/finance/bank-statements": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/bank-statements",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "date_time",
+        "title",
+        "handler",
+        "status",
+        "filename_original",
+        "filename_uploaded",
+        "filename_parsed",
+        "records",
+        "processed",
+        "errors",
+        "new",
+        "canceled",
+        "ignored",
+        "manual_paired",
+        "pending",
+        "selected_columns",
+        "dataFromApi",
+        "payment_type",
+        "file",
+        "delimiter",
+        "make_preview",
+        "make_import",
+        "paired_data",
+        "pair_to_inactive_customers",
+        "countRows",
+        "countRowsWithErrors"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "date_time": "2025-09-12 07:10:49",
+          "title": "",
+          "handler": "",
+          "status": "new",
+          "filename_original": "",
+          "filename_uploaded": "",
+          "filename_parsed": "",
+          "records": 0,
+          "processed": 0,
+          "errors": 0,
+          "new": 0,
+          "canceled": 0,
+          "ignored": 0,
+          "manual_paired": 0,
+          "pending": 0,
+          "selected_columns": null,
+          "dataFromApi": null,
+          "payment_type": 2,
+          "file": null,
+          "delimiter": "tabulator",
+          "make_preview": null,
+          "make_import": null,
+          "paired_data": [],
+          "pair_to_inactive_customers": "1",
+          "countRows": 0,
+          "countRowsWithErrors": 0
+        }
+      ],
+      "record_count": 1,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_time",
+            "title": "Date & Time",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "handler",
+            "title": "Handler",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_original",
+            "title": "Filename",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_uploaded",
+            "title": "Filename_uploaded",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_parsed",
+            "title": "Filename_parsed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "records",
+            "title": "Records",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "processed",
+            "title": "Processed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "errors",
+            "title": "Errors",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "new",
+            "title": "New",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "canceled",
+            "title": "Cancelled",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ignored",
+            "title": "Ignored",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "manual_paired",
+            "title": "Manually paired",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "pending",
+            "title": "Pending",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "selected_columns",
+            "title": "Selected_columns",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "dataFromApi",
+            "title": "DataFromApi",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_type",
+            "title": "Payment type",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "file",
+            "title": "File",
+            "type": "file",
+            "required": false
+          },
+          {
+            "name": "delimiter",
+            "title": "Delimiter",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "make_preview",
+            "title": "Make_preview",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "make_import",
+            "title": "Make_import",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "paired_data",
+            "title": "Paired_data",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "pair_to_inactive_customers",
+            "title": "Pair to inactive customers",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "countRows",
+            "title": "CountRows",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "countRowsWithErrors",
+            "title": "CountRowsWithErrors",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/finance/proforma-invoices": {
+      "url": "http://10.0.60.125/api/2.0/admin/finance/proforma-invoices",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "date_created",
+            "title": "Document date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "real_create_datetime",
+            "title": "Created",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_updated",
+            "title": "Last update",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "date_payment",
+            "title": "Payment date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_till",
+            "title": "Payment due date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "number",
+            "title": "Number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "total",
+            "title": "Total",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "title": "Payment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_sent",
+            "title": "Sent?",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "memo",
+            "title": "Memo",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_crm_request",
+            "title": "Is_crm_request",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by",
+            "type": "numeric",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/administration/locations": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/locations",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "name",
+        "tax_for_tariff_bundle",
+        "tax_for_tariff_internet",
+        "tax_for_tariff_voice",
+        "tax_for_tariff_recurring",
+        "tax_for_tariff_onetime",
+        "tax_for_inventory_items"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "name": "Main",
+          "tax_for_tariff_bundle": 0,
+          "tax_for_tariff_internet": 0,
+          "tax_for_tariff_voice": 0,
+          "tax_for_tariff_recurring": 0,
+          "tax_for_tariff_onetime": 0,
+          "tax_for_inventory_items": 0
+        }
+      ],
+      "record_count": 1,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Location",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "tax_for_tariff_bundle",
+            "title": "Default tax for any bundle in this location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tax_for_tariff_internet",
+            "title": "Default tax for any internet tariff & related top-ups in this location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tax_for_tariff_voice",
+            "title": "Default tax for any voice tariff in this location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tax_for_tariff_recurring",
+            "title": "Default tax for any recurring tariff in this location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tax_for_tariff_onetime",
+            "title": "Default tax for any one-time tariff in this location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tax_for_inventory_items",
+            "title": "Default tax for any inventory item in this location",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/administration/administrators": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/administrators",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "partner_id",
+        "role_name",
+        "login",
+        "name",
+        "email",
+        "timeout",
+        "last_ip",
+        "last_dt",
+        "filter_partner_id",
+        "router_access",
+        "phone",
+        "send_from_my_name",
+        "calendar_color",
+        "updated_at",
+        "avatar_api_url",
+        "download_avatar_link"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "partner_id": 0,
+          "role_name": "super-administrator",
+          "login": "admin",
+          "name": "Main Admin",
+          "email": "admin1@splynx.com",
+          "timeout": 0,
+          "last_ip": "10.10.10.115",
+          "last_dt": "2025-09-12 02:45:38",
+          "filter_partner_id": null,
+          "router_access": "none",
+          "phone": "",
+          "send_from_my_name": "0",
+          "calendar_color": "",
+          "updated_at": "2025-09-12 02:45:38",
+          "avatar_api_url": null,
+          "download_avatar_link": null
+        },
+        {
+          "id": 2,
+          "partner_id": 0,
+          "role_name": "super-administrator",
+          "login": "splynx",
+          "name": "Splynx admin",
+          "email": "admin2@splynx.com",
+          "timeout": 0,
+          "last_ip": "",
+          "last_dt": "0000-00-00 00:00:00",
+          "filter_partner_id": null,
+          "router_access": "none",
+          "phone": "",
+          "send_from_my_name": "0",
+          "calendar_color": "",
+          "updated_at": "2025-09-12 02:43:16",
+          "avatar_api_url": null,
+          "download_avatar_link": null
+        }
+      ],
+      "record_count": 2,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "role_name",
+            "title": "Role",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Admin login",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "title": "Full name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "title": "Email",
+            "type": "email",
+            "required": true
+          },
+          {
+            "name": "timeout",
+            "title": "Timeout",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "last_ip",
+            "title": "Last IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_dt",
+            "title": "Last login",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "filter_partner_id",
+            "title": "Filter_partner_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "router_access",
+            "title": "Router access (radius)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "title": "Phone",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "send_from_my_name",
+            "title": "Send emails from my name",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "calendar_color",
+            "title": "Calendar color",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "updated_at",
+            "title": "Updated_at",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/administration/partners": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/partners",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [
+        "id",
+        "name"
+      ],
+      "sample_data": [
+        {
+          "id": 1,
+          "name": "Main"
+        }
+      ],
+      "record_count": 1,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Partner name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/administration/roles": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/roles",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/administration/config": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/config",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/administration/main": {
+      "url": "http://10.0.60.125/api/2.0/admin/administration/main",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/networking/routers": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/routers",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "model",
+            "title": "Vendor/Model",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "address",
+            "title": "Physical address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ip",
+            "title": "IP/Host",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "gps",
+            "title": "GPS area",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gps_point",
+            "title": "GPS",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "authorization_method",
+            "title": "Authorization",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "accounting_method",
+            "title": "Accounting",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "nas_type",
+            "title": "NAS type",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "nas_ip",
+            "title": "NAS IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "radius_secret",
+            "title": "Radius secret",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "pool_ids",
+            "title": "Pools",
+            "type": "array",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/ipv4": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/ipv4",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network",
+            "title": "Network",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "mask",
+            "title": "BM",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network_category",
+            "title": "Network category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network_type",
+            "title": "Network type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type_of_usage",
+            "title": "Type of usage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "allow_use_network_and_broadcast",
+            "title": "Allow usage of network and broadcast IP's",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "parent",
+            "title": "Parent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "rootnet",
+            "title": "RootNet",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "save_to_parent",
+            "title": "Save_to_parent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "used",
+            "title": "Used",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "split_to",
+            "title": "Split_to",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "confirm_merge",
+            "title": "Confirm_merge",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "needCreateIps",
+            "title": "Need create IPs",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/ipv6": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/ipv6",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network",
+            "title": "Network",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "prefix",
+            "title": "Prefix",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network_category",
+            "title": "Network category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "network_type",
+            "title": "Network type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type_of_usage",
+            "title": "Type of usage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "parent",
+            "title": "Parent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "rootnet",
+            "title": "RootNet",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "save_to_parent",
+            "title": "Save_to_parent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "used",
+            "title": "Used",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "split_to",
+            "title": "Split_to",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "confirm_merge",
+            "title": "Confirm_merge",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "range_from",
+            "title": "Range_from",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "range_to",
+            "title": "Range_to",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/monitoring": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/monitoring",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "network_site_id",
+            "title": "Network site",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "parent_id",
+            "title": "Parent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "producer",
+            "title": "Vendor",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "model",
+            "title": "Product/Model",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ip",
+            "title": "IP address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "snmp_port",
+            "title": "Port",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "snmp_community",
+            "title": "SNMP community",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "monitoring_group",
+            "title": "Group",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "address",
+            "title": "Address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "active",
+            "title": "SNMP Monitoring",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "send_notifications",
+            "title": "Send notifications",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "gps",
+            "title": "Gps",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gps_area",
+            "title": "Gps_area",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "delay_timer",
+            "title": "Delay for notification",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "is_ping",
+            "title": "Ping this device",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "ping_0",
+            "title": "Ping_0",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_1",
+            "title": "Ping_1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_2",
+            "title": "Ping_2",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_3",
+            "title": "Ping_3",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_4",
+            "title": "Ping_4",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_5",
+            "title": "Ping_5",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_time",
+            "title": "Ping_time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping",
+            "title": "Ping",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_version",
+            "title": "SNMP Version",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "snmp_time",
+            "title": "Snmp_time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_uptime",
+            "title": "Uptime",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status_1",
+            "title": "Snmp_status_1",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status_2",
+            "title": "Snmp_status_2",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status_3",
+            "title": "Snmp_status_3",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status_4",
+            "title": "Snmp_status_4",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_status_5",
+            "title": "Snmp_status_5",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "snmp_state",
+            "title": "SNMP state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ping_state",
+            "title": "Ping state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "access_device",
+            "title": "Access device",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "versions",
+            "title": "Versions",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/nas-types": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/nas-types",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/networking/vlans": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/vlans",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/networking/ip-pools": {
+      "url": "http://10.0.60.125/api/2.0/admin/networking/ip-pools",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/support/tickets": {
+      "url": "http://10.0.60.125/api/2.0/admin/support/tickets",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "reporter",
+            "title": "Reporter",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "reporter_id",
+            "title": "Reporter ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "reporter_type",
+            "title": "Reporter type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "incoming_customer_id",
+            "title": "Incoming customer",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "hidden",
+            "title": "Hide",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "assign_to",
+            "title": "Assigned to",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status_id",
+            "title": "Status",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "group_id",
+            "title": "Group",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "type_id",
+            "title": "Type",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "task_id",
+            "title": "Task",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "subject",
+            "title": "Subject",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "priority",
+            "title": "Priority",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "star",
+            "title": "Star",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "unread_by_customer",
+            "title": "Unread_by_customer",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "unread_by_admin",
+            "title": "Unread_by_admin",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "closed",
+            "title": "Closed",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "created_at",
+            "title": "Created Date & Time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "updated_at",
+            "title": "Updated date & time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "trash",
+            "title": "Archive",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "shareable",
+            "title": "Shareable",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "watching",
+            "title": "Watching",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "related_account_id",
+            "title": "Related to",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "related_account_type",
+            "title": "Related_account_type",
+            "type": "enum",
+            "required": false
+          },
+          {
+            "name": "hidden_from_related_account",
+            "title": "Hidden from related account",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "unread_by_related_account",
+            "title": "Unread_by_related_account",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/support/ticket-messages": {
+      "url": "http://10.0.60.125/api/2.0/admin/support/ticket-messages",
+      "status": 500,
+      "accessible": false,
+      "restricted": false,
+      "not_found": false,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/support/canned-responses": {
+      "url": "http://10.0.60.125/api/2.0/admin/support/canned-responses",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/inventory/items": {
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/items",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "supplier_invoices_item_id",
+            "title": "Supplier Invoice ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "barcode",
+            "title": "Barcode",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "serial_number",
+            "title": "Serial number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "mark",
+            "title": "Mark",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "admin_id",
+            "title": "Administrator ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "service_id",
+            "title": "Service ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "invoice_id",
+            "title": "Invoice ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "cost_price",
+            "title": "Cost price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "transaction_id",
+            "title": "Transaction ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "product_id",
+            "title": "Product",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "notes",
+            "title": "Notes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_original",
+            "title": "Filename_original",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename",
+            "title": "Photo",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "stock_id",
+            "title": "Stock location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "task_id",
+            "title": "Link to task",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/inventory/categories": {
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/categories",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/inventory/vendors": {
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/vendors",
+      "status": 200,
+      "accessible": true,
+      "restricted": false,
+      "not_found": false,
+      "methods": [
+        "OPTIONS",
+        "POST"
+      ],
+      "fields": [],
+      "sample_data": [],
+      "record_count": 0,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/crm/tasks": {
+      "url": "http://10.0.60.125/api/2.0/admin/crm/tasks",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/crm/deals": {
+      "url": "http://10.0.60.125/api/2.0/admin/crm/deals",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/crm/pipeline": {
+      "url": "http://10.0.60.125/api/2.0/admin/crm/pipeline",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/reports/customers": {
+      "url": "http://10.0.60.125/api/2.0/admin/reports/customers",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/reports/financial": {
+      "url": "http://10.0.60.125/api/2.0/admin/reports/financial",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/reports/custom": {
+      "url": "http://10.0.60.125/api/2.0/admin/reports/custom",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/dashboard/dashboard": {
+      "url": "http://10.0.60.125/api/2.0/admin/dashboard/dashboard",
+      "status": 403,
+      "accessible": false,
+      "restricted": true,
+      "not_found": false,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/dashboard/widgets": {
+      "url": "http://10.0.60.125/api/2.0/admin/dashboard/widgets",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/radius/accounts": {
+      "url": "http://10.0.60.125/api/2.0/admin/radius/accounts",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/radius/sessions": {
+      "url": "http://10.0.60.125/api/2.0/admin/radius/sessions",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/radius/nas": {
+      "url": "http://10.0.60.125/api/2.0/admin/radius/nas",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/radius/settings": {
+      "url": "http://10.0.60.125/api/2.0/admin/radius/settings",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/monitoring/monitoring": {
+      "url": "http://10.0.60.125/api/2.0/admin/monitoring/monitoring",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/monitoring/maps": {
+      "url": "http://10.0.60.125/api/2.0/admin/monitoring/maps",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/monitoring/ping": {
+      "url": "http://10.0.60.125/api/2.0/admin/monitoring/ping",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    },
+    "admin/monitoring/traceroute": {
+      "url": "http://10.0.60.125/api/2.0/admin/monitoring/traceroute",
+      "status": 404,
+      "accessible": false,
+      "restricted": false,
+      "not_found": true,
+      "methods": [],
+      "fields": [],
+      "sample_data": null,
+      "record_count": 0,
+      "schema": null
+    }
+  },
+  "working_endpoints": [
+    "admin/api/check",
+    "admin/customers/customer",
+    "admin/customers/customer-statistics",
+    "admin/customers/customers-online",
+    "admin/tariffs/internet",
+    "admin/tariffs/voice",
+    "admin/tariffs/recurring",
+    "admin/tariffs/bundle",
+    "admin/tariffs/one-time",
+    "admin/finance/transactions",
+    "admin/finance/invoices",
+    "admin/finance/payments",
+    "admin/finance/payment-methods",
+    "admin/finance/transaction-categories",
+    "admin/finance/bank-statements",
+    "admin/finance/proforma-invoices",
+    "admin/administration/locations",
+    "admin/administration/administrators",
+    "admin/administration/partners",
+    "admin/networking/routers",
+    "admin/networking/ipv4",
+    "admin/networking/ipv6",
+    "admin/networking/monitoring",
+    "admin/support/tickets",
+    "admin/inventory/items",
+    "admin/inventory/vendors"
+  ],
+  "restricted_endpoints": [
+    "admin/dashboard/dashboard"
+  ],
+  "schemas": {
+    "admin/customers/customer": {
+      "attributes": [
+        {
+          "name": "mrr_total",
+          "title": "Monthly recurring revenue",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "gdpr_agreed",
+          "title": "GDPR agreement",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "parent_id",
+          "title": "Main account",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "billing_type",
+          "title": "Billing type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "partner_id",
+          "title": "Partner",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location_id",
+          "title": "Location",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by",
+          "title": "Added by",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by_id",
+          "title": "Added by ID",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "login",
+          "title": "Portal login",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "category",
+          "title": "Category",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Full name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "email",
+          "title": "Email",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "billing_email",
+          "title": "Billing email",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "phone",
+          "title": "Phone number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "street_1",
+          "title": "Street",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "zip_code",
+          "title": "ZIP Code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "city",
+          "title": "City",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "subdivision_id",
+          "title": "State/Province",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_add",
+          "title": "Date added",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "last_online",
+          "title": "Last online",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "last_update",
+          "title": "Last update",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "daily_prepaid_cost",
+          "title": "Daily prepaid cost",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "gps",
+          "title": "Geo data",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "conversion_date",
+          "title": "Convert date",
+          "type": "datetime",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/customers/customer-statistics": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "#",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "service_id",
+          "title": "Service",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "tariff_id",
+          "title": "Plan",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "partner_id",
+          "title": "Partner",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "nas_id",
+          "title": "Nas_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "login",
+          "title": "Login",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "in_bytes",
+          "title": "Download bytes",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "out_bytes",
+          "title": "Upload bytes",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_date",
+          "title": "Start date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_time",
+          "title": "Start time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_date",
+          "title": "End date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_time",
+          "title": "End time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ipv4",
+          "title": "IPv4 address",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ipv6",
+          "title": "IPv6 address",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "mac",
+          "title": "MAC",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "call_to",
+          "title": "Called-Station-Id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "port",
+          "title": "NAS-Port-Id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "error",
+          "title": "Error",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "error_repeat",
+          "title": "Error repeat",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "session_id",
+          "title": "Session ID",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "terminate_cause",
+          "title": "Termination cause",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    "admin/customers/customers-online": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "service_id",
+          "title": "Service",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tariff_id",
+          "title": "Plan",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "partner_id",
+          "title": "Partner",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "nas_id",
+          "title": "Routers",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "login",
+          "title": "Login",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "username_real",
+          "title": "User name real",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "in_bytes",
+          "title": "Download MB",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "out_bytes",
+          "title": "Upload MB",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "start_session",
+          "title": "Start session",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ipv4",
+          "title": "IP",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ipv6",
+          "title": "IPv6",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ipv6_prefix",
+          "title": "IPv6 prefix",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "mac",
+          "title": "MAC/IP",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "call_to",
+          "title": "Called-Station-Id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "port",
+          "title": "NAS-Port-Id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "time_on",
+          "title": "Time online",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "last_change",
+          "title": "Last update",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "login_is",
+          "title": "Login is",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "session_id",
+          "title": "Session ID",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "blocked",
+          "title": "Blocked",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "nas_identifier",
+          "title": "Nas_identifier",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "kill",
+          "title": "X",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "fup",
+          "title": "Rule",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "signal",
+          "title": "Signal Strength",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_router_id",
+          "title": "Routers",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_sector_id",
+          "title": "Router contention",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_login",
+          "title": "Service login",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_ipv4",
+          "title": "IPs",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_ipv4_route",
+          "title": "Additional networks",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_mac",
+          "title": "MAC",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_unit_price",
+          "title": "Internet service price",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_start_date",
+          "title": "Internet services start date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_end_date",
+          "title": "Internet services end date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services_internet_description",
+          "title": "Description",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    "admin/tariffs/internet": {
+      "attributes": [
+        {
+          "name": "speed_download",
+          "title": "Download speed (kbps)",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "speed_upload",
+          "title": "Upload speed (kbps)",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "speed_limit_type",
+          "title": "Speed limit type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "speed_limit_at",
+          "title": "Guaranteed speed limit at",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "speed_limit_fixed_up",
+          "title": "Guaranteed upload speed limit",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "speed_limit_fixed_down",
+          "title": "Guaranteed download speed limit",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "aggregation",
+          "title": "Aggregation",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_type",
+          "title": "Burst type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "burst_limit",
+          "title": "Burst limit",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_limit_fixed_up",
+          "title": "Upload burst limit",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_limit_fixed_down",
+          "title": "Download burst limit",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_threshold",
+          "title": "Burst threshold",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_threshold_fixed_up",
+          "title": "Upload burst threshold",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_threshold_fixed_down",
+          "title": "Download burst threshold",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "burst_time",
+          "title": "Burst time",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "priority",
+          "title": "Priority",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "exclude_traffic_classes",
+          "title": "Exclude traffic classes from accounting",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "services",
+          "title": "Services",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "service_name",
+          "title": "Service description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "billing_days_count",
+          "title": "Days",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "available_for_services",
+          "title": "Enabled",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "billing_types",
+          "title": "Types of billing",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "custom_period",
+          "title": "Prepaid period",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id",
+          "title": "Transaction category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "vat_percent",
+          "title": "Tax %",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "with_vat",
+          "title": "Tax included",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "show_on_customer_portal",
+          "title": "Show tariff on Customer portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "hide_on_admin_portal",
+          "title": "Hide tariff on Admin portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "available_for_locations",
+          "title": "Available locations",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "customer_categories",
+          "title": "Customer category",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "tax_id",
+          "title": "Tax name",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/tariffs/voice": {
+      "attributes": [
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "customer_rate_table_id",
+          "title": "Rate table",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "buy_price_increase",
+          "title": "Buy price increase",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "connection_cost_included",
+          "title": "Included pricing should cover the connection cost",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id_for_calls",
+          "title": "Transaction category for calls",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id_for_messages",
+          "title": "Transaction category for messages",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id_for_data",
+          "title": "Transaction category for data",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "services",
+          "title": "Services",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "service_name",
+          "title": "Service description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "billing_days_count",
+          "title": "Days",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "available_for_services",
+          "title": "Enabled",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "billing_types",
+          "title": "Types of billing",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "custom_period",
+          "title": "Prepaid period",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id",
+          "title": "Transaction category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "vat_percent",
+          "title": "Tax %",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "with_vat",
+          "title": "Tax included",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "show_on_customer_portal",
+          "title": "Show tariff on Customer portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "hide_on_admin_portal",
+          "title": "Hide tariff on Admin portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "available_for_locations",
+          "title": "Available locations",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "customer_categories",
+          "title": "Customer category",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "tax_id",
+          "title": "Tax name",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/tariffs/bundle": {
+      "attributes": [
+        {
+          "name": "service_description",
+          "title": "Service description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "billing_days_count",
+          "title": "Days",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "customers",
+          "title": "Customers",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "billing_types",
+          "title": "Types of billing",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "activation_fee",
+          "title": "Activation fee",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "get_activation_fee_when",
+          "title": "Get activation fee when",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "issue_invoice_while_service_creation",
+          "title": "Issue an invoice",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "contract_duration",
+          "title": "Contract duration",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "automatic_renewal",
+          "title": "Automatic renewal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "auto_reactivate",
+          "title": "Auto reactivate",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "cancellation_fee",
+          "title": "Cancellation fee",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "prior_cancellation_fee",
+          "title": "Prior cancellation fee",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "change_to_other_bundle_fee",
+          "title": "Change to other bundle fee",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "discount_period",
+          "title": "Discount period",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "discount_value",
+          "title": "Discount value",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "discount_type",
+          "title": "Discount type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "available_for_services",
+          "title": "Enabled",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "internet_tariffs",
+          "title": "Internet tariffs plans",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "voice_tariffs",
+          "title": "Voice tariffs plans",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "custom_tariffs",
+          "title": "Recurring tariffs plans",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "custom_period",
+          "title": "Prepaid period",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "services",
+          "title": "Services",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id",
+          "title": "Transaction category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "vat_percent",
+          "title": "Tax",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "with_vat",
+          "title": "Tax included",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "show_on_customer_portal",
+          "title": "Show tariff on Customer portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "hide_on_admin_portal",
+          "title": "Hide tariff on Admin portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "available_for_locations",
+          "title": "Available locations",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "customer_categories",
+          "title": "Customer category",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "deleted",
+          "title": "Deleted",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "tax_id",
+          "title": "Tax name",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/tariffs/one-time": {
+      "attributes": [
+        {
+          "name": "service_description",
+          "title": "Service description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "enabled",
+          "title": "Enabled",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "transaction_category_id",
+          "title": "Transaction category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "vat_percent",
+          "title": "Tax %",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "with_vat",
+          "title": "Tax included",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "show_on_customer_portal",
+          "title": "Show tariff on Customer portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "hide_on_admin_portal",
+          "title": "Hide tariff on Admin portal",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "available_for_locations",
+          "title": "Available locations",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "customer_categories",
+          "title": "Customer category",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": true
+        },
+        {
+          "name": "tax_id",
+          "title": "Tax name",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/finance/transactions": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "quantity",
+          "title": "Quantity",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "unit",
+          "title": "Unit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "price",
+          "title": "Price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "tax_percent",
+          "title": "Tax %",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "total",
+          "title": "Total",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "remind_amount",
+          "title": "Remind amount",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "date",
+          "title": "Transaction date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "category",
+          "title": "Category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "description",
+          "title": "Description",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "period_from",
+          "title": "From",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "period_to",
+          "title": "To",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "service_id",
+          "title": "Service ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "payment_id",
+          "title": "Payment",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "credit_note_id",
+          "title": "Credit note ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "invoice_id",
+          "title": "Invoice ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "invoiced_by_id",
+          "title": "Invoiced by ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "comment",
+          "title": "Comment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "to_invoice",
+          "title": "Include transaction in next recurring invoice",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "service_type",
+          "title": "Service type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "source",
+          "title": "Source",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "tax_id",
+          "title": "Tax name",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "sub_account_id",
+          "title": "Account ID",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/finance/invoices": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "date_created",
+          "title": "Document date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "real_create_datetime",
+          "title": "Created",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_updated",
+          "title": "Last update",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "date_payment",
+          "title": "Payment date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_till",
+          "title": "Payment due date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "use_transactions",
+          "title": "Use transactions",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "note",
+          "title": "Note",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "memo",
+          "title": "Memo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "number",
+          "title": "Number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "total",
+          "title": "Total",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "due",
+          "title": "Due",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "payment_id",
+          "title": "Payment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payd_from_deposit",
+          "title": "Payd_from_deposit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "is_sent",
+          "title": "Sent?",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by",
+          "title": "Added_by",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by_id",
+          "title": "Added by",
+          "type": "numeric",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/finance/payments": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "invoice_id",
+          "title": "Invoice",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "credit_note_id",
+          "title": "Credit note",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "request_id",
+          "title": "Proforma Invoice",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "transaction_id",
+          "title": "Transaction",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "payment_statement_id",
+          "title": "Payment_statement_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payment_type",
+          "title": "Payment type",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "receipt_number",
+          "title": "Receipt Number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date",
+          "title": "Date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "real_create_datetime",
+          "title": "Created",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "amount",
+          "title": "Sum",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "remind_amount",
+          "title": "Unallocated amount",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "comment",
+          "title": "Comment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "is_sent",
+          "title": "Sent?",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "field_1",
+          "title": "Payer",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "field_2",
+          "title": "#2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "field_3",
+          "title": "#3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "field_4",
+          "title": "#4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "field_5",
+          "title": "#5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "note",
+          "title": "Note",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "memo",
+          "title": "Memo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by",
+          "title": "Added_by",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by_id",
+          "title": "Added by",
+          "type": "numeric",
+          "required": false
+        },
+        {
+          "name": "updated_at",
+          "title": "Updated_at",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/finance/payment-methods": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "is_active",
+          "title": "Active",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "name_1",
+          "title": "Field 1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name_2",
+          "title": "Field 2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name_3",
+          "title": "Field 3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name_4",
+          "title": "Field 4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name_5",
+          "title": "Field 5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "accounting_bank_accounts_id",
+          "title": "Accounting bank accounts ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "einvoicing_payment_methods_id",
+          "title": "Einvoicing_payment_methods_id",
+          "type": "integer",
+          "required": false
+        }
+      ]
+    },
+    "admin/finance/transaction-categories": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "is_base",
+          "title": "Is base",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "accounting_category_id",
+          "title": "Accounting category ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "einvoicing_category_id",
+          "title": "eInvoicing category ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "einvoicing_private_person_category_id",
+          "title": "eInvoicing private person category ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "einvoicing_type_id",
+          "title": "eInvoicing type ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "einvoicing_private_person_type_id",
+          "title": "eInvoicing private person type ID",
+          "type": "integer",
+          "required": false
+        }
+      ]
+    },
+    "admin/finance/bank-statements": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_time",
+          "title": "Date & Time",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "handler",
+          "title": "Handler",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "filename_original",
+          "title": "Filename",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "filename_uploaded",
+          "title": "Filename_uploaded",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "filename_parsed",
+          "title": "Filename_parsed",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "records",
+          "title": "Records",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "processed",
+          "title": "Processed",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "errors",
+          "title": "Errors",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "new",
+          "title": "New",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "canceled",
+          "title": "Cancelled",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ignored",
+          "title": "Ignored",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "manual_paired",
+          "title": "Manually paired",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "pending",
+          "title": "Pending",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "selected_columns",
+          "title": "Selected_columns",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "dataFromApi",
+          "title": "DataFromApi",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payment_type",
+          "title": "Payment type",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "file",
+          "title": "File",
+          "type": "file",
+          "required": false
+        },
+        {
+          "name": "delimiter",
+          "title": "Delimiter",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "make_preview",
+          "title": "Make_preview",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "make_import",
+          "title": "Make_import",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "paired_data",
+          "title": "Paired_data",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "pair_to_inactive_customers",
+          "title": "Pair to inactive customers",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "countRows",
+          "title": "CountRows",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "countRowsWithErrors",
+          "title": "CountRowsWithErrors",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    "admin/finance/proforma-invoices": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "date_created",
+          "title": "Document date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "real_create_datetime",
+          "title": "Created",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_updated",
+          "title": "Last update",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "date_payment",
+          "title": "Payment date",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "date_till",
+          "title": "Payment due date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "number",
+          "title": "Number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "total",
+          "title": "Total",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "payment_id",
+          "title": "Payment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "is_sent",
+          "title": "Sent?",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "note",
+          "title": "Note",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "memo",
+          "title": "Memo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "is_crm_request",
+          "title": "Is_crm_request",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "added_by",
+          "title": "Added_by",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "added_by_id",
+          "title": "Added by",
+          "type": "numeric",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/administration/locations": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "Id",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Location",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "tax_for_tariff_bundle",
+          "title": "Default tax for any bundle in this location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tax_for_tariff_internet",
+          "title": "Default tax for any internet tariff & related top-ups in this location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tax_for_tariff_voice",
+          "title": "Default tax for any voice tariff in this location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tax_for_tariff_recurring",
+          "title": "Default tax for any recurring tariff in this location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tax_for_tariff_onetime",
+          "title": "Default tax for any one-time tariff in this location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "tax_for_inventory_items",
+          "title": "Default tax for any inventory item in this location",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/administration/administrators": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "Id",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "partner_id",
+          "title": "Partner",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "role_name",
+          "title": "Role",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "login",
+          "title": "Admin login",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "name",
+          "title": "Full name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "email",
+          "title": "Email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "timeout",
+          "title": "Timeout",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "last_ip",
+          "title": "Last IP",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "last_dt",
+          "title": "Last login",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "filter_partner_id",
+          "title": "Filter_partner_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "router_access",
+          "title": "Router access (radius)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "phone",
+          "title": "Phone",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "send_from_my_name",
+          "title": "Send emails from my name",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "calendar_color",
+          "title": "Calendar color",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "updated_at",
+          "title": "Updated_at",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/administration/partners": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "Id",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Partner name",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/networking/routers": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "model",
+          "title": "Vendor/Model",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location_id",
+          "title": "Location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "address",
+          "title": "Physical address",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ip",
+          "title": "IP/Host",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "gps",
+          "title": "GPS area",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "gps_point",
+          "title": "GPS",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "authorization_method",
+          "title": "Authorization",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "accounting_method",
+          "title": "Accounting",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "nas_type",
+          "title": "NAS type",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "nas_ip",
+          "title": "NAS IP",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "radius_secret",
+          "title": "Radius secret",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "pool_ids",
+          "title": "Pools",
+          "type": "array",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/networking/ipv4": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network",
+          "title": "Network",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "mask",
+          "title": "BM",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "comment",
+          "title": "Comment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location_id",
+          "title": "Location ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network_category",
+          "title": "Network category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network_type",
+          "title": "Network type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "type_of_usage",
+          "title": "Type of usage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "allow_use_network_and_broadcast",
+          "title": "Allow usage of network and broadcast IP's",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "parent",
+          "title": "Parent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rootnet",
+          "title": "RootNet",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "save_to_parent",
+          "title": "Save_to_parent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "used",
+          "title": "Used",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "split_to",
+          "title": "Split_to",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "confirm_merge",
+          "title": "Confirm_merge",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "needCreateIps",
+          "title": "Need create IPs",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/networking/ipv6": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network",
+          "title": "Network",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "prefix",
+          "title": "Prefix",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "comment",
+          "title": "Comment",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "location_id",
+          "title": "Location ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network_category",
+          "title": "Network category",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "network_type",
+          "title": "Network type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "type_of_usage",
+          "title": "Type of usage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "parent",
+          "title": "Parent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rootnet",
+          "title": "RootNet",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "save_to_parent",
+          "title": "Save_to_parent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "used",
+          "title": "Used",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "split_to",
+          "title": "Split_to",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "confirm_merge",
+          "title": "Confirm_merge",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "range_from",
+          "title": "Range_from",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "range_to",
+          "title": "Range_to",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/networking/monitoring": {
+      "attributes": [
+        {
+          "name": "title",
+          "title": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "network_site_id",
+          "title": "Network site",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "parent_id",
+          "title": "Parent",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "producer",
+          "title": "Vendor",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "model",
+          "title": "Product/Model",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ip",
+          "title": "IP address",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "snmp_port",
+          "title": "Port",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "snmp_community",
+          "title": "SNMP community",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "monitoring_group",
+          "title": "Group",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "location_id",
+          "title": "Location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "address",
+          "title": "Address",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "active",
+          "title": "SNMP Monitoring",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "send_notifications",
+          "title": "Send notifications",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "gps",
+          "title": "Gps",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "gps_area",
+          "title": "Gps_area",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "delay_timer",
+          "title": "Delay for notification",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "is_ping",
+          "title": "Ping this device",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "ping_0",
+          "title": "Ping_0",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_1",
+          "title": "Ping_1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_2",
+          "title": "Ping_2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_3",
+          "title": "Ping_3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_4",
+          "title": "Ping_4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_5",
+          "title": "Ping_5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_time",
+          "title": "Ping_time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping",
+          "title": "Ping",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_version",
+          "title": "SNMP Version",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "snmp_time",
+          "title": "Snmp_time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_uptime",
+          "title": "Uptime",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status",
+          "title": "Status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status_1",
+          "title": "Snmp_status_1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status_2",
+          "title": "Snmp_status_2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status_3",
+          "title": "Snmp_status_3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status_4",
+          "title": "Snmp_status_4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_status_5",
+          "title": "Snmp_status_5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "snmp_state",
+          "title": "SNMP state",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ping_state",
+          "title": "Ping state",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "access_device",
+          "title": "Access device",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "partners_ids",
+          "title": "Partners",
+          "type": "array",
+          "required": false
+        },
+        {
+          "name": "versions",
+          "title": "Versions",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "id",
+          "title": "Id",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/support/tickets": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "reporter",
+          "title": "Reporter",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "reporter_id",
+          "title": "Reporter ID",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "reporter_type",
+          "title": "Reporter type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "incoming_customer_id",
+          "title": "Incoming customer",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "hidden",
+          "title": "Hide",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "assign_to",
+          "title": "Assigned to",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "status_id",
+          "title": "Status",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "group_id",
+          "title": "Group",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "type_id",
+          "title": "Type",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "task_id",
+          "title": "Task",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "subject",
+          "title": "Subject",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "priority",
+          "title": "Priority",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "star",
+          "title": "Star",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "unread_by_customer",
+          "title": "Unread_by_customer",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "unread_by_admin",
+          "title": "Unread_by_admin",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "closed",
+          "title": "Closed",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "created_at",
+          "title": "Created Date & Time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "source",
+          "title": "Source",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "updated_at",
+          "title": "Updated date & time",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "trash",
+          "title": "Archive",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "shareable",
+          "title": "Shareable",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "note",
+          "title": "Note",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "watching",
+          "title": "Watching",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "related_account_id",
+          "title": "Related to",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "related_account_type",
+          "title": "Related_account_type",
+          "type": "enum",
+          "required": false
+        },
+        {
+          "name": "hidden_from_related_account",
+          "title": "Hidden from related account",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "unread_by_related_account",
+          "title": "Unread_by_related_account",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/inventory/items": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "supplier_invoices_item_id",
+          "title": "Supplier Invoice ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "barcode",
+          "title": "Barcode",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "serial_number",
+          "title": "Serial number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "title": "Status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "mark",
+          "title": "Mark",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "customer_id",
+          "title": "Customer",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "admin_id",
+          "title": "Administrator ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "service_id",
+          "title": "Service ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "invoice_id",
+          "title": "Invoice ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "cost_price",
+          "title": "Cost price",
+          "type": "float",
+          "required": false
+        },
+        {
+          "name": "transaction_id",
+          "title": "Transaction ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "product_id",
+          "title": "Product",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "notes",
+          "title": "Notes",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "filename_original",
+          "title": "Filename_original",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "filename",
+          "title": "Photo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "stock_id",
+          "title": "Stock location",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "task_id",
+          "title": "Link to task",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "additional_attributes": []
+    },
+    "admin/inventory/vendors": {
+      "attributes": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "name": "name",
+          "title": "Name",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "additional_attributes": []
+    }
+  },
+  "sample_data": {
+    "admin/api/check": {
+      "status": "ok",
+      "message": "API is valid",
+      "same_server": 0
+    }
+  },
+  "creation_capabilities": {
+    "admin/customers/customer": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/customers/customer-statistics": {
+      "post_status": 404,
+      "post_allowed": true
+    },
+    "admin/customers/customers-online": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/tariffs/internet": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/tariffs/voice": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/tariffs/recurring": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/tariffs/bundle": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/tariffs/one-time": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/transactions": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/invoices": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/payments": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/payment-methods": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/transaction-categories": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/finance/bank-statements": {
+      "post_status": 201,
+      "post_allowed": true
+    },
+    "admin/finance/proforma-invoices": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/administration/locations": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/administration/administrators": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/administration/partners": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/networking/routers": {
+      "post_status": 500,
+      "post_allowed": true
+    },
+    "admin/networking/ipv4": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/networking/ipv6": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/networking/monitoring": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/support/tickets": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/inventory/items": {
+      "post_status": 422,
+      "post_allowed": true
+    },
+    "admin/inventory/vendors": {
+      "post_status": 422,
+      "post_allowed": true
+    }
+  },
+  "summary": {
+    "total_endpoints_tested": 60,
+    "working_endpoints": 26,
+    "restricted_endpoints": 1,
+    "endpoints_with_data": 6,
+    "endpoints_with_schema": 24,
+    "api_status": "FULLY_FUNCTIONAL",
+    "migration_capable": true
+  },
+  "customer_management": {
+    "create_success": true,
+    "create_status": 201,
+    "delete_status": 204,
+    "test_customer_id": 2
+  }
+}

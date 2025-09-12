@@ -1,0 +1,4254 @@
+{
+  "analysis_date": "2025-09-12T07:19:28.948870",
+  "splynx_url": "http://10.0.60.125",
+  "documentation_based_analysis": true,
+  "endpoints_tested": [
+    "admin/customers/customer",
+    "admin/customers/customer-statistics",
+    "admin/customers/customers-online",
+    "admin/crm/leads",
+    "admin/crm/leads-info",
+    "admin/crm/leads-notes",
+    "admin/crm/quotes",
+    "admin/customers/customer/0/internet-services",
+    "admin/customers/customer/0/voice-services",
+    "admin/customers/customer/0/recurring-services",
+    "admin/customers/customer/0/bundle-services",
+    "admin/finance/credit-notes",
+    "admin/finance/refill-cards",
+    "admin/finance/refill-cards-series",
+    "admin/config/additional-fields/customers",
+    "admin/config/modules",
+    "admin/config/templates",
+    "admin/config/sms",
+    "admin/config/mail",
+    "admin/config/company-info",
+    "admin/config/inventory-stocks",
+    "admin/config/taxes",
+    "admin/config/crm-pipeline",
+    "admin/config/states-provinces",
+    "admin/config/labels",
+    "admin/scheduling/projects",
+    "admin/scheduling/tasks",
+    "admin/scheduling/tasks-worklogs",
+    "admin/scheduling/tasks-comments",
+    "admin/scheduling/tasks-attachments",
+    "admin/scheduling/tasks-activity",
+    "admin/voice/calls",
+    "admin/voice/data",
+    "admin/voice/messages",
+    "admin/communications/calls",
+    "admin/inventory/products",
+    "admin/inventory/suppliers",
+    "admin/inventory/supplier-invoices",
+    "admin/networking/acs-devices",
+    "admin/networking/routers-sectors",
+    "admin/networking/voice-devices",
+    "admin/networking/cpe",
+    "admin/networking/cpe-ap",
+    "admin/networking/cpe-qos",
+    "admin/networking/network-sites",
+    "admin/networking/ipv4-ip/1",
+    "admin/networking/ipv6-ip/1",
+    "admin/support/tickets-statuses",
+    "admin/support/tickets-groups",
+    "admin/support/tickets-types",
+    "admin/support/ticket-attachments",
+    "admin/support/ticket-feedbacks",
+    "admin/fup/counter",
+    "admin/fup/compiler",
+    "admin/fup/policies",
+    "admin/fup/fup-limits",
+    "admin/fup/cap-tariff",
+    "admin/fup/capped-data",
+    "admin/logs/changes",
+    "admin/logs/pending-statuses",
+    "admin/logs/pending-services",
+    "portal/dashboard/dashboard",
+    "portal/login/entry-points",
+    "portal/profile/additional-attributes",
+    "portal/services/billing-info",
+    "admin/auth/tokens",
+    "admin/auth/trusted-devices",
+    "admin/auth/two-factor-status",
+    "admin/auth/sessions"
+  ],
+  "endpoint_results": {
+    "admin/customers/customer": {
+      "endpoint": "admin/customers/customer",
+      "description": "Customer management",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "mrr_total",
+            "title": "Monthly recurring revenue",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gdpr_agreed",
+            "title": "GDPR agreement",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "parent_id",
+            "title": "Main account",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "billing_type",
+            "title": "Billing type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Portal login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Full name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "title": "Email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_email",
+            "title": "Billing email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "title": "Phone number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "street_1",
+            "title": "Street",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "zip_code",
+            "title": "ZIP Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "city",
+            "title": "City",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "subdivision_id",
+            "title": "State/Province",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_add",
+            "title": "Date added",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "last_online",
+            "title": "Last online",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_update",
+            "title": "Last update",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "daily_prepaid_cost",
+            "title": "Daily prepaid cost",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "gps",
+            "title": "Geo data",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "conversion_date",
+            "title": "Convert date",
+            "type": "datetime",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/customers/customer-statistics": {
+      "endpoint": "admin/customers/customer-statistics",
+      "description": "Customer statistics",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer-statistics",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "#",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tariff_id",
+            "title": "Plan",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "nas_id",
+            "title": "Nas_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "in_bytes",
+            "title": "Download bytes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "out_bytes",
+            "title": "Upload bytes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "start_date",
+            "title": "Start date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "start_time",
+            "title": "Start time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "title": "End date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "end_time",
+            "title": "End time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv4",
+            "title": "IPv4 address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6",
+            "title": "IPv6 address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "mac",
+            "title": "MAC",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "call_to",
+            "title": "Called-Station-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "port",
+            "title": "NAS-Port-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "error",
+            "title": "Error",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "error_repeat",
+            "title": "Error repeat",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "session_id",
+            "title": "Session ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "terminate_cause",
+            "title": "Termination cause",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/customers/customers-online": {
+      "endpoint": "admin/customers/customers-online",
+      "description": "Online customers",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customers-online",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "tariff_id",
+            "title": "Plan",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "nas_id",
+            "title": "Routers",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "login",
+            "title": "Login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "username_real",
+            "title": "User name real",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "in_bytes",
+            "title": "Download MB",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "out_bytes",
+            "title": "Upload MB",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "start_session",
+            "title": "Start session",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv4",
+            "title": "IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6",
+            "title": "IPv6",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ipv6_prefix",
+            "title": "IPv6 prefix",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "mac",
+            "title": "MAC/IP",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "call_to",
+            "title": "Called-Station-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "port",
+            "title": "NAS-Port-Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "time_on",
+            "title": "Time online",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_change",
+            "title": "Last update",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "login_is",
+            "title": "Login is",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "session_id",
+            "title": "Session ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "blocked",
+            "title": "Blocked",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "nas_identifier",
+            "title": "Nas_identifier",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "kill",
+            "title": "X",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fup",
+            "title": "Rule",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "signal",
+            "title": "Signal Strength",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_router_id",
+            "title": "Routers",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_sector_id",
+            "title": "Router contention",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_login",
+            "title": "Service login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_ipv4",
+            "title": "IPs",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_ipv4_route",
+            "title": "Additional networks",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_mac",
+            "title": "MAC",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_unit_price",
+            "title": "Internet service price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_start_date",
+            "title": "Internet services start date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_end_date",
+            "title": "Internet services end date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "services_internet_description",
+            "title": "Description",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/crm/leads": {
+      "endpoint": "admin/crm/leads",
+      "description": "CRM leads management",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/crm/leads",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "billing_type",
+            "title": "Billing type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Full name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "title": "Email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "billing_email",
+            "title": "Billing email",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "title": "Phone number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "street_1",
+            "title": "Street",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "zip_code",
+            "title": "ZIP Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "city",
+            "title": "City",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "subdivision_id",
+            "title": "State/Province",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_add",
+            "title": "Date added",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "last_update",
+            "title": "Last update",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gps",
+            "title": "Geo data",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "conversion_date",
+            "title": "Convert date",
+            "type": "datetime",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/crm/leads-info": {
+      "endpoint": "admin/crm/leads-info",
+      "description": "CRM lead information",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/crm/leads-info",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "customer_id",
+            "title": "Customer_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "score",
+            "title": "Score",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "last_contacted",
+            "title": "Last contacted",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "crm_status",
+            "title": "Pipeline status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "owner",
+            "title": "Owner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "deal_value",
+            "title": "Deal value",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "deal_comment",
+            "title": "Deal comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_status_changed",
+            "title": "Last status changed",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "status_due_notification_sent",
+            "title": "Status_due_notification_sent",
+            "type": "boolean",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/crm/leads-notes": {
+      "endpoint": "admin/crm/leads-notes",
+      "description": "CRM lead comments",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/crm/leads-notes",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "datetime",
+            "title": "Date & Time",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "administrator_id",
+            "title": "Administrator_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "pinned_date",
+            "title": "Pinned_date",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "class",
+            "title": "Class",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "values",
+            "title": "Values",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_edited",
+            "title": "Is_edited",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "scheduled_send_time",
+            "title": "Send time",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "assigned_to",
+            "title": "Send to",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "is_done",
+            "title": "Done",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "is_send",
+            "title": "Send",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "is_pinned",
+            "title": "Is_pinned",
+            "type": "boolean",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/crm/quotes": {
+      "endpoint": "admin/crm/quotes",
+      "description": "CRM quotes",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/crm/quotes",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Lead ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "number",
+            "title": "Number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_created",
+            "title": "Document date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "real_create_datetime",
+            "title": "Real_create_datetime",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "date_updated",
+            "title": "Last update",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "date_of_decision",
+            "title": "Date of decision",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "date_till",
+            "title": "Valid until",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "total",
+            "title": "Total",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "invoice_id",
+            "title": "Invoice ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "request_id",
+            "title": "Request ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_sent",
+            "title": "Sent?",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "memo",
+            "title": "Memo",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "signature",
+            "title": "Signature",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_customers",
+            "title": "Customers quote",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by",
+            "type": "numeric",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/customers/customer/0/internet-services": {
+      "endpoint": "admin/customers/customer/0/internet-services",
+      "description": "Internet services (search)",
+      "status": 500,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer/0/internet-services",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/customers/customer/0/voice-services": {
+      "endpoint": "admin/customers/customer/0/voice-services",
+      "description": "Voice services (search)",
+      "status": 500,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer/0/voice-services",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/customers/customer/0/recurring-services": {
+      "endpoint": "admin/customers/customer/0/recurring-services",
+      "description": "Recurring services (search)",
+      "status": 500,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer/0/recurring-services",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/customers/customer/0/bundle-services": {
+      "endpoint": "admin/customers/customer/0/bundle-services",
+      "description": "Bundle services (search)",
+      "status": 500,
+      "url": "http://10.0.60.125/api/2.0/admin/customers/customer/0/bundle-services",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/finance/credit-notes": {
+      "endpoint": "admin/finance/credit-notes",
+      "description": "Credit notes",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/finance/credit-notes",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "number",
+            "title": "Number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date_created",
+            "title": "Document date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "real_create_datetime",
+            "title": "Created",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "date_updated",
+            "title": "Last update",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "date_payment",
+            "title": "Payment date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "title": "Payment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "total",
+            "title": "Total",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "remind_amount",
+            "title": "Unallocated amount",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "note",
+            "title": "Note",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_sent",
+            "title": "Sent?",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "invoicesId",
+            "title": "InvoicesId",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "resetPeriodForService",
+            "title": "ResetPeriodForService",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partiallyUse",
+            "title": "PartiallyUse",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added by",
+            "type": "numeric",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/finance/refill-cards": {
+      "endpoint": "admin/finance/refill-cards",
+      "description": "Refill cards",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/finance/refill-cards",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/finance/refill-cards-series": {
+      "endpoint": "admin/finance/refill-cards-series",
+      "description": "Refill card series",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/finance/refill-cards-series",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "prefix",
+            "title": "Prefix",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "code",
+            "title": "Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "seller_name",
+            "title": "Seller name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "remark",
+            "title": "Remark",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "activated_at",
+            "title": "Activated at",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "valid_till",
+            "title": "Valid until",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "serie",
+            "title": "Series",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "quantity",
+            "title": "Quantity",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "created_at",
+            "title": "Created",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "changed",
+            "title": "Changed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_import",
+            "title": "Is_import",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/config/additional-fields/customers": {
+      "endpoint": "admin/config/additional-fields/customers",
+      "description": "Customer additional fields",
+      "status": 400,
+      "url": "http://10.0.60.125/api/2.0/admin/config/additional-fields/customers",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/config/modules": {
+      "endpoint": "admin/config/modules",
+      "description": "Custom modules",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/modules",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "module",
+            "title": "Module name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "root",
+            "title": "Root",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "icon",
+            "title": "Icon",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "title_attribute_prefix",
+            "title": "Title prefix",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "title_attribute_suffix",
+            "title": "Title suffix",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "path",
+            "title": "Path to module",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Entry points status for portal",
+            "type": "integer",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/config/templates": {
+      "endpoint": "admin/config/templates",
+      "description": "Email/SMS templates",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/templates",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 5,
+      "sample_fields": [
+        "id",
+        "type",
+        "title",
+        "description",
+        "subject",
+        "backupsTemplate",
+        "lastBackupTemplateLink",
+        "select_id",
+        "template_types"
+      ]
+    },
+    "admin/config/sms": {
+      "endpoint": "admin/config/sms",
+      "description": "SMS management",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/sms",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "message_id",
+            "title": "Message_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_added",
+            "title": "Added time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_start_sending",
+            "title": "Datetime_start_sending",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_sent",
+            "title": "Sent time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "recipient",
+            "title": "Recipient",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "message",
+            "title": "Message",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "admin_id",
+            "title": "Admin_id",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/config/mail": {
+      "endpoint": "admin/config/mail",
+      "description": "Email management",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/mail",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "subject",
+            "title": "Subject",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "message_id",
+            "title": "Message_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "bcc",
+            "title": "Bcc",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "cc",
+            "title": "Cc",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "from",
+            "title": "From",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "sendCopy",
+            "title": "SendCopy",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_added",
+            "title": "Added time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_start_sending",
+            "title": "Datetime_start_sending",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime_sent",
+            "title": "Sent time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "recipient",
+            "title": "Recipient",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "message",
+            "title": "Message",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "admin_id",
+            "title": "Admin_id",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/config/company-info": {
+      "endpoint": "admin/config/company-info",
+      "description": "Company information",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/company-info",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 1,
+      "sample_fields": [
+        "id",
+        "invoice_template_id",
+        "credit_note_template_id",
+        "request_template_id",
+        "receipt_template_id",
+        "quote_template_id",
+        "reminder_mail_template_id",
+        "reminder_sms_template_id",
+        "report_statements_template_id",
+        "company_name",
+        "street_1",
+        "street_2",
+        "zip",
+        "city",
+        "country",
+        "iso_country",
+        "email",
+        "phone",
+        "company_id",
+        "company_vat",
+        "vat_percent",
+        "bank_account",
+        "bank_name",
+        "bank_address",
+        "splynx_url",
+        "partner_percent",
+        "file_logo",
+        "tax_id",
+        "iso_country_code"
+      ]
+    },
+    "admin/config/inventory-stocks": {
+      "endpoint": "admin/config/inventory-stocks",
+      "description": "Inventory stocks",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/inventory-stocks",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 2,
+      "sample_fields": [
+        "id",
+        "name",
+        "type",
+        "is_base"
+      ]
+    },
+    "admin/config/taxes": {
+      "endpoint": "admin/config/taxes",
+      "description": "Tax configuration",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/taxes",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 2,
+      "sample_fields": [
+        "id",
+        "name",
+        "rate",
+        "type",
+        "archived",
+        "accounting_tax_rates_id",
+        "einvoicing_tax_rates_id",
+        "is_system"
+      ]
+    },
+    "admin/config/crm-pipeline": {
+      "endpoint": "admin/config/crm-pipeline",
+      "description": "CRM pipeline configuration",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/crm-pipeline",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 5,
+      "sample_fields": [
+        "id",
+        "stage",
+        "name",
+        "is_base",
+        "label",
+        "is_bg_color",
+        "bg_color",
+        "due_days",
+        "position"
+      ]
+    },
+    "admin/config/states-provinces": {
+      "endpoint": "admin/config/states-provinces",
+      "description": "States/provinces",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/states-provinces",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 5,
+      "sample_fields": [
+        "id",
+        "code",
+        "name",
+        "date_changed",
+        "is_default"
+      ]
+    },
+    "admin/config/labels": {
+      "endpoint": "admin/config/labels",
+      "description": "Labels management",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/config/labels",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0
+    },
+    "admin/scheduling/projects": {
+      "endpoint": "admin/scheduling/projects",
+      "description": "Scheduling projects",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/projects",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 1,
+      "sample_fields": [
+        "id",
+        "title",
+        "description",
+        "type_id",
+        "lead_id",
+        "category_id",
+        "workflow_id",
+        "is_archive",
+        "partner_ids"
+      ]
+    },
+    "admin/scheduling/tasks": {
+      "endpoint": "admin/scheduling/tasks",
+      "description": "Scheduling tasks",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/tasks",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "address",
+            "title": "Address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gps",
+            "title": "Coordinates",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "description",
+            "title": "Description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "reporter_id",
+            "title": "Reporter",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "project_id",
+            "title": "Project",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "parent_task_id",
+            "title": "Parent task",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "related_customer_id",
+            "title": "Customer",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "related_service_id",
+            "title": "Related service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "created_at",
+            "title": "Created at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "updated_at",
+            "title": "Updated at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "resolved_at",
+            "title": "Resolved at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "assigned_to",
+            "title": "Assigned to type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "assignee",
+            "title": "Assigned to",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "assinged_at",
+            "title": "Assigned at",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "priority",
+            "title": "Priority",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_scheduled",
+            "title": "Scheduled?",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "scheduled_from",
+            "title": "Start date & time",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "relatedTasks",
+            "title": "RelatedTasks",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "travel_time_to",
+            "title": "Travel time to task location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "travel_time_from",
+            "title": "Travel time from task location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "checklist_template_id",
+            "title": "Checklist template",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "workflow_status_id",
+            "title": "Status",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "is_archived",
+            "title": "Archived?",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "closed",
+            "title": "Closed",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "partner_id",
+            "title": "Partner",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "notification_send_interval",
+            "title": "Send before",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "notification_enabled",
+            "title": "Enable notifications",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "createdFromTicket",
+            "title": "CreatedFromTicket",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "remaining",
+            "title": "Remaining",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "logged",
+            "title": "Logged",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_status_changed",
+            "title": "Last status change",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "formatted_duration",
+            "title": "Scheduled duration",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/scheduling/tasks-worklogs": {
+      "endpoint": "admin/scheduling/tasks-worklogs",
+      "description": "Task worklogs",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/tasks-worklogs",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "task_id",
+            "title": "Task",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "user_id",
+            "title": "User",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "created_at",
+            "title": "Created at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "started_at",
+            "title": "Started at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "stopped_at",
+            "title": "Stopped_at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "is_manual",
+            "title": "Is_manual",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "time_spent",
+            "title": "Time spent",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "title": "Description",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/scheduling/tasks-comments": {
+      "endpoint": "admin/scheduling/tasks-comments",
+      "description": "Task comments",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/tasks-comments",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "task_id",
+            "title": "Task",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "user_id",
+            "title": "User",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "created_at",
+            "title": "Created at",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "files",
+            "title": "Attachments",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "is_edited",
+            "title": "Is_edited",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "is_pinned",
+            "title": "Pinned",
+            "type": "boolean",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/scheduling/tasks-attachments": {
+      "endpoint": "admin/scheduling/tasks-attachments",
+      "description": "Task attachments",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/tasks-attachments",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "task_id",
+            "title": "Task_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment_id",
+            "title": "Comment_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "hash_id",
+            "title": "Hash_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_original",
+            "title": "Filename_original",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename_uploaded",
+            "title": "Filename_uploaded",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/scheduling/tasks-activity": {
+      "endpoint": "admin/scheduling/tasks-activity",
+      "description": "Task activity",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/scheduling/tasks-activity",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0
+    },
+    "admin/voice/calls": {
+      "endpoint": "admin/voice/calls",
+      "description": "Voice calls",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/voice/calls",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "start",
+            "title": "Start",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "stop",
+            "title": "Stop",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "call_to",
+            "title": "Destination",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "direction_type",
+            "title": "Direction",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service_id",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "transaction_id",
+            "title": "Transaction_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "amount",
+            "title": "Amount",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "sell_price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "buy_price",
+            "title": "Buy price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "rate_buy_price",
+            "title": "Rate buy price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_price_from_import",
+            "title": "Is_price_from_import",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "sell_price_total",
+            "title": "Price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "buy_price_total",
+            "title": "Buy price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "rate_name",
+            "title": "Rate name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "import_id",
+            "title": "CDR import ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_login",
+            "title": "Customer login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_name",
+            "title": "Customer name",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/voice/data": {
+      "endpoint": "admin/voice/data",
+      "description": "Voice data usage",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/voice/data",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "datetime",
+            "title": "Date & Time",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service_id",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "transaction_id",
+            "title": "Transaction_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "amount",
+            "title": "Amount",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "sell_price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "buy_price",
+            "title": "Buy price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "rate_buy_price",
+            "title": "Rate buy price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_price_from_import",
+            "title": "Is_price_from_import",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "sell_price_total",
+            "title": "Price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "buy_price_total",
+            "title": "Buy price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "rate_name",
+            "title": "Rate name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "import_id",
+            "title": "CDR import ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_login",
+            "title": "Customer login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_name",
+            "title": "Customer name",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/voice/messages": {
+      "endpoint": "admin/voice/messages",
+      "description": "Voice messages",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/voice/messages",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "send_at",
+            "title": "Send at",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "destination",
+            "title": "Destination",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "direction_type",
+            "title": "Direction",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "service_id",
+            "title": "Service_id",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "transaction_id",
+            "title": "Transaction_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "source",
+            "title": "Source",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "amount",
+            "title": "Amount",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "sell_price",
+            "title": "Price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "buy_price",
+            "title": "Buy price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "rate_buy_price",
+            "title": "Rate buy price",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_price_from_import",
+            "title": "Is_price_from_import",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "sell_price_total",
+            "title": "Price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "buy_price_total",
+            "title": "Buy price (tax incl.)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "rate_name",
+            "title": "Rate name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "import_id",
+            "title": "CDR import ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_login",
+            "title": "Customer login",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customer_name",
+            "title": "Customer name",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/communications/calls": {
+      "endpoint": "admin/communications/calls",
+      "description": "Communication calls",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/communications/calls",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "from",
+            "title": "Source",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "to",
+            "title": "Destination",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "duration",
+            "title": "Duration",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "direction",
+            "title": "Direction",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "recording_url",
+            "title": "Recording url",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "voice_file_url",
+            "title": "Voice_file_url",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "datetime",
+            "title": "Datetime added",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ticket_id",
+            "title": "Ticket_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "client_id",
+            "title": "Client_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "agent_id",
+            "title": "Agent_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "added_by",
+            "title": "Added_by",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "added_by_id",
+            "title": "Added_by_id",
+            "type": "numeric",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/inventory/products": {
+      "endpoint": "admin/inventory/products",
+      "description": "Inventory products",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/products",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "vendor_id",
+            "title": "Vendor",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "category_id",
+            "title": "Category",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "rent_price",
+            "title": "Rent price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "sold_price",
+            "title": "Sell price",
+            "type": "float",
+            "required": false
+          },
+          {
+            "name": "filename_original",
+            "title": "Filename_original",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename",
+            "title": "Photo",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/inventory/suppliers": {
+      "endpoint": "admin/inventory/suppliers",
+      "description": "Inventory suppliers",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/suppliers",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "address",
+            "title": "Address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "contact_name",
+            "title": "Contact name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "email",
+            "title": "Email",
+            "type": "email",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "title": "Phone",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tax_included",
+            "title": "Tax included",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/inventory/supplier-invoices": {
+      "endpoint": "admin/inventory/supplier-invoices",
+      "description": "Supplier invoices",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/inventory/supplier-invoices",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "supplier_id",
+            "title": "Supplier",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "original_invoice_number",
+            "title": "Supplier invoice number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "date",
+            "title": "Date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "filename_original",
+            "title": "Invoice file",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "filename",
+            "title": "Invoice file",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/acs-devices": {
+      "endpoint": "admin/networking/acs-devices",
+      "description": "ACS devices",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/acs-devices",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "internet_service_id",
+            "title": "Internet service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "voice_service_id",
+            "title": "Voice service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "recurring_service_id",
+            "title": "Recurring service",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "device_id",
+            "title": "Device ID",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "prefix",
+            "title": "Prefix",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "group",
+            "title": "Group",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "product_class",
+            "title": "Product class",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "manufacturer",
+            "title": "Vendor",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "oui",
+            "title": "OUI",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "serial_number",
+            "title": "Serial number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "software_version",
+            "title": "SW version",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "hardware_version",
+            "title": "HW version",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "uptime",
+            "title": "Uptime",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "last_inform",
+            "title": "Last inform",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "registered",
+            "title": "Registered",
+            "type": "datetime",
+            "required": false
+          },
+          {
+            "name": "auto_provisioning",
+            "title": "Auto provisioning",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "provisioned",
+            "title": "Provisioned",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "model_name",
+            "title": "Model name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "last_updated",
+            "title": "Last_updated",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/routers-sectors": {
+      "endpoint": "admin/networking/routers-sectors",
+      "description": "Router sectors",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/routers-sectors",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "router_id",
+            "title": "Router id",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "speed_down",
+            "title": "Speed Down",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "speed_up",
+            "title": "Speed Up",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "limit_at",
+            "title": "Guaranteed speed limit at",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/voice-devices": {
+      "endpoint": "admin/networking/voice-devices",
+      "description": "Voice devices",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/voice-devices",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "model",
+            "title": "Vendor/Model",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "location_id",
+            "title": "Location",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "address",
+            "title": "Address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ip",
+            "title": "IP",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "partners_ids",
+            "title": "Partners",
+            "type": "array",
+            "required": false
+          }
+        ],
+        "additional_attributes": []
+      }
+    },
+    "admin/networking/cpe": {
+      "endpoint": "admin/networking/cpe",
+      "description": "CPE devices",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/cpe",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/networking/cpe-ap": {
+      "endpoint": "admin/networking/cpe-ap",
+      "description": "CPE Access Points",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/cpe-ap",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/networking/cpe-qos": {
+      "endpoint": "admin/networking/cpe-qos",
+      "description": "CPE QoS",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/cpe-qos",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/networking/network-sites": {
+      "endpoint": "admin/networking/network-sites",
+      "description": "Network sites",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/network-sites",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0
+    },
+    "admin/networking/ipv4-ip/1": {
+      "endpoint": "admin/networking/ipv4-ip/1",
+      "description": "IPv4 IP management (network 1)",
+      "status": 400,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/ipv4-ip/1",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/networking/ipv6-ip/1": {
+      "endpoint": "admin/networking/ipv6-ip/1",
+      "description": "IPv6 IP management (network 1)",
+      "status": 400,
+      "url": "http://10.0.60.125/api/2.0/admin/networking/ipv6-ip/1",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/support/tickets-statuses": {
+      "endpoint": "admin/support/tickets-statuses",
+      "description": "Ticket statuses",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/support/tickets-statuses",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 5,
+      "sample_fields": [
+        "id",
+        "title_for_agent",
+        "title_for_customer",
+        "label",
+        "mark",
+        "icon",
+        "view_on_dashboard"
+      ]
+    },
+    "admin/support/tickets-groups": {
+      "endpoint": "admin/support/tickets-groups",
+      "description": "Ticket groups",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/support/tickets-groups",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 3,
+      "sample_fields": [
+        "id",
+        "title",
+        "description",
+        "agent_ids"
+      ]
+    },
+    "admin/support/tickets-types": {
+      "endpoint": "admin/support/tickets-types",
+      "description": "Ticket types",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/support/tickets-types",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 5,
+      "sample_fields": [
+        "id",
+        "title",
+        "background_color"
+      ]
+    },
+    "admin/support/ticket-attachments": {
+      "endpoint": "admin/support/ticket-attachments",
+      "description": "Ticket attachments",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/support/ticket-attachments",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 1,
+      "sample_fields": [
+        "id",
+        "type",
+        "filename_original",
+        "filename_uploaded",
+        "download_link",
+        "has_thumbnail",
+        "thumbnail_link",
+        "message_id"
+      ]
+    },
+    "admin/support/ticket-feedbacks": {
+      "endpoint": "admin/support/ticket-feedbacks",
+      "description": "Ticket feedbacks",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/support/ticket-feedbacks",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "ticket_id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "form",
+            "title": "Customer feedback",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "content",
+            "title": "Content",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "feedback",
+            "title": "Feedback",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "timing",
+            "title": "Timing",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "comment",
+            "title": "Comment",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "archived",
+            "title": "Archived",
+            "type": "boolean",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/fup/counter": {
+      "endpoint": "admin/fup/counter",
+      "description": "FUP counters",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/counter",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "service_id",
+            "title": "Service_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "day_up",
+            "title": "Day_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "day_down",
+            "title": "Day_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "day_time",
+            "title": "Day_time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "week_up",
+            "title": "Week_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "week_down",
+            "title": "Week_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "week_time",
+            "title": "Week_time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "month_up",
+            "title": "Month_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "month_down",
+            "title": "Month_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "month_time",
+            "title": "Month_time",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "over_usage",
+            "title": "Over_usage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "day_bonus_up",
+            "title": "Day_bonus_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "day_bonus_down",
+            "title": "Day_bonus_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "week_bonus_up",
+            "title": "Week_bonus_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "week_bonus_down",
+            "title": "Week_bonus_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "month_bonus_up",
+            "title": "Month_bonus_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "month_bonus_down",
+            "title": "Month_bonus_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "cap_used",
+            "title": "Cap_used",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "cap_amount",
+            "title": "Cap_amount",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/fup/compiler": {
+      "endpoint": "admin/fup/compiler",
+      "description": "FUP compiler",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/compiler",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "service_id",
+            "title": "Service ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "traffic_accounting",
+            "title": "Traffic accounting",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "time_accounting",
+            "title": "Time accounting",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "fup_policy",
+            "title": "FUP policy",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "blocked",
+            "title": "Blocked",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "changed",
+            "title": "Changed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "is_hard",
+            "title": "Is hard",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "decrease_percent",
+            "title": "Decrease percent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fixed_up",
+            "title": "Upload",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fixed_down",
+            "title": "Download",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "restored",
+            "title": "Restored",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/fup/policies": {
+      "endpoint": "admin/fup/policies",
+      "description": "FUP policies",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/policies",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "tariff_id",
+            "title": "Tariff_id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "accounting_traffic",
+            "title": "Accounting_traffic",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "accounting_online",
+            "title": "Accounting_online",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "action",
+            "title": "Action",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "percent",
+            "title": "Percent",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fixed_up",
+            "title": "Fixed_up",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "fixed_down",
+            "title": "Fixed_down",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "conditions",
+            "title": "Conditions",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/fup/fup-limits": {
+      "endpoint": "admin/fup/fup-limits",
+      "description": "FUP limits",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/fup-limits",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 1,
+      "sample_fields": [
+        "tariff_id",
+        "cap_tariff_id",
+        "traffic_from",
+        "online_from",
+        "traffic_to",
+        "online_to",
+        "traffic_days",
+        "online_days",
+        "traffic_amount",
+        "traffic_direction",
+        "traffic_in",
+        "bonus_traffic",
+        "bonus_traffic_in",
+        "bonus_is_unlimited",
+        "use_bonus_when_normal_ended",
+        "override_traffic",
+        "online_amount",
+        "override_online",
+        "online_in",
+        "action",
+        "percent",
+        "fixed_up",
+        "fixed_down",
+        "rollover_data",
+        "rollover_time",
+        "top_up_over_usage",
+        "top_up_trigger_percent"
+      ]
+    },
+    "admin/fup/cap-tariff": {
+      "endpoint": "admin/fup/cap-tariff",
+      "description": "CAP tariffs",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/cap-tariff",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/fup/capped-data": {
+      "endpoint": "admin/fup/capped-data",
+      "description": "Capped data",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/fup/capped-data",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/logs/changes": {
+      "endpoint": "admin/logs/changes",
+      "description": "Change logs",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/logs/changes",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0
+    },
+    "admin/logs/pending-statuses": {
+      "endpoint": "admin/logs/pending-statuses",
+      "description": "Pending status changes",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/admin/logs/pending-statuses",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "customer_id",
+            "title": "Customer ID",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "date",
+            "title": "Date",
+            "type": "date",
+            "required": false
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "done",
+            "title": "Done",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "administrator_id",
+            "title": "Administrator ID",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "admin/logs/pending-services": {
+      "endpoint": "admin/logs/pending-services",
+      "description": "Pending services",
+      "status": 500,
+      "url": "http://10.0.60.125/api/2.0/admin/logs/pending-services",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "portal/dashboard/dashboard": {
+      "endpoint": "portal/dashboard/dashboard",
+      "description": "Portal dashboard",
+      "status": 403,
+      "url": "http://10.0.60.125/api/2.0/portal/dashboard/dashboard",
+      "working": false,
+      "restricted": true,
+      "not_found": false
+    },
+    "portal/login/entry-points": {
+      "endpoint": "portal/login/entry-points",
+      "description": "Portal login entry points",
+      "status": 200,
+      "url": "http://10.0.60.125/api/2.0/portal/login/entry-points",
+      "working": true,
+      "restricted": false,
+      "not_found": false,
+      "data_type": "list",
+      "record_count": 0,
+      "has_schema": true,
+      "schema": {
+        "attributes": [
+          {
+            "name": "id",
+            "title": "Id",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "module",
+            "title": "Module name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "place",
+            "title": "Place",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "type",
+            "title": "Type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "size",
+            "title": "Size",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "title",
+            "title": "Title",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "root",
+            "title": "Root",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "model",
+            "title": "Model",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "icon",
+            "title": "Icon",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "background",
+            "title": "Background",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "url",
+            "title": "Add-on URL",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "code",
+            "title": "Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "partners",
+            "title": "Partners",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "location",
+            "title": "Placement",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "enabled",
+            "title": "Enabled",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "location_geo",
+            "title": "Location",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "payment_type",
+            "title": "Payment type",
+            "type": "array",
+            "required": false
+          },
+          {
+            "name": "payment_account_id",
+            "title": "Payment account",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    "portal/profile/additional-attributes": {
+      "endpoint": "portal/profile/additional-attributes",
+      "description": "Portal profile attributes",
+      "status": 403,
+      "url": "http://10.0.60.125/api/2.0/portal/profile/additional-attributes",
+      "working": false,
+      "restricted": true,
+      "not_found": false
+    },
+    "portal/services/billing-info": {
+      "endpoint": "portal/services/billing-info",
+      "description": "Portal billing info",
+      "status": 403,
+      "url": "http://10.0.60.125/api/2.0/portal/services/billing-info",
+      "working": false,
+      "restricted": true,
+      "not_found": false
+    },
+    "admin/auth/tokens": {
+      "endpoint": "admin/auth/tokens",
+      "description": "Authentication tokens",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/auth/tokens",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/auth/trusted-devices": {
+      "endpoint": "admin/auth/trusted-devices",
+      "description": "Trusted devices",
+      "status": 403,
+      "url": "http://10.0.60.125/api/2.0/admin/auth/trusted-devices",
+      "working": false,
+      "restricted": true,
+      "not_found": false
+    },
+    "admin/auth/two-factor-status": {
+      "endpoint": "admin/auth/two-factor-status",
+      "description": "Two-factor status",
+      "status": 405,
+      "url": "http://10.0.60.125/api/2.0/admin/auth/two-factor-status",
+      "working": false,
+      "restricted": false,
+      "not_found": false
+    },
+    "admin/auth/sessions": {
+      "endpoint": "admin/auth/sessions",
+      "description": "Session management",
+      "status": 403,
+      "url": "http://10.0.60.125/api/2.0/admin/auth/sessions",
+      "working": false,
+      "restricted": true,
+      "not_found": false
+    },
+    "admin/customers/customer/3/internet-services": {
+      "endpoint": "admin/customers/customer/3/internet-services",
+      "description": "Customer internet services",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer/3/voice-services": {
+      "endpoint": "admin/customers/customer/3/voice-services",
+      "description": "Customer voice services",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer/3/recurring-services": {
+      "endpoint": "admin/customers/customer/3/recurring-services",
+      "description": "Customer recurring services",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer/3/bundle-services": {
+      "endpoint": "admin/customers/customer/3/bundle-services",
+      "description": "Customer bundle services",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer/3/logs-changes": {
+      "endpoint": "admin/customers/customer/3/logs-changes",
+      "description": "Customer change logs",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer-info/3": {
+      "endpoint": "admin/customers/customer-info/3",
+      "description": "Customer additional info",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    },
+    "admin/customers/customer-billing/3": {
+      "endpoint": "admin/customers/customer-billing/3",
+      "description": "Customer billing info",
+      "status": 200,
+      "working": true,
+      "customer_specific": true
+    }
+  },
+  "working_endpoints": [
+    "admin/customers/customer",
+    "admin/customers/customer-statistics",
+    "admin/customers/customers-online",
+    "admin/crm/leads",
+    "admin/crm/leads-info",
+    "admin/crm/leads-notes",
+    "admin/crm/quotes",
+    "admin/finance/credit-notes",
+    "admin/finance/refill-cards-series",
+    "admin/config/modules",
+    "admin/config/templates",
+    "admin/config/sms",
+    "admin/config/mail",
+    "admin/config/company-info",
+    "admin/config/inventory-stocks",
+    "admin/config/taxes",
+    "admin/config/crm-pipeline",
+    "admin/config/states-provinces",
+    "admin/config/labels",
+    "admin/scheduling/projects",
+    "admin/scheduling/tasks",
+    "admin/scheduling/tasks-worklogs",
+    "admin/scheduling/tasks-comments",
+    "admin/scheduling/tasks-attachments",
+    "admin/scheduling/tasks-activity",
+    "admin/voice/calls",
+    "admin/voice/data",
+    "admin/voice/messages",
+    "admin/communications/calls",
+    "admin/inventory/products",
+    "admin/inventory/suppliers",
+    "admin/inventory/supplier-invoices",
+    "admin/networking/acs-devices",
+    "admin/networking/routers-sectors",
+    "admin/networking/voice-devices",
+    "admin/networking/network-sites",
+    "admin/support/tickets-statuses",
+    "admin/support/tickets-groups",
+    "admin/support/tickets-types",
+    "admin/support/ticket-attachments",
+    "admin/support/ticket-feedbacks",
+    "admin/fup/counter",
+    "admin/fup/compiler",
+    "admin/fup/policies",
+    "admin/fup/fup-limits",
+    "admin/logs/changes",
+    "admin/logs/pending-statuses",
+    "portal/login/entry-points",
+    "admin/customers/customer/3/internet-services",
+    "admin/customers/customer/3/voice-services",
+    "admin/customers/customer/3/recurring-services",
+    "admin/customers/customer/3/bundle-services",
+    "admin/customers/customer/3/logs-changes",
+    "admin/customers/customer-info/3",
+    "admin/customers/customer-billing/3"
+  ],
+  "restricted_endpoints": [
+    "portal/dashboard/dashboard",
+    "portal/profile/additional-attributes",
+    "portal/services/billing-info",
+    "admin/auth/trusted-devices",
+    "admin/auth/sessions"
+  ],
+  "not_found_endpoints": [],
+  "categories": {
+    "Customers": [
+      "admin/customers/customer",
+      "admin/customers/customer-statistics",
+      "admin/customers/customers-online",
+      "admin/customers/customer/3/internet-services",
+      "admin/customers/customer/3/voice-services",
+      "admin/customers/customer/3/recurring-services",
+      "admin/customers/customer/3/bundle-services",
+      "admin/customers/customer/3/logs-changes",
+      "admin/customers/customer-info/3",
+      "admin/customers/customer-billing/3"
+    ],
+    "CRM": [
+      "admin/crm/leads",
+      "admin/crm/leads-info",
+      "admin/crm/leads-notes",
+      "admin/crm/quotes",
+      "admin/config/crm-pipeline"
+    ],
+    "Finance": [
+      "admin/finance/credit-notes",
+      "admin/finance/refill-cards-series"
+    ],
+    "Configuration": [
+      "admin/config/modules",
+      "admin/config/templates",
+      "admin/config/sms",
+      "admin/config/mail",
+      "admin/config/company-info",
+      "admin/config/inventory-stocks",
+      "admin/config/taxes",
+      "admin/config/states-provinces",
+      "admin/config/labels"
+    ],
+    "Scheduling": [
+      "admin/scheduling/projects",
+      "admin/scheduling/tasks",
+      "admin/scheduling/tasks-worklogs",
+      "admin/scheduling/tasks-comments",
+      "admin/scheduling/tasks-attachments",
+      "admin/scheduling/tasks-activity"
+    ],
+    "Voice": [
+      "admin/voice/calls",
+      "admin/voice/data",
+      "admin/voice/messages",
+      "admin/inventory/supplier-invoices",
+      "admin/networking/voice-devices"
+    ],
+    "Communications": [
+      "admin/communications/calls"
+    ],
+    "Inventory": [
+      "admin/inventory/products",
+      "admin/inventory/suppliers"
+    ],
+    "Networking": [
+      "admin/networking/acs-devices",
+      "admin/networking/routers-sectors",
+      "admin/networking/network-sites"
+    ],
+    "Support": [
+      "admin/support/tickets-statuses",
+      "admin/support/tickets-groups",
+      "admin/support/tickets-types",
+      "admin/support/ticket-attachments",
+      "admin/support/ticket-feedbacks"
+    ],
+    "FUP": [
+      "admin/fup/counter",
+      "admin/fup/compiler",
+      "admin/fup/policies",
+      "admin/fup/fup-limits"
+    ],
+    "Logs": [
+      "admin/logs/changes",
+      "admin/logs/pending-statuses"
+    ],
+    "Portal": [
+      "portal/login/entry-points"
+    ],
+    "Auth": []
+  },
+  "summary": {
+    "total_tested": 69,
+    "working": 55,
+    "restricted": 5,
+    "api_coverage": "comprehensive"
+  }
+}

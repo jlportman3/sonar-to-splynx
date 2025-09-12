@@ -1,0 +1,2723 @@
+{
+  "admin/finance/refill-cards": {
+    "description": "Refill cards management",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 422,
+        "content_length": 243
+      },
+      "PUT": {
+        "status": 400,
+        "content_length": 97
+      },
+      "DELETE": {
+        "status": 400,
+        "content_length": 97
+      },
+      "OPTIONS": {
+        "status": 200,
+        "content_length": 2514,
+        "schema": {
+          "attributes": [
+            {
+              "name": "type",
+              "title": "Type",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "status",
+              "title": "Status",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "price",
+              "title": "Price",
+              "type": "float",
+              "required": false
+            },
+            {
+              "name": "partner_id",
+              "title": "Partner",
+              "type": "integer",
+              "required": false
+            },
+            {
+              "name": "prefix",
+              "title": "Prefix",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "code",
+              "title": "Code",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "seller_name",
+              "title": "Seller name",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "remark",
+              "title": "Remark",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "activated_at",
+              "title": "Activated at",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "customer_id",
+              "title": "Customer",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "valid_till",
+              "title": "Valid until",
+              "type": "date",
+              "required": false
+            },
+            {
+              "name": "id",
+              "title": "ID",
+              "type": "integer",
+              "required": false
+            },
+            {
+              "name": "serie",
+              "title": "Series",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "quantity",
+              "title": "Quantity",
+              "type": "integer",
+              "required": true
+            },
+            {
+              "name": "created_at",
+              "title": "Created",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "changed",
+              "title": "Changed",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "is_import",
+              "title": "Is_import",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "additional_attributes": []
+        }
+      },
+      "HEAD": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "cards_refill_fields",
+        "rows": 0
+      },
+      {
+        "table": "cards_refill_values",
+        "rows": 0
+      },
+      {
+        "table": "cards_refill",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/networking/cpe": {
+    "description": "CPE devices",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 405,
+        "content_length": 88
+      },
+      "PUT": {
+        "status": 405,
+        "content_length": 88
+      },
+      "DELETE": {
+        "status": 405,
+        "content_length": 88
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "cpe",
+        "rows": 0
+      },
+      {
+        "table": "cpe_fields",
+        "rows": 0
+      },
+      {
+        "table": "cpe_values",
+        "rows": 0
+      },
+      {
+        "table": "cpe_dhcp",
+        "rows": 0
+      },
+      {
+        "table": "cpe_ap",
+        "rows": 0
+      },
+      {
+        "table": "cpe_qos",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/networking/cpe-ap": {
+    "description": "CPE Access Points",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 405,
+        "content_length": 88
+      },
+      "PUT": {
+        "status": 405,
+        "content_length": 88
+      },
+      "DELETE": {
+        "status": 405,
+        "content_length": 88
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "cpe_ap",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/networking/cpe-qos": {
+    "description": "CPE QoS",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 405,
+        "content_length": 88
+      },
+      "PUT": {
+        "status": 405,
+        "content_length": 88
+      },
+      "DELETE": {
+        "status": 405,
+        "content_length": 88
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "cpe_qos",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/fup/cap-tariff": {
+    "description": "CAP tariffs",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 405,
+        "content_length": 88
+      },
+      "PUT": {
+        "status": 405,
+        "content_length": 88
+      },
+      "DELETE": {
+        "status": 405,
+        "content_length": 88
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "cap_tariff",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/fup/capped-data": {
+    "description": "Capped data",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 405,
+        "content_length": 88
+      },
+      "PUT": {
+        "status": 405,
+        "content_length": 88
+      },
+      "DELETE": {
+        "status": 405,
+        "content_length": 88
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [
+      {
+        "table": "bonus_capped_data",
+        "rows": 0
+      },
+      {
+        "table": "capped_data",
+        "rows": 0
+      }
+    ],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/auth/tokens": {
+    "description": "Authentication tokens",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 276
+      },
+      "POST": {
+        "status": 401,
+        "content_length": 110
+      },
+      "PUT": {
+        "status": 400,
+        "content_length": 97
+      },
+      "DELETE": {
+        "status": 400,
+        "content_length": 97
+      },
+      "OPTIONS": {
+        "status": 500,
+        "content_length": 84
+      },
+      "HEAD": {
+        "status": 500,
+        "content_length": 0
+      }
+    },
+    "database_tables": [],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  },
+  "admin/auth/two-factor-status": {
+    "description": "Two-factor status",
+    "method_tests": {
+      "GET": {
+        "status": 405,
+        "content_length": 88
+      },
+      "POST": {
+        "status": 400,
+        "content_length": 90
+      },
+      "PUT": {
+        "status": 400,
+        "content_length": 97
+      },
+      "DELETE": {
+        "status": 400,
+        "content_length": 97
+      },
+      "OPTIONS": {
+        "status": 405,
+        "content_length": 88
+      },
+      "HEAD": {
+        "status": 405,
+        "content_length": 0
+      }
+    },
+    "database_tables": [],
+    "configuration": [
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_ip",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "blocking_port",
+        "type": "string",
+        "value": "80"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "bytes",
+        "type": "select",
+        "value": "1000"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "debug",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_qos",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "default_simple_target",
+        "type": "string",
+        "value": "192.168.88.0/24"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_dns_server",
+        "type": "string",
+        "value": "8.8.8.8, 8.8.4.4"
+      },
+      {
+        "module": "networking",
+        "path": "cpe",
+        "key": "dhcp_enabled",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_auto_top_up_description",
+        "type": "string",
+        "value": "Auto Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_check_deposit",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_customer_top_up_description",
+        "type": "string",
+        "value": "Portal Top-Up {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_issue_invoice_auto_topup",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_limitation_type",
+        "type": "select",
+        "value": "auto_top_up"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_max_cap_during_month",
+        "type": "string",
+        "value": "10"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_admin_top_up_description",
+        "type": "string",
+        "value": "Top-Up charge {{size}} for {{service.description}}"
+      },
+      {
+        "module": "main",
+        "path": "cap",
+        "key": "prepaid_monthly_auto_cap",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_check_api_url",
+        "type": "boolean",
+        "value": "0"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "disable_working_with_finance_documents_for_sub_accounts",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "force_allow_any_domains",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "api",
+        "key": "splynx_api_url",
+        "type": "uri",
+        "value": "http://10.0.60.125"
+      },
+      {
+        "module": "main",
+        "path": "logrotate",
+        "key": "api_logs",
+        "type": "select",
+        "value": "1"
+      },
+      {
+        "module": "main",
+        "path": "mail",
+        "key": "api_username",
+        "type": "hidden",
+        "value": ""
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "api_url",
+        "type": "url",
+        "value": "https://wiki.splynx.com"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_account_local_traffic",
+        "type": "boolean",
+        "value": "1"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "accounting_threshold",
+        "type": "integer",
+        "value": "256000"
+      },
+      {
+        "module": "networking",
+        "path": "mikrotik-api",
+        "key": "attempts",
+        "type": "select",
+        "value": "5"
+      },
+      {
+        "module": "main",
+        "path": "preferences",
+        "key": "force_admins_to_enable_2fa",
+        "type": "boolean",
+        "value": "0"
+      }
+    ]
+  }
+}
