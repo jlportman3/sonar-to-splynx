@@ -22,11 +22,11 @@ secret = os.getenv('SPLYNX_SECRET')
 
 # Database credentials
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'debian-sys-maint', 
-    'password': '1TfVsv9TzjE55a1k',
-    'unix_socket': '/var/run/mysqld/mysqld.sock',
-    'database': 'splynx'
+    'host': os.getenv('MYSQL_HOST'),
+    'user': os.getenv('MYSQL_USER'), 
+    'password': os.getenv('MYSQL_PASSWORD'),
+    'unix_socket': os.getenv('MYSQL_SOCKET'),
+    'database': os.getenv('MYSQL_DATABASE')
 }
 
 session = requests.Session()

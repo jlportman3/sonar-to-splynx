@@ -10,12 +10,17 @@ import os
 from datetime import datetime
 from collections import defaultdict
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Database credentials
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'debian-sys-maint', 
-    'password': '1TfVsv9TzjE55a1k',
-    'unix_socket': '/var/run/mysqld/mysqld.sock'
+    'host': os.getenv('MYSQL_HOST'),
+    'user': os.getenv('MYSQL_USER'),
+    'password': os.getenv('MYSQL_PASSWORD'),
+    'unix_socket': os.getenv('MYSQL_SOCKET'),
+    'database': os.getenv('MYSQL_DATABASE')
 }
 
 def get_database_connection(database=None):

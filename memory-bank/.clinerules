@@ -1,0 +1,127 @@
+# 🧠 MEMORY BANK MAINTENANCE RULES
+# Mandatory rules for keeping project memory current and accurate
+
+## 📋 RULE 1: Update activeContext.md
+**WHEN:** Working focus changes to a new area/feature
+**ACTION:** 
+- Update current working focus section
+- Add completed investigation to context handoff
+- Set context status appropriately
+- Document key decisions made in current context
+
+**TRIGGER EXAMPLES:**
+- Starting new feature investigation  
+- Switching from analysis to implementation
+- Moving between API and database work
+- Changing from one system to another
+
+## 📈 RULE 2: Update progress.md  
+**WHEN:** Completing major features or phase milestones
+**ACTION:**
+- Update phase completion status
+- Add completed milestones with dates
+- Update progress metrics and percentages
+- Document major deliverables created
+- Update next phase priorities
+
+**TRIGGER EXAMPLES:**
+- Completing API analysis
+- Finishing database schema mapping
+- Completing error investigation
+- Moving from one implementation phase to next
+
+## 🏗️ RULE 3: Update systemPatterns.md
+**WHEN:** Architecture evolves or new patterns discovered
+**ACTION:**
+- Document new architectural patterns
+- Add proven code patterns and solutions
+- Update core pattern descriptions
+- Record architectural evolution steps
+- Document pattern trade-offs and decisions
+
+**TRIGGER EXAMPLES:**
+- Discovering new data access patterns
+- Finding better error handling approaches  
+- Implementing new integration patterns
+- Changing core architectural decisions
+
+## 💻 RULE 4: Update techContext.md
+**WHEN:** Adding new technologies or making tech stack changes
+**ACTION:**
+- Add new dependencies to technology stack
+- Document new technical decisions
+- Update configuration standards
+- Record performance optimizations
+- Document new development tools
+
+**TRIGGER EXAMPLES:**
+- Adding new Python libraries
+- Implementing new database access patterns
+- Adding new development/analysis tools
+- Making performance optimization changes
+- Changing authentication or API patterns
+
+## 🔄 RULE 5: Update .clinerules
+**WHEN:** Discovering new maintenance patterns or rules
+**ACTION:**
+- Add new rules for memory bank maintenance
+- Update existing rules based on experience
+- Document new trigger examples
+- Refine maintenance procedures
+
+**TRIGGER EXAMPLES:**
+- Finding gaps in current maintenance rules
+- Discovering new types of work that need tracking
+- Learning better maintenance patterns
+- Identifying missing documentation triggers
+
+## ⚡ ENFORCEMENT RULES
+
+### MANDATORY UPDATES:
+- ✅ **BEFORE** switching to new major work area → Update activeContext.md
+- ✅ **AFTER** completing major milestone → Update progress.md  
+- ✅ **WHEN** implementing new patterns → Update systemPatterns.md
+- ✅ **WHEN** adding technologies → Update techContext.md
+
+### UPDATE FREQUENCY:
+- **activeContext.md**: Every context switch (daily/session-based)
+- **progress.md**: Every major milestone (weekly/phase-based)
+- **systemPatterns.md**: When new patterns emerge (as-needed)
+- **techContext.md**: When tech stack changes (as-needed)
+- **.clinerules**: When maintenance patterns evolve (rarely)
+
+### QUALITY STANDARDS:
+- Use consistent formatting and emoji patterns
+- Include specific dates and version information
+- Document both successes and failures/learnings
+- Maintain cross-references between memory bank files
+- Keep historical context while highlighting current state
+
+### VERIFICATION CHECKLIST:
+- [ ] All memory bank files are current for latest work
+- [ ] Cross-references between files are accurate
+- [ ] Dates and status indicators are up-to-date  
+- [ ] New patterns/technologies are documented
+- [ ] Context handoffs are complete and clear
+
+## 🎯 MEMORY BANK SUCCESS CRITERIA
+
+### EFFECTIVE MEMORY BANK INDICATORS:
+- ✅ Any developer can understand current context immediately
+- ✅ Historical decisions and reasoning are preserved
+- ✅ Technical patterns can be reused confidently
+- ✅ Progress tracking shows clear project velocity
+- ✅ Knowledge transfer requires minimal explanation
+
+### MEMORY BANK FAILURE SIGNS:
+- ❌ Outdated status information in memory files
+- ❌ Missing documentation for recent major changes
+- ❌ Inconsistent information between memory files
+- ❌ New team members can't understand current state
+- ❌ Repeated investigation of already-solved problems
+
+---
+
+**THESE RULES ARE MANDATORY - NOT OPTIONAL**
+**Maintaining the memory bank is part of the development process**
+**Failure to maintain memory bank = Technical debt**
