@@ -37,8 +37,7 @@ A detailed analysis of the Sonar API is available in the `docs/sonar/` directory
 **Key Findings:**
 
 *   **GraphQL API:** The Sonar GraphQL API is extensive, with 318 queries and 591 entities. The full schema is documented in `docs/sonar/api_schema.md`.
-*   **REST API:** The Sonar REST API has three identified endpoints: `accounts`, `tickets`, and `users`. The `accounts` endpoint is a high priority for migration.
-*   **Data Availability:** The Sonar system contains a significant amount of data, including over 10,000 accounts and 38,000 tickets.
+*   **Data Availability:** The Sonar system contains a significant amount of data, including over 10,000 accounts and 38,000 tickets exposed through the GraphQL API.
 
 ### Splynx System Analysis
 

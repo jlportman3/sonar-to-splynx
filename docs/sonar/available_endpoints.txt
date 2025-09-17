@@ -1,5 +1,0 @@
-# Available Sonar REST API Endpoints
-
-accounts: 10,114 records
-tickets: 38,285 records
-users: 30 records

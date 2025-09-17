@@ -84,7 +84,7 @@ def get_database_connection(config):
 
 ### **API Authentication Pattern**
 ```python
-# REST API Basic Auth Pattern
+# Splynx REST API Basic Auth Pattern
 import base64
 
 def authenticate_api(key, secret):

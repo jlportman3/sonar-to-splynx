@@ -1,7 +1,7 @@
 # 💻 TECHNICAL CONTEXT
 **Technology Stack & Technical Decisions**  
 **Last Updated:** September 12, 2025  
-**Tech Stack:** Python 3.8+, GraphQL, REST APIs, MySQL
+**Tech Stack:** Python 3.8+, GraphQL, Splynx REST API, MySQL
 
 ---
 
@@ -27,7 +27,7 @@ pytest==7.4.2       # Testing framework
 ### **API Integration Technologies**
 ```yaml
 # Sonar System
-API Type: GraphQL + REST
+API Type: GraphQL (primary data interface)
 Client: gql library with authentication
 Authentication: API tokens via headers
 Data Format: JSON with complex nested structures
@@ -135,6 +135,8 @@ json: Schema serialization and documentation
 analyze_sonar_schema.py: GraphQL schema documentation  
 analyze_splynx_database.py: Database structure analysis
 investigate_405_errors.py: HTTP error investigation
+backup_sonar_graphql.py: GraphQL-only full data backup into SQLite for pre-migration snapshots
+docs/sonar/schema.md: High-level GraphQL domain map for quick reference
 ```
 
 ### **Configuration Management**

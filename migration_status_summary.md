@@ -15,18 +15,18 @@ We have successfully analyzed both Sonar and Splynx APIs and confirmed **full mi
 ## 📊 Sonar API Analysis Results
 
 ### Available Data Sources:
-- **Customers:** Full access via REST API (`/api/rest/v1/accounts`)
-- **Services:** Internet, voice, and custom services accessible
-- **Billing:** Invoices, payments, transactions, and billing cycles
-- **Plans:** Service plans and pricing structures
-- **Financial:** Account balances, payment methods, and billing history
+- **Customers:** Full access via GraphQL `accounts` connection
+- **Services:** Internet, voice, and custom services via GraphQL (`services`, `service_plans`)
+- **Billing:** Invoices, payments, transactions, and billing cycles via GraphQL (`invoices`, `payments`)
+- **Plans:** Service plans and pricing structures exposed through GraphQL
+- **Financial:** Account balances, payment methods, and billing history retrievable through GraphQL queries
 
 ### Key Findings:
 - **Authentication:** Working with API tokens
-- **Rate Limiting:** 1000 requests/hour limit identified
-- **Data Format:** Well-structured JSON responses
-- **Total Endpoints:** 45+ working endpoints discovered
-- **Records Available:** Actual customer and billing data exists
+- **Rate Limiting:** GraphQL rate guidance observed; batching recommended
+- **Data Format:** Typed GraphQL responses (JSON payloads)
+- **Schema Coverage:** 318 queries, 591 object types introspected
+- **Records Available:** Live customer, billing, and service data confirmed via GraphQL sampling
 
 ## 📊 Splynx API Analysis Results  
 
@@ -114,7 +114,7 @@ We have successfully analyzed both Sonar and Splynx APIs and confirmed **full mi
 ## 🛠️ Technical Implementation Ready
 
 ### Migration Tools Available:
-- **✅ Sonar Client:** `src/apis/sonar_rest_client.py` - Full data extraction
+- **✅ Sonar Client:** GraphQL client (`src/apis/sonar_client.py`) supports full data extraction
 - **✅ Splynx Client:** `src/apis/splynx_client.py` - Full CRUD operations
 - **✅ Schema Mappers:** Detailed field mapping and transformation
 - **✅ Data Validators:** Ensure data integrity throughout process

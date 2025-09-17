@@ -16,7 +16,7 @@
 ### **SYSTEM ACCESS STATUS**
 - ✅ **Splynx API:** Full access with authentication
 - ✅ **Splynx Database:** Direct MySQL access (debian-sys-maint user)
-- ✅ **Sonar API:** GraphQL + REST APIs documented
+- ✅ **Sonar API:** GraphQL API documented
 - ✅ **Combined Strategy:** API + Database hybrid approach optimal
 
 ---
@@ -210,7 +210,7 @@ Phase 5: Testing & Optimization ⏳ READY TO START
 1. **Complete System Access** - API + Database dual approach
 2. **Fresh Target System** - No data conflicts or legacy issues  
 3. **Comprehensive Analysis** - Both systems fully understood
-4. **Proven Technology Stack** - Python, GraphQL, REST, MySQL
+4. **Proven Technology Stack** - Python, GraphQL, Splynx REST, MySQL
 5. **Modular Architecture** - Can enable features as needed
 
 ### **Risk Mitigation**

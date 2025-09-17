@@ -1,6 +1,6 @@
 # 📈 PROGRESS TRACKING
 **Sonar-to-Splynx Migration Project**  
-**Last Updated:** September 12, 2025  
+**Last Updated:** September 13, 2025  
 **Current Phase:** Phase 2 → Phase 3 Transition
 
 ---
@@ -30,7 +30,7 @@ Progress: 100%
 
 Key Achievements:
 ├── ✅ Sonar GraphQL API analyzed (318 queries, 591 entities)
-├── ✅ Sonar REST API documented (3 endpoints)
+├── ✅ Sonar GraphQL API documented (318 queries)
 ├── ✅ Splynx API comprehensive analysis (26+ working endpoints)
 ├── ✅ Splynx database direct access established
 ├── ✅ Complete schema mapping (462 tables)
@@ -103,6 +103,12 @@ Planned Achievements:
 
 ### **Completed Milestones** ✅
 ```
+2025-09-13: Sonar GraphQL Backup Tool Ready
+├── Introspection-driven query discovery implemented
+├── SQLite backup schema with run metadata created
+├── CLI entry point (backup_sonar_graphql.py) documented
+└── Usage integrated into main README / tech context
+
 2025-09-12: 405 Error Investigation Complete
 ├── Root cause identified (feature modules disabled)
 ├── Migration readiness confirmed
@@ -117,7 +123,7 @@ Planned Achievements:
 
 2025-09-XX: Sonar System Analysis Complete
 ├── GraphQL schema fully documented
-├── REST API endpoints identified
+├── GraphQL query catalogue created
 ├── Data volume estimates completed
 └── Extraction strategy planned
 ```

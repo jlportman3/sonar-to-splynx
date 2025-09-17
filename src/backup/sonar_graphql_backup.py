@@ -1,0 +1,591 @@
+"""Utilities for backing up Sonar GraphQL data into SQLite."""
+
+from __future__ import annotations
+
+import json
+import sqlite3
+import hashlib
+import uuid
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
+import textwrap
+
+from src.apis.sonar_client import SonarGraphQLClient
+from src.config.settings import config
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+_DEFAULT_SCALARS = {"String", "Boolean", "Int", "Float", "ID"}
+_OPTIONAL_ARG_WHITELIST = {"limit", "offset", "after", "before", "first", "last", "cursor"}
+
+
+def _sanitize_table_name(name: str) -> str:
+    """Sanitize a name so it is safe to use as a SQLite table."""
+    safe = [c if c.isalnum() or c == "_" else "_" for c in name]
+    sanitized = "".join(safe).strip("_")
+    return sanitized or "unnamed"
+
+
+class GraphQLSchema:
+    """Helper around a GraphQL introspection schema."""
+
+    def __init__(self, schema: Dict[str, Any]):
+        self.schema = schema
+        raw_types = schema.get("__schema", {}).get("types", [])
+        self.type_map: Dict[str, Dict[str, Any]] = {
+            t["name"]: t for t in raw_types if t.get("name")
+        }
+        query_type_name = schema.get("__schema", {}).get("queryType", {}).get("name")
+        if not query_type_name or query_type_name not in self.type_map:
+            raise ValueError("Unable to determine GraphQL query type from schema")
+        self.query_type = self.type_map[query_type_name]
+
+        # Collect scalar and enum names (treat custom scalars as scalars for backup)
+        self.scalar_types: Set[str] = {
+            t["name"]
+            for t in raw_types
+            if t.get("kind") == "SCALAR" and t.get("name")
+        } | _DEFAULT_SCALARS
+        self.enum_types: Set[str] = {
+            t["name"]
+            for t in raw_types
+            if t.get("kind") == "ENUM" and t.get("name")
+        }
+
+    # ------------------------------------------------------------------
+    # Introspection helpers
+
+    def get_type(self, name: Optional[str]) -> Optional[Dict[str, Any]]:
+        if not name:
+            return None
+        return self.type_map.get(name)
+
+    def is_scalar(self, type_name: str) -> bool:
+        return type_name in self.scalar_types
+
+    def is_enum(self, type_name: str) -> bool:
+        return type_name in self.enum_types
+
+    def resolve_named_type(self, type_ref: Dict[str, Any]) -> Tuple[Optional[Dict[str, Any]], bool]:
+        """Resolve a field type into its named type and whether it is a list."""
+        is_list = False
+        current = type_ref
+        while current:
+            kind = current.get("kind")
+            if kind == "NON_NULL":
+                current = current.get("ofType")
+                continue
+            if kind == "LIST":
+                is_list = True
+                current = current.get("ofType")
+                continue
+            break
+        if current and current.get("name"):
+            named = self.get_type(current["name"])
+        else:
+            named = None
+        return named, is_list
+
+    def is_type_non_null(self, type_ref: Dict[str, Any]) -> bool:
+        return type_ref.get("kind") == "NON_NULL"
+
+    def field_has_required_args(self, field: Dict[str, Any]) -> bool:
+        for arg in field.get("args", []):
+            arg_type = arg.get("type", {})
+            default_val = arg.get("defaultValue")
+            arg_name = arg.get("name")
+            if self.is_type_non_null(arg_type) and default_val is None:
+                if arg_name not in _OPTIONAL_ARG_WHITELIST:
+                    return True
+        return False
+
+    # ------------------------------------------------------------------
+    # Discovery helpers
+
+    def discover_collection_fields(self) -> List["CollectionField"]:
+        """Discover root query fields that look like list/collection queries."""
+        collections: List[CollectionField] = []
+        for field in self.query_type.get("fields", []):
+            field_name = field.get("name")
+            args = field.get("args", [])
+            arg_names = {arg.get("name") for arg in args}
+            # Heuristic: require a limit-style argument
+            if not ({"limit", "first", "paginator"} & arg_names):
+                continue
+            # Skip fields needing unknown required args
+            has_unsupported_required = False
+            for arg in args:
+                arg_name = arg.get("name")
+                arg_type = arg.get("type", {})
+                default_val = arg.get("defaultValue")
+                if self.is_type_non_null(arg_type) and default_val is None:
+                    if arg_name not in {"limit", "offset", "first", "after", "paginator"}:
+                        has_unsupported_required = True
+                        break
+            if has_unsupported_required:
+                continue
+
+            return_type, _ = self.resolve_named_type(field.get("type", {}))
+            if not return_type:
+                continue
+            entities_field = None
+            page_info_field = None
+            total_count_field = None
+            for sub_field in return_type.get("fields", []):
+                if sub_field.get("name") == "entities":
+                    entities_field = sub_field
+                elif sub_field.get("name") in {"page_info", "pageInfo"}:
+                    page_info_field = sub_field
+                elif sub_field.get("name") in {"total_count", "totalCount"}:
+                    total_count_field = sub_field
+            if not entities_field:
+                continue
+            entity_type, _ = self.resolve_named_type(entities_field.get("type", {}))
+            if not entity_type:
+                continue
+            page_info_field_name = page_info_field.get("name") if page_info_field else None
+            page_info_next_field_name = None
+            page_info_cursor_field_name = None
+            if page_info_field:
+                page_info_type, _ = self.resolve_named_type(page_info_field.get("type", {}))
+                if page_info_type:
+                    for pf in page_info_type.get("fields", []):
+                        pf_name = pf.get("name")
+                        if pf_name in {"has_next_page", "hasNextPage"}:
+                            page_info_next_field_name = pf_name
+                        elif pf_name in {"end_cursor", "endCursor"}:
+                            page_info_cursor_field_name = pf_name
+            supports_paginator = any(arg.get("name") == "paginator" for arg in args)
+            collections.append(
+                CollectionField(
+                    name=field_name,
+                    arguments=args,
+                    container_type=return_type,
+                    entity_type=entity_type,
+                    entities_field_name=entities_field.get("name"),
+                    page_info_field_name=page_info_field_name,
+                    page_info_next_field_name=page_info_next_field_name,
+                    page_info_cursor_field_name=page_info_cursor_field_name,
+                    total_count_field_name=total_count_field.get("name") if total_count_field else None,
+                    supports_paginator=supports_paginator,
+                )
+            )
+        return collections
+
+
+@dataclass
+class CollectionField:
+    """Information about a root query collection field."""
+
+    name: str
+    arguments: List[Dict[str, Any]]
+    container_type: Dict[str, Any]
+    entity_type: Dict[str, Any]
+    entities_field_name: str
+    page_info_field_name: Optional[str]
+    page_info_next_field_name: Optional[str]
+    page_info_cursor_field_name: Optional[str]
+    total_count_field_name: Optional[str]
+    supports_paginator: bool
+
+    @property
+    def supports_offset(self) -> bool:
+        return any(arg.get("name") == "offset" for arg in self.arguments)
+
+    @property
+    def supports_limit(self) -> bool:
+        return any(arg.get("name") in {"limit", "first"} for arg in self.arguments)
+
+    @property
+    def has_page_info(self) -> bool:
+        return self.page_info_field_name is not None
+
+    @property
+    def has_total_count(self) -> bool:
+        return self.total_count_field_name is not None
+
+
+class SelectionBuilder:
+    """Builds selection sets for a GraphQL type based on introspection."""
+
+    def __init__(self, schema: GraphQLSchema, max_depth: int = 2):
+        self.schema = schema
+        self.max_depth = max_depth
+
+    def build(self, type_name: str) -> str:
+        visited: Set[str] = set()
+        selection = self._build_for_type(type_name, depth=0, visited=visited)
+        lines = ["__typename"] if selection else ["__typename"]
+        if selection:
+            lines.extend(selection)
+        return "\n".join(lines)
+
+    def _build_for_type(self, type_name: str, depth: int, visited: Set[str]) -> List[str]:
+        type_def = self.schema.get_type(type_name)
+        if not type_def:
+            return []
+        visited.add(type_name)
+        lines: List[str] = []
+        for field in type_def.get("fields", []):
+            field_name = field.get("name")
+            if not field_name:
+                continue
+            if self.schema.field_has_required_args(field):
+                continue
+            field_type, is_list = self.schema.resolve_named_type(field.get("type", {}))
+            if not field_type:
+                continue
+            kind = field_type.get("kind")
+            field_type_name = field_type.get("name")
+            if kind in {"SCALAR"} or self.schema.is_scalar(field_type_name):
+                lines.append(field_name)
+            elif kind == "ENUM" or self.schema.is_enum(field_type_name):
+                lines.append(field_name)
+            elif kind in {"OBJECT", "INTERFACE"}:
+                if depth >= self.max_depth:
+                    continue
+                if field_type_name in visited:
+                    continue
+                nested = self._build_for_type(field_type_name, depth + 1, visited)
+                if nested:
+                    nested_block = textwrap.indent("\n".join(nested), "  ")
+                    lines.append(f"{field_name} {{\n{nested_block}\n}}")
+            elif kind == "UNION":
+                # Include typename for union; field-specific handling could be added later.
+                lines.append(f"{field_name} {{ __typename }}")
+            else:
+                # Fallback for other kinds (INPUT_OBJECT etc.)
+                continue
+        visited.discard(type_name)
+        return lines
+
+
+class SQLiteBackupWriter:
+    """Persist GraphQL entities into a SQLite database."""
+
+    def __init__(self, db_path: str):
+        self.db_path = db_path
+        self.conn = sqlite3.connect(db_path)
+        self.conn.execute("PRAGMA journal_mode=WAL;")
+        self.conn.execute("PRAGMA foreign_keys=ON;")
+        self._init_metadata()
+
+    def _init_metadata(self) -> None:
+        self.conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS backup_runs (
+                id TEXT PRIMARY KEY,
+                started_at TEXT NOT NULL,
+                completed_at TEXT,
+                status TEXT NOT NULL,
+                notes TEXT
+            )
+            """
+        )
+        self.conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS backup_tables (
+                query_name TEXT PRIMARY KEY,
+                table_name TEXT NOT NULL,
+                last_run_id TEXT,
+                FOREIGN KEY(last_run_id) REFERENCES backup_runs(id)
+            )
+            """
+        )
+        self.conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS backup_table_stats (
+                run_id TEXT NOT NULL,
+                query_name TEXT NOT NULL,
+                records INTEGER NOT NULL,
+                duration_seconds REAL,
+                PRIMARY KEY (run_id, query_name),
+                FOREIGN KEY(run_id) REFERENCES backup_runs(id)
+            )
+            """
+        )
+        self.conn.commit()
+
+    def start_run(self) -> str:
+        run_id = str(uuid.uuid4())
+        started_at = datetime.utcnow().isoformat()
+        self.conn.execute(
+            "INSERT INTO backup_runs (id, started_at, status) VALUES (?, ?, ?)",
+            (run_id, started_at, "running"),
+        )
+        self.conn.commit()
+        return run_id
+
+    def complete_run(self, run_id: str, status: str = "completed", notes: Optional[str] = None) -> None:
+        completed_at = datetime.utcnow().isoformat()
+        self.conn.execute(
+            "UPDATE backup_runs SET completed_at = ?, status = ?, notes = ? WHERE id = ?",
+            (completed_at, status, notes, run_id),
+        )
+        self.conn.commit()
+
+    def ensure_table(self, query_name: str) -> str:
+        table_name = _sanitize_table_name(query_name)
+        self.conn.execute(
+            "INSERT OR IGNORE INTO backup_tables (query_name, table_name) VALUES (?, ?)",
+            (query_name, table_name),
+        )
+        self.conn.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS "{table_name}" (
+                id TEXT PRIMARY KEY,
+                data TEXT NOT NULL,
+                fetched_at TEXT NOT NULL
+            )
+            """
+        )
+        self.conn.commit()
+        return table_name
+
+    def write_entities(self, table_name: str, entities: Iterable[Dict[str, Any]]) -> int:
+        now = datetime.utcnow().isoformat()
+        sanitized = _sanitize_table_name(table_name)
+        rows = []
+        for entity in entities:
+            json_blob = json.dumps(entity, sort_keys=True)
+            entity_id = entity.get("id")
+            if entity_id is None:
+                entity_id = hashlib.sha256(json_blob.encode("utf-8")).hexdigest()
+            rows.append((str(entity_id), json_blob, now))
+        if not rows:
+            return 0
+        self.conn.executemany(
+            f'INSERT OR REPLACE INTO "{sanitized}" (id, data, fetched_at) VALUES (?, ?, ?)',
+            rows,
+        )
+        self.conn.commit()
+        return len(rows)
+
+    def mark_table_run(self, query_name: str, run_id: str) -> None:
+        self.conn.execute(
+            "UPDATE backup_tables SET last_run_id = ? WHERE query_name = ?",
+            (run_id, query_name),
+        )
+        self.conn.commit()
+
+    def record_table_stats(self, query_name: str, run_id: str, records: int, duration_seconds: float) -> None:
+        self.conn.execute(
+            """
+            INSERT OR REPLACE INTO backup_table_stats (run_id, query_name, records, duration_seconds)
+            VALUES (?, ?, ?, ?)
+            """,
+            (run_id, query_name, records, duration_seconds),
+        )
+        self.conn.commit()
+
+
+class SonarGraphQLBackup:
+    """Coordinates full GraphQL backup into SQLite."""
+
+    def __init__(
+        self,
+        client: Optional[SonarGraphQLClient] = None,
+        output_path: str = "sonar_graphql_backup.sqlite",
+        page_size: int = 200,
+        max_depth: int = 2,
+        include: Optional[Set[str]] = None,
+        exclude: Optional[Set[str]] = None,
+    ) -> None:
+        self.client = client or SonarGraphQLClient(config)
+        self.output_path = output_path
+        self.page_size = page_size
+        self.max_depth = max_depth
+        self.include = include
+        self.exclude = exclude or set()
+        self.schema: Optional[GraphQLSchema] = None
+        self.writer = SQLiteBackupWriter(output_path)
+
+    def load_schema(self) -> None:
+        logger.info("Fetching GraphQL schema via introspection...")
+        schema_data = self.client.get_schema_info()
+        self.schema = GraphQLSchema(schema_data)
+        logger.info(f"GraphQL schema loaded: {len(self.schema.type_map)} types")
+
+    def run(self) -> None:
+        if not self.schema:
+            self.load_schema()
+        assert self.schema is not None
+        selection_builder = SelectionBuilder(self.schema, max_depth=self.max_depth)
+        collection_fields = self.schema.discover_collection_fields()
+        logger.info("Discovered %d collection queries", len(collection_fields))
+
+        if self.include:
+            collection_fields = [cf for cf in collection_fields if cf.name in self.include]
+        if self.exclude:
+            collection_fields = [cf for cf in collection_fields if cf.name not in self.exclude]
+
+        run_id = self.writer.start_run()
+        logger.info(f"Backup run {run_id} started (writing to {self.output_path})")
+
+        try:
+            for collection in collection_fields:
+                self._backup_collection(collection, selection_builder, run_id)
+            self.writer.complete_run(run_id, status="completed")
+            logger.info(f"Backup run {run_id} completed")
+        except Exception as exc:  # pragma: no cover - defensive logging
+            logger.exception(f"GraphQL backup failed: {exc}")
+            self.writer.complete_run(run_id, status="failed", notes=str(exc))
+            raise
+
+    def _backup_collection(
+        self,
+        collection: CollectionField,
+        selection_builder: SelectionBuilder,
+        run_id: str,
+    ) -> None:
+        query_name = collection.name
+        logger.info(f"Backing up query '{query_name}'")
+        selection = selection_builder.build(collection.entity_type["name"])
+        query_alias = f"backup_{query_name}"
+
+        query_with_page_info = self._build_collection_query(
+            collection, query_alias, selection, include_page_info=True
+        )
+        query_without_page_info = self._build_collection_query(
+            collection, query_alias, selection, include_page_info=False
+        )
+
+        table_name = self.writer.ensure_table(query_name)
+        total_downloaded = 0
+        started_at = datetime.utcnow()
+        current_page = 1
+        per_page = self.page_size
+        use_page_info = collection.has_page_info
+        while True:
+            variables = {}
+            if collection.supports_paginator:
+                variables = {"page": current_page, "per_page": per_page}
+
+            query_to_run = (
+                query_with_page_info if use_page_info else query_without_page_info
+            )
+
+            response = self.client.execute_query(query_to_run, variables or None)
+            if not response.success or not response.data:
+                if use_page_info and self._should_retry_without_page_info(response.errors):
+                    logger.warning(
+                        f"Query {query_name} failed due to aggregation; retrying without page_info"
+                    )
+                    use_page_info = False
+                    continue
+                logger.warning(f"Query {query_name} failed or returned no data: {response.errors}")
+                break
+            container = response.data.get(query_name)
+            if not container:
+                logger.warning(f"Query {query_name} response missing container")
+                break
+            entities = container.get(collection.entities_field_name, [])
+            if not entities:
+                logger.info(f"No more entities for {query_name} (downloaded {total_downloaded} total)")
+                break
+            written = self.writer.write_entities(table_name, entities)
+            total_downloaded += written
+            logger.info(f"Stored {written} entities from {query_name} (cumulative {total_downloaded})")
+
+            if use_page_info and collection.has_page_info:
+                page_info = container.get(collection.page_info_field_name) or {}
+                logger.debug(
+                    f"Page info for {query_name}: {{'page': {page_info.get('page')}, 'total_pages': {page_info.get('total_pages')}, 'records_per_page': {page_info.get('records_per_page')}, 'total_count': {page_info.get('total_count')}}}"
+                )
+                if collection.supports_paginator:
+                    total_pages = page_info.get("total_pages")
+                    records_per_page = page_info.get("records_per_page")
+                    if isinstance(records_per_page, int) and records_per_page > 0:
+                        per_page = records_per_page
+                    if isinstance(total_pages, int) and total_pages > 0:
+                        if current_page >= total_pages:
+                            break
+                    elif written < per_page:
+                        break
+                    current_page += 1
+                    continue
+            elif collection.supports_paginator:
+                if written < per_page:
+                    break
+                current_page += 1
+                continue
+
+            # Non-paginated paths exit after first batch
+            break
+
+        logger.info(f"Finished backing up {query_name} ({total_downloaded} records)")
+        duration = (datetime.utcnow() - started_at).total_seconds()
+        self.writer.record_table_stats(query_name, run_id, total_downloaded, duration)
+        self.writer.mark_table_run(query_name, run_id)
+
+    def _build_collection_query(
+        self,
+        collection: CollectionField,
+        query_alias: str,
+        selection: str,
+        include_page_info: bool,
+    ) -> str:
+        formatted_selection = selection.replace("\n", "\n      ")
+        arg_definitions: List[str] = []
+        arg_calls: List[str] = []
+        if collection.supports_paginator:
+            arg_definitions.extend(["$page: Int!", "$per_page: Int!"])
+            arg_calls.append("paginator: { page: $page, records_per_page: $per_page }")
+
+        args_clause = ", ".join(arg_definitions)
+        query_header = f"query {query_alias}"
+        if args_clause:
+            query_header += f"({args_clause})"
+
+        container_lines = [
+            f"    {collection.entities_field_name} {{",
+            f"      {formatted_selection}",
+            "    }",
+        ]
+        if include_page_info and collection.has_page_info:
+            pi_lines = [f"    {collection.page_info_field_name} {{"]
+            for field_name in ["page", "total_pages", "total_count", "records_per_page"]:
+                pi_lines.append(f"      {field_name}")
+            if collection.page_info_next_field_name:
+                pi_lines.append(f"      {collection.page_info_next_field_name}")
+            if collection.page_info_cursor_field_name:
+                pi_lines.append(f"      {collection.page_info_cursor_field_name}")
+            pi_lines.append("    }")
+            container_lines.extend(pi_lines)
+        if include_page_info and collection.has_total_count:
+            container_lines.append(f"    {collection.total_count_field_name}")
+
+        args_invocation = ", ".join(arg_calls)
+        if args_invocation:
+            return (
+                f"{query_header} {{\n"
+                f"  {collection.name}({args_invocation}) {{\n"
+                + "\n".join(container_lines)
+                + "\n  }\n}"
+            )
+        return (
+            f"{query_header} {{\n"
+            f"  {collection.name} {{\n"
+            + "\n".join(container_lines)
+            + "\n  }\n}"
+        )
+
+    @staticmethod
+    def _should_retry_without_page_info(errors: Optional[List[Dict[str, Any]]]) -> bool:
+        if not errors:
+            return False
+        for error in errors:
+            message = (error or {}).get("message", "").lower()
+            if "aggregat" in message or "does not exist" in message:
+                return True
+        return False
+
+
+__all__ = [
+    "SonarGraphQLBackup",
+    "GraphQLSchema",
+    "SelectionBuilder",
+    "SQLiteBackupWriter",
+]

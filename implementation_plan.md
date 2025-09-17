@@ -1,254 +1,268 @@
 # Implementation Plan
 
-## [Overview]
-Create a comprehensive Python-based migration application to transfer all available data from a Sonar software instance to a local Splynx instance using their respective APIs.
+## Overview
+Create a comprehensive incremental migration system to transfer pertinent data from Sonar instance to Splynx instance with selective customer migration capabilities.
 
-This migration application will handle the complete data transfer process including API documentation scraping, schema analysis, data extraction from Sonar's GraphQL API, data transformation through a normalized schema, and data loading into Splynx's REST API. The system will provide robust error handling, progress tracking, and validation to ensure data integrity throughout the migration process. The application will be designed to handle large datasets efficiently while maintaining data relationships and implementing retry mechanisms for network failures.
+This migration application will handle incremental data transfer with the ability to migrate one customer, a hundred customers, or all customers from Sonar to Splynx. The system prioritizes company/user/group information, plans, and tariffs first, followed by network infrastructure, then inventory management, with active customers taking priority over inactive ones. The implementation uses API-first validation, stops on any error for immediate resolution, and provides detailed progress tracking throughout the migration process.
 
-## [Types]
-Define comprehensive data models and transformation schemas for all migration entities.
+## Types
+Define comprehensive data models for incremental migration with customer selection capabilities.
 
-**Core Data Models:**
+**Migration Priority Enums:**
+```python
+class MigrationPriority(Enum):
+    FOUNDATION = 1      # Company, users, groups, plans, tariffs
+    NETWORK = 2         # Network, IP ranges, pools
+    INVENTORY = 3       # Inventory, locations, vendors, models
+    CUSTOMERS = 4       # Active customers first, others later
+
+class CustomerStatus(Enum):
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    SUSPENDED = "suspended"
+    TERMINATED = "terminated"
+
+class MigrationMode(Enum):
+    SINGLE_CUSTOMER = "single"
+    BATCH_CUSTOMERS = "batch"
+    ALL_CUSTOMERS = "all"
+```
+
+**Customer Selection Models:**
 ```python
 @dataclass
-class SonarAccount:
+class CustomerFilter:
+    customer_ids: Optional[List[int]] = None
+    status_filter: Optional[List[CustomerStatus]] = None
+    date_range: Optional[Tuple[datetime, datetime]] = None
+    limit: Optional[int] = None
+    active_only: bool = True
+
+@dataclass
+class MigrationRequest:
+    mode: MigrationMode
+    customer_filter: CustomerFilter
+    priority_phases: List[MigrationPriority]
+    stop_on_error: bool = True
+    validate_with_api: bool = True
+```
+
+**Enhanced Entity Models:**
+```python
+@dataclass
+class SonarCustomer:
     id: int
     name: str
-    account_status_id: int
+    status: CustomerStatus
     account_type: str
-    created_at: datetime
-    contacts: List[SonarContact]
-    services: List[SonarService]
-    billing_info: SonarBillingInfo
+    created_date: datetime
+    last_activity: Optional[datetime]
+    services: List['SonarService']
+    billing_info: 'SonarBillingInfo'
+    is_active: bool
 
 @dataclass
-class SplynxCustomer:
-    id: Optional[int]
-    login: str
-    password: str
-    name: str
-    email: str
-    phone: str
-    status: str
-    services: List[SplynxService]
-
-@dataclass
-class NormalizedEntity:
-    source_id: str
-    entity_type: str
-    data: Dict[str, Any]
-    relationships: List[str]
-    validation_status: bool
+class MigrationResult:
+    customer_id: int
+    success: bool
+    error_message: Optional[str]
+    entities_migrated: Dict[str, int]
+    validation_results: Dict[str, bool]
+    migration_time: float
 ```
 
-**API Response Models:**
-```python
-class GraphQLResponse(TypedDict):
-    data: Optional[Dict[str, Any]]
-    errors: Optional[List[Dict[str, str]]]
+## Files
+Organize migration system with customer selection and incremental processing capabilities.
 
-class RESTResponse(TypedDict):
-    status_code: int
-    data: Optional[Dict[str, Any]]
-    error: Optional[str]
+**New Core Migration Files:**
+- `src/migration/customer_selector.py` - Customer filtering and selection logic
+- `src/migration/incremental_migrator.py` - Incremental migration orchestration
+- `src/migration/priority_manager.py` - Migration priority and phase management
+- `src/migration/error_handler.py` - Stop-on-error handling and recovery
+- `src/migration/progress_tracker.py` - Detailed progress tracking and reporting
+
+**Enhanced Extractor Files:**
+- `src/extractors/foundation_extractor.py` - Company, users, groups, plans, tariffs
+- `src/extractors/network_extractor.py` - Network infrastructure, IP ranges, pools
+- `src/extractors/inventory_extractor.py` - Inventory, locations, vendors, models
+- `src/extractors/customer_extractor.py` - Customer data with status filtering
+
+**Validation and API Files:**
+- `src/validators/api_validator.py` - API-first validation for all entities
+- `src/validators/relationship_validator.py` - Cross-entity relationship validation
+- `src/apis/enhanced_splynx_client.py` - Extended Splynx client with validation endpoints
+
+**Customer Management Files:**
+- `src/models/customer_models.py` - Customer-specific data models
+- `src/transformers/customer_transformer.py` - Customer data transformation
+- `src/loaders/customer_loader.py` - Customer data loading with validation
+
+**Configuration and CLI:**
+- `src/cli/migration_cli.py` - Command-line interface for customer selection
+- `src/config/migration_settings.py` - Migration-specific configuration
+- `migration_runner.py` - Main entry point for migration execution
+
+## Functions
+Implement customer-centric migration functions with incremental processing capabilities.
+
+**Customer Selection Functions:**
+- `select_customers_by_ids(customer_ids: List[int]) -> List[SonarCustomer]` - Select specific customers
+- `select_active_customers(limit: Optional[int] = None) -> List[SonarCustomer]` - Get active customers
+- `filter_customers_by_status(status: CustomerStatus) -> List[SonarCustomer]` - Filter by status
+- `get_customer_migration_order(customers: List[SonarCustomer]) -> List[SonarCustomer]` - Priority ordering
+
+**Incremental Migration Functions:**
+- `migrate_single_customer(customer_id: int) -> MigrationResult` - Migrate one customer
+- `migrate_customer_batch(customer_ids: List[int]) -> List[MigrationResult]` - Migrate customer batch
+- `migrate_all_customers(filter: CustomerFilter) -> List[MigrationResult]` - Migrate all matching customers
+- `resume_failed_migration(migration_id: str) -> MigrationResult` - Resume after error fix
+
+**Priority Phase Functions:**
+- `migrate_foundation_data() -> MigrationResult` - Company, users, groups, plans, tariffs
+- `migrate_network_infrastructure() -> MigrationResult` - Network, IP ranges, pools
+- `migrate_inventory_data() -> MigrationResult` - Inventory, locations, vendors, models
+- `migrate_customer_data(customer: SonarCustomer) -> MigrationResult` - Individual customer migration
+
+**API Validation Functions:**
+- `validate_customer_creation(customer_data: Dict) -> ValidationResult` - Pre-creation validation
+- `validate_service_assignment(service_data: Dict) -> ValidationResult` - Service validation
+- `validate_billing_setup(billing_data: Dict) -> ValidationResult` - Billing validation
+- `post_migration_validation(customer_id: int) -> ValidationResult` - Post-migration checks
+
+**Error Handling Functions:**
+- `handle_migration_error(error: Exception, context: Dict) -> None` - Stop and log error
+- `create_error_report(migration_results: List[MigrationResult]) -> Dict` - Error reporting
+- `suggest_error_fixes(error_type: str) -> List[str]` - Error resolution suggestions
+
+## Classes
+Design customer-focused migration classes with incremental processing capabilities.
+
+**Customer Management Classes:**
+- `CustomerSelector` - Handles customer filtering and selection logic
+  - Methods: `select_by_ids()`, `filter_by_status()`, `get_active_customers()`, `apply_filters()`
+  - Properties: `total_customers`, `active_count`, `selected_customers`
+
+- `IncrementalMigrator` - Orchestrates incremental customer migration
+  - Methods: `migrate_customers()`, `process_batch()`, `handle_dependencies()`, `track_progress()`
+  - Properties: `current_batch`, `migration_status`, `error_state`
+
+**Priority Management Classes:**
+- `PriorityManager` - Manages migration phases and priorities
+  - Methods: `get_migration_order()`, `execute_phase()`, `validate_dependencies()`, `skip_phase()`
+  - Properties: `current_phase`, `completed_phases`, `remaining_phases`
+
+- `FoundationMigrator` - Handles company, user, group, plan, and tariff migration
+  - Methods: `migrate_company_info()`, `migrate_users()`, `migrate_groups()`, `migrate_plans()`
+
+- `NetworkMigrator` - Handles network infrastructure migration
+  - Methods: `migrate_ip_ranges()`, `migrate_pools()`, `migrate_network_config()`
+
+- `InventoryMigrator` - Handles inventory and location migration
+  - Methods: `migrate_locations()`, `migrate_vendors()`, `migrate_models()`, `migrate_inventory()`
+
+**Enhanced API Classes:**
+- `EnhancedSplynxClient` - Extended Splynx client with validation capabilities
+  - Methods: `validate_before_create()`, `create_with_validation()`, `verify_creation()`
+  - Properties: `validation_enabled`, `last_validation_result`
+
+**Error Management Classes:**
+- `MigrationErrorHandler` - Handles stop-on-error behavior
+  - Methods: `handle_error()`, `create_error_context()`, `suggest_fixes()`, `enable_resume()`
+  - Properties: `error_count`, `last_error`, `recovery_suggestions`
+
+## Dependencies
+Enhanced dependencies for customer management and incremental migration.
+
+**Core Migration Dependencies:**
+```
+requests>=2.31.0          # HTTP client for REST API calls
+gql>=3.4.1                # GraphQL client for Sonar
+aiohttp>=3.8.5            # Async HTTP for concurrent processing
+pydantic>=2.4.2           # Data validation and serialization
+python-dotenv>=1.0.0      # Environment configuration
+tenacity>=8.2.3           # Retry mechanisms
+click>=8.1.7              # CLI interface for customer selection
+rich>=13.6.0              # Enhanced progress display
+loguru>=0.7.2             # Detailed logging
 ```
 
-**Configuration Models:**
-```python
-@dataclass
-class MigrationConfig:
-    sonar_url: str
-    sonar_api_key: str
-    sonar_username: Optional[str]
-    sonar_password: Optional[str]
-    splynx_url: str
-    splynx_api_key: str
-    splynx_username: Optional[str]
-    splynx_password: Optional[str]
-    batch_size: int = 100
-    retry_attempts: int = 3
-    parallel_workers: int = 4
+**Customer Management Dependencies:**
+```
+pandas>=2.1.1             # Customer data analysis and filtering
+sqlalchemy>=2.0.0         # Database ORM for migration tracking
+alembic>=1.12.0           # Database migrations
+psycopg2-binary>=2.9.7    # PostgreSQL adapter for Splynx database
 ```
 
-## [Files]
-Organize the migration application into modular components with clear separation of concerns.
-
-**New files to be created:**
-- `src/main.py` - Application entry point and orchestration
-- `src/config/settings.py` - Configuration management and environment variables
-- `src/apis/sonar_client.py` - Sonar GraphQL API client
-- `src/apis/splynx_client.py` - Splynx REST API client
-- `src/scrapers/sonar_docs_scraper.py` - Sonar API documentation scraper
-- `src/scrapers/splynx_docs_scraper.py` - Splynx API documentation scraper
-- `src/models/sonar_models.py` - Sonar data models and GraphQL queries
-- `src/models/splynx_models.py` - Splynx data models and REST endpoints
-- `src/models/normalized_schema.py` - Normalized data schema for transformation
-- `src/extractors/sonar_extractor.py` - Data extraction from Sonar
-- `src/transformers/data_transformer.py` - Data transformation and normalization
-- `src/loaders/splynx_loader.py` - Data loading into Splynx
-- `src/utils/logger.py` - Logging configuration and utilities
-- `src/utils/validators.py` - Data validation utilities
-- `src/utils/retry.py` - Retry mechanism utilities
-- `src/migration/orchestrator.py` - Migration process orchestration
-- `docs/sonar/api_schema.md` - Generated Sonar API schema documentation
-- `docs/splynx/api_schema.md` - Generated Splynx API schema documentation
-- `docs/migration_mapping.md` - Data mapping documentation
-- `requirements.txt` - Python dependencies
-- `.env.example` - Environment variables template (user will provide .env with actual credentials)
-- `README.md` - Project documentation and setup instructions
-- `tests/test_sonar_client.py` - Unit tests for Sonar client
-- `tests/test_splynx_client.py` - Unit tests for Splynx client
-- `tests/test_data_transformer.py` - Unit tests for data transformation
-
-**Configuration files:**
-- `pyproject.toml` - Python project configuration
-- `.gitignore` - Git ignore patterns
-- `docker-compose.yml` - Optional containerization setup
-
-## [Functions]
-Implement comprehensive functions for each stage of the migration process.
-
-**API Client Functions:**
-- `SonarClient.execute_query(query: str, variables: Dict) -> GraphQLResponse` - Execute GraphQL queries
-- `SonarClient.get_schema_info() -> Dict` - Retrieve schema information
-- `SplynxClient.get(endpoint: str, params: Dict) -> RESTResponse` - GET requests
-- `SplynxClient.post(endpoint: str, data: Dict) -> RESTResponse` - POST requests
-- `SplynxClient.put(endpoint: str, data: Dict) -> RESTResponse` - PUT requests
-
-**Documentation Scraping Functions:**
-- `scrape_sonar_docs() -> Dict[str, Any]` - Extract Sonar API documentation
-- `scrape_splynx_docs() -> Dict[str, Any]` - Extract Splynx API documentation
-- `generate_schema_docs(api_data: Dict, output_path: str) -> None` - Generate markdown documentation
-
-**Data Processing Functions:**
-- `extract_all_accounts() -> List[SonarAccount]` - Extract all account data from Sonar
-- `extract_services() -> List[SonarService]` - Extract service data
-- `extract_billing_data() -> List[SonarBilling]` - Extract billing information
-- `transform_to_normalized(data: Any, entity_type: str) -> NormalizedEntity` - Transform to normalized schema
-- `validate_data(entity: NormalizedEntity) -> bool` - Validate data integrity
-- `load_to_splynx(entities: List[NormalizedEntity]) -> MigrationResult` - Load data into Splynx
-
-**Migration Orchestration Functions:**
-- `run_full_migration() -> MigrationReport` - Execute complete migration
-- `migrate_entity_type(entity_type: str) -> EntityMigrationResult` - Migrate specific entity type
-- `generate_migration_report() -> Dict` - Generate detailed migration report
-- `rollback_migration(migration_id: str) -> bool` - Rollback failed migration
-
-## [Classes]
-Design object-oriented components to encapsulate migration functionality.
-
-**API Client Classes:**
-- `SonarGraphQLClient` - Handles all Sonar GraphQL interactions with connection pooling and error handling
-  - Methods: `connect()`, `execute_query()`, `get_all_entities()`, `get_schema()`
-  - Properties: `connection_status`, `rate_limit_status`
-
-- `SplynxRESTClient` - Manages Splynx REST API interactions with authentication and retry logic
-  - Methods: `authenticate()`, `create_customer()`, `update_service()`, `bulk_create()`
-  - Properties: `auth_token`, `api_version`
-
-**Data Processing Classes:**
-- `DataExtractor` - Orchestrates data extraction from Sonar with pagination and filtering
-  - Methods: `extract_by_type()`, `extract_with_relations()`, `handle_pagination()`
-
-- `DataTransformer` - Handles data transformation and normalization with validation
-  - Methods: `transform()`, `normalize_schema()`, `validate_mapping()`, `handle_conflicts()`
-
-- `DataLoader` - Manages data loading into Splynx with batch processing and error recovery
-  - Methods: `load_batch()`, `handle_dependencies()`, `retry_failed()`, `validate_loaded()`
-
-**Migration Management Classes:**
-- `MigrationOrchestrator` - Coordinates the entire migration process with progress tracking
-  - Methods: `plan_migration()`, `execute_migration()`, `monitor_progress()`, `handle_errors()`
-
-- `SchemaAnalyzer` - Analyzes and documents API schemas
-  - Methods: `analyze_sonar_schema()`, `analyze_splynx_schema()`, `generate_mappings()`
-
-## [Dependencies]
-Install and configure essential Python packages for GraphQL, REST APIs, and data processing.
-
-**Core Dependencies:**
+**Validation and Testing:**
 ```
-requests==2.31.0          # HTTP client for REST API calls
-gql==3.4.1                # GraphQL client library
-aiohttp==3.8.5            # Async HTTP client
-beautifulsoup4==4.12.2    # HTML parsing for documentation scraping
-pandas==2.1.1             # Data manipulation and analysis
-pydantic==2.4.2           # Data validation and serialization
-python-dotenv==1.0.0      # Environment variable management
-tenacity==8.2.3           # Retry mechanisms
-click==8.1.7              # CLI interface
-rich==13.6.0              # Enhanced terminal output
-loguru==0.7.2             # Advanced logging
-pytest==7.4.2            # Testing framework
-black==23.9.1             # Code formatting
-mypy==1.6.1               # Type checking
+pytest>=7.4.2            # Testing framework
+pytest-asyncio>=0.21.1   # Async testing support
+factory-boy>=3.3.0       # Test data factories
+responses>=0.23.3        # HTTP request mocking
 ```
 
-**Additional Dependencies:**
-```
-asyncio                   # Async processing for concurrent operations
-dataclasses              # Data class support
-json                     # JSON processing
-csv                      # CSV export capabilities
-sqlite3                  # Local database for migration tracking
-```
+## Testing
+Comprehensive testing strategy for customer migration and incremental processing.
 
-## [Testing]
-Implement comprehensive testing strategy covering unit tests, integration tests, and migration validation.
+**Customer Migration Testing:**
+- `tests/test_customer_selector.py` - Customer filtering and selection logic
+- `tests/test_incremental_migration.py` - Incremental migration workflows
+- `tests/test_priority_phases.py` - Migration phase execution
+- `tests/test_error_handling.py` - Stop-on-error behavior
 
-**Unit Testing Approach:**
-- Test each API client independently with mocked responses
-- Validate data transformation logic with sample datasets
-- Test error handling and retry mechanisms
-- Verify configuration management and validation
+**Integration Testing:**
+- `tests/integration/test_single_customer.py` - Single customer migration end-to-end
+- `tests/integration/test_batch_migration.py` - Batch customer migration
+- `tests/integration/test_api_validation.py` - API validation workflows
+- `tests/integration/test_error_recovery.py` - Error handling and recovery
 
-**Integration Testing Strategy:**
-- Test end-to-end API communication with both Sonar and Splynx
-- Validate complete data extraction and loading pipelines
-- Test migration orchestration with small datasets
-- Verify data integrity and relationship preservation
-
-**Testing Infrastructure:**
-- `tests/fixtures/` - Sample data for testing
-- `tests/mocks/` - API response mocks
-- `tests/integration/` - End-to-end integration tests
-- `tests/unit/` - Individual component tests
+**Performance Testing:**
+- `tests/performance/test_large_batch.py` - Large customer batch performance
+- `tests/performance/test_concurrent_migration.py` - Concurrent processing limits
+- `tests/performance/test_memory_usage.py` - Memory usage during migration
 
 **Validation Testing:**
-- Pre-migration data validation
-- Post-migration data integrity checks
-- Relationship mapping verification
-- Performance and scalability testing
+- Mock Splynx API responses for validation testing
+- Test customer data integrity across migration
+- Verify relationship preservation between entities
+- Test rollback capabilities for failed migrations
 
-## [Implementation Order]
-Execute implementation in logical phases to minimize dependencies and enable iterative testing.
+## Implementation Order
+Phased implementation focusing on customer migration capabilities and incremental processing.
 
-**Phase 1: Foundation Setup**
-1. Create project structure and configuration management
-2. Set up logging, error handling, and retry mechanisms
-3. Implement basic API client scaffolding for both Sonar and Splynx
-4. Create data models and validation schemas
+**Phase 1: Customer Selection Foundation (Week 1)**
+1. Implement customer filtering and selection logic
+2. Create customer status management and priority ordering
+3. Build CLI interface for customer selection
+4. Develop migration request and configuration management
 
-**Phase 2: API Documentation and Schema Analysis**
-5. Implement documentation scrapers for both APIs
-6. Generate comprehensive API schema documentation
-7. Analyze data structures and create mapping strategies
-8. Document migration approach and data relationships
+**Phase 2: Incremental Migration Core (Week 2)**
+5. Implement incremental migration orchestrator
+6. Build priority phase management system
+7. Create stop-on-error handling with detailed logging
+8. Develop progress tracking and reporting
 
-**Phase 3: Core Data Processing Components**
-9. Develop Sonar GraphQL client with query capabilities
-10. Implement Splynx REST client with CRUD operations
-11. Build data extraction, transformation, and loading components
-12. Create normalized schema and transformation logic
+**Phase 3: Priority Data Migration (Week 3)**
+9. Implement foundation data migration (company, users, groups, plans, tariffs)
+10. Build network infrastructure migration (IP ranges, pools)
+11. Create inventory migration (locations, vendors, models)
+12. Develop customer data migration with dependency handling
 
-**Phase 4: Migration Orchestration**
-13. Implement migration orchestrator with progress tracking
-14. Add batch processing and parallel execution capabilities
-15. Develop comprehensive error handling and recovery mechanisms
-16. Create migration reporting and validation tools
+**Phase 4: API Validation Integration (Week 4)**
+13. Enhance Splynx client with validation capabilities
+14. Implement pre-migration validation for all entity types
+15. Build post-migration verification and integrity checks
+16. Create validation reporting and error suggestion system
 
-**Phase 5: Testing and Optimization**
-17. Implement comprehensive test suite with unit and integration tests
-18. Performance testing and optimization for large datasets
-19. Final validation and documentation updates
-20. Production readiness checklist and deployment preparation
+**Phase 5: Testing and Production Readiness (Week 5)**
+17. Implement comprehensive test suite for customer migration
+18. Performance testing with various customer batch sizes
+19. Error handling testing and recovery procedures
+20. Documentation and production deployment preparation
+
+**Phase 6: Advanced Features (Week 6)**
+21. Implement migration resume capabilities after error fixes
+22. Add concurrent customer processing with rate limiting
+23. Create detailed migration analytics and reporting
+24. Build migration rollback and cleanup procedures

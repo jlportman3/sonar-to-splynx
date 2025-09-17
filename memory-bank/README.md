@@ -134,7 +134,7 @@ edit memory-bank/techContext.md
 1. Read activeContext.md → "Currently working on 405 error investigation"
 2. Read progress.md → "Phase 2 complete, Phase 3 ready to start"  
 3. Read systemPatterns.md → "Use hybrid API + database pattern"
-4. Read techContext.md → "Python 3.8+, MySQL, GraphQL, REST APIs"
+4. Read techContext.md → "Python 3.8+, MySQL, GraphQL, Splynx REST API"
 Result: Complete understanding in 15 minutes
 ```
 
