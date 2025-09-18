@@ -1,15 +1,19 @@
-"""Utilities for backing up Sonar GraphQL data into SQLite."""
+"""Utilities for backing up Sonar GraphQL data into PostgreSQL."""
 
 from __future__ import annotations
 
 import json
-import sqlite3
 import hashlib
 import uuid
+import textwrap
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
-import textwrap
+from urllib.parse import urlsplit, urlunsplit
+
+from psycopg import connect, sql
+from psycopg.types.json import Json
 
 from src.apis.sonar_client import SonarGraphQLClient
 from src.config.settings import config
@@ -19,13 +23,42 @@ logger = get_logger(__name__)
 
 _DEFAULT_SCALARS = {"String", "Boolean", "Int", "Float", "ID"}
 _OPTIONAL_ARG_WHITELIST = {"limit", "offset", "after", "before", "first", "last", "cursor"}
+_BACKUP_TABLE_PREFIX = "graphql_backup__"
 
 
 def _sanitize_table_name(name: str) -> str:
-    """Sanitize a name so it is safe to use as a SQLite table."""
+    """Sanitize a name so it is safe to use as a PostgreSQL table."""
     safe = [c if c.isalnum() or c == "_" else "_" for c in name]
     sanitized = "".join(safe).strip("_")
     return sanitized or "unnamed"
+
+
+def _redact_database_url(url: str) -> str:
+    """Mask credentials in a connection string before logging."""
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return url
+
+    netloc = parts.netloc
+    if not netloc or "@" not in netloc:
+        return url
+
+    userinfo, host = netloc.split("@", 1)
+    if ":" in userinfo:
+        username = userinfo.split(":", 1)[0]
+        masked_userinfo = f"{username}:***"
+    else:
+        masked_userinfo = userinfo
+
+    masked_netloc = f"{masked_userinfo}@{host}"
+    return urlunsplit((parts.scheme, masked_netloc, parts.path, parts.query, parts.fragment))
+
+
+def _format_table_name(query_name: str) -> str:
+    """Return the physical table name for a given GraphQL query."""
+    sanitized = _sanitize_table_name(query_name)
+    return f"{_BACKUP_TABLE_PREFIX}{sanitized}"
 
 
 class GraphQLSchema:
@@ -210,7 +243,7 @@ class CollectionField:
 class SelectionBuilder:
     """Builds selection sets for a GraphQL type based on introspection."""
 
-    def __init__(self, schema: GraphQLSchema, max_depth: int = 2):
+    def __init__(self, schema: GraphQLSchema, max_depth: int = 0):
         self.schema = schema
         self.max_depth = max_depth
 
@@ -262,145 +295,172 @@ class SelectionBuilder:
         return lines
 
 
-class SQLiteBackupWriter:
-    """Persist GraphQL entities into a SQLite database."""
+class PostgresBackupWriter:
+    """Persist GraphQL entities into a PostgreSQL database."""
 
-    def __init__(self, db_path: str):
-        self.db_path = db_path
-        self.conn = sqlite3.connect(db_path)
-        self.conn.execute("PRAGMA journal_mode=WAL;")
-        self.conn.execute("PRAGMA foreign_keys=ON;")
+    def __init__(self, database_url: str):
+        self.database_url = database_url
+        self.conn = connect(database_url)
+        self.conn.autocommit = True
         self._init_metadata()
 
     def _init_metadata(self) -> None:
-        self.conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS backup_runs (
-                id TEXT PRIMARY KEY,
-                started_at TEXT NOT NULL,
-                completed_at TEXT,
-                status TEXT NOT NULL,
-                notes TEXT
+        with self.conn.cursor() as cur:
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS backup_runs (
+                    id TEXT PRIMARY KEY,
+                    started_at TIMESTAMPTZ NOT NULL,
+                    completed_at TIMESTAMPTZ,
+                    status TEXT NOT NULL,
+                    notes TEXT
+                )
+                """
             )
-            """
-        )
-        self.conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS backup_tables (
-                query_name TEXT PRIMARY KEY,
-                table_name TEXT NOT NULL,
-                last_run_id TEXT,
-                FOREIGN KEY(last_run_id) REFERENCES backup_runs(id)
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS backup_tables (
+                    query_name TEXT PRIMARY KEY,
+                    table_name TEXT NOT NULL,
+                    last_run_id TEXT,
+                    FOREIGN KEY(last_run_id) REFERENCES backup_runs(id)
+                )
+                """
             )
-            """
-        )
-        self.conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS backup_table_stats (
-                run_id TEXT NOT NULL,
-                query_name TEXT NOT NULL,
-                records INTEGER NOT NULL,
-                duration_seconds REAL,
-                PRIMARY KEY (run_id, query_name),
-                FOREIGN KEY(run_id) REFERENCES backup_runs(id)
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS backup_table_stats (
+                    run_id TEXT NOT NULL,
+                    query_name TEXT NOT NULL,
+                    records BIGINT NOT NULL,
+                    duration_seconds DOUBLE PRECISION,
+                    PRIMARY KEY (run_id, query_name),
+                    FOREIGN KEY(run_id) REFERENCES backup_runs(id)
+                )
+                """
             )
-            """
-        )
-        self.conn.commit()
 
     def start_run(self) -> str:
         run_id = str(uuid.uuid4())
-        started_at = datetime.utcnow().isoformat()
-        self.conn.execute(
-            "INSERT INTO backup_runs (id, started_at, status) VALUES (?, ?, ?)",
-            (run_id, started_at, "running"),
-        )
-        self.conn.commit()
+        started_at = datetime.utcnow()
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO backup_runs (id, started_at, status) VALUES (%s, %s, %s)",
+                (run_id, started_at, "running"),
+            )
         return run_id
 
     def complete_run(self, run_id: str, status: str = "completed", notes: Optional[str] = None) -> None:
-        completed_at = datetime.utcnow().isoformat()
-        self.conn.execute(
-            "UPDATE backup_runs SET completed_at = ?, status = ?, notes = ? WHERE id = ?",
-            (completed_at, status, notes, run_id),
-        )
-        self.conn.commit()
+        completed_at = datetime.utcnow()
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "UPDATE backup_runs SET completed_at = %s, status = %s, notes = %s WHERE id = %s",
+                (completed_at, status, notes, run_id),
+            )
 
     def ensure_table(self, query_name: str) -> str:
-        table_name = _sanitize_table_name(query_name)
-        self.conn.execute(
-            "INSERT OR IGNORE INTO backup_tables (query_name, table_name) VALUES (?, ?)",
-            (query_name, table_name),
-        )
-        self.conn.execute(
-            f"""
-            CREATE TABLE IF NOT EXISTS "{table_name}" (
-                id TEXT PRIMARY KEY,
-                data TEXT NOT NULL,
-                fetched_at TEXT NOT NULL
+        table_name = _format_table_name(query_name)
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO backup_tables (query_name, table_name) VALUES (%s, %s)"
+                " ON CONFLICT (query_name) DO NOTHING",
+                (query_name, table_name),
             )
-            """
-        )
-        self.conn.commit()
+            cur.execute(
+                sql.SQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS {table} (
+                        id TEXT PRIMARY KEY,
+                        data JSONB NOT NULL,
+                        fetched_at TIMESTAMPTZ NOT NULL
+                    )
+                    """
+                ).format(table=sql.Identifier(table_name))
+            )
         return table_name
 
     def write_entities(self, table_name: str, entities: Iterable[Dict[str, Any]]) -> int:
-        now = datetime.utcnow().isoformat()
-        sanitized = _sanitize_table_name(table_name)
+        now = datetime.utcnow()
         rows = []
         for entity in entities:
-            json_blob = json.dumps(entity, sort_keys=True)
             entity_id = entity.get("id")
             if entity_id is None:
+                json_blob = json.dumps(entity, sort_keys=True)
                 entity_id = hashlib.sha256(json_blob.encode("utf-8")).hexdigest()
-            rows.append((str(entity_id), json_blob, now))
+            rows.append((str(entity_id), Json(entity), now))
         if not rows:
             return 0
-        self.conn.executemany(
-            f'INSERT OR REPLACE INTO "{sanitized}" (id, data, fetched_at) VALUES (?, ?, ?)',
-            rows,
-        )
-        self.conn.commit()
+        with self.conn.cursor() as cur:
+            cur.executemany(
+                sql.SQL(
+                    """
+                    INSERT INTO {table} (id, data, fetched_at)
+                    VALUES (%s, %s, %s)
+                    ON CONFLICT (id) DO UPDATE
+                    SET data = EXCLUDED.data,
+                        fetched_at = EXCLUDED.fetched_at
+                    """
+                ).format(table=sql.Identifier(table_name)),
+                rows,
+            )
         return len(rows)
 
     def mark_table_run(self, query_name: str, run_id: str) -> None:
-        self.conn.execute(
-            "UPDATE backup_tables SET last_run_id = ? WHERE query_name = ?",
-            (run_id, query_name),
-        )
-        self.conn.commit()
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "UPDATE backup_tables SET last_run_id = %s WHERE query_name = %s",
+                (run_id, query_name),
+            )
 
     def record_table_stats(self, query_name: str, run_id: str, records: int, duration_seconds: float) -> None:
-        self.conn.execute(
-            """
-            INSERT OR REPLACE INTO backup_table_stats (run_id, query_name, records, duration_seconds)
-            VALUES (?, ?, ?, ?)
-            """,
-            (run_id, query_name, records, duration_seconds),
-        )
-        self.conn.commit()
+        with self.conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO backup_table_stats (run_id, query_name, records, duration_seconds)
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (run_id, query_name)
+                DO UPDATE SET records = EXCLUDED.records, duration_seconds = EXCLUDED.duration_seconds
+                """,
+                (run_id, query_name, records, duration_seconds),
+            )
 
 
 class SonarGraphQLBackup:
-    """Coordinates full GraphQL backup into SQLite."""
+    """Coordinates full GraphQL backup into PostgreSQL."""
 
     def __init__(
         self,
         client: Optional[SonarGraphQLClient] = None,
-        output_path: str = "sonar_graphql_backup.sqlite",
+        database_url: Optional[str] = None,
         page_size: int = 200,
-        max_depth: int = 2,
+        max_depth: int = 0,
+        sample_size: Optional[int] = None,
+        request_timeout: float = 30.0,
+        rate_limit_delay: float = 5.0,
+        rate_limit_retries: int = 5,
         include: Optional[Set[str]] = None,
         exclude: Optional[Set[str]] = None,
     ) -> None:
-        self.client = client or SonarGraphQLClient(config)
-        self.output_path = output_path
+        self.request_timeout = request_timeout
+        if client is None:
+            self.client = SonarGraphQLClient(config, request_timeout=request_timeout)
+        else:
+            self.client = client
+            if hasattr(self.client, "request_timeout"):
+                self.client.request_timeout = request_timeout
+        if not database_url:
+            raise ValueError("database_url must be provided for PostgreSQL backups")
+        self.database_url = database_url
+        self.database_label = _redact_database_url(database_url)
         self.page_size = page_size
         self.max_depth = max_depth
+        self.sample_size = sample_size
+        self.rate_limit_delay = rate_limit_delay
+        self.rate_limit_retries = max(1, rate_limit_retries)
         self.include = include
         self.exclude = exclude or set()
         self.schema: Optional[GraphQLSchema] = None
-        self.writer = SQLiteBackupWriter(output_path)
+        self.writer = PostgresBackupWriter(database_url)
 
     def load_schema(self) -> None:
         logger.info("Fetching GraphQL schema via introspection...")
@@ -414,7 +474,7 @@ class SonarGraphQLBackup:
         assert self.schema is not None
         selection_builder = SelectionBuilder(self.schema, max_depth=self.max_depth)
         collection_fields = self.schema.discover_collection_fields()
-        logger.info("Discovered %d collection queries", len(collection_fields))
+        logger.info(f"Discovered {len(collection_fields)} collection queries")
 
         if self.include:
             collection_fields = [cf for cf in collection_fields if cf.name in self.include]
@@ -422,7 +482,11 @@ class SonarGraphQLBackup:
             collection_fields = [cf for cf in collection_fields if cf.name not in self.exclude]
 
         run_id = self.writer.start_run()
-        logger.info(f"Backup run {run_id} started (writing to {self.output_path})")
+        logger.info(
+            "Backup run {} started (writing to {})",
+            run_id,
+            self.database_label,
+        )
 
         try:
             for collection in collection_fields:
@@ -452,12 +516,15 @@ class SonarGraphQLBackup:
             collection, query_alias, selection, include_page_info=False
         )
 
-        table_name = self.writer.ensure_table(query_name)
         total_downloaded = 0
+        table_name: Optional[str] = None
         started_at = datetime.utcnow()
         current_page = 1
         per_page = self.page_size
+        if self.sample_size is not None:
+            per_page = min(per_page, max(1, self.sample_size))
         use_page_info = collection.has_page_info
+        rate_limit_attempts = 0
         while True:
             variables = {}
             if collection.supports_paginator:
@@ -468,14 +535,43 @@ class SonarGraphQLBackup:
             )
 
             response = self.client.execute_query(query_to_run, variables or None)
-            if not response.success or not response.data:
+            if not response.success:
+                if _is_rate_limit_error(response.errors):
+                    rate_limit_attempts += 1
+                    if rate_limit_attempts > self.rate_limit_retries:
+                        logger.error(
+                            "Query %s hit rate limits %s times; aborting",
+                            query_name,
+                            rate_limit_attempts,
+                        )
+                        break
+                    logger.warning(
+                        "Query %s rate limited (attempt %s/%s); sleeping %.1fs",
+                        query_name,
+                        rate_limit_attempts,
+                        self.rate_limit_retries,
+                        self.rate_limit_delay,
+                    )
+                    time.sleep(self.rate_limit_delay)
+                    continue
                 if use_page_info and self._should_retry_without_page_info(response.errors):
                     logger.warning(
-                        f"Query {query_name} failed due to aggregation; retrying without page_info"
+                        "Query %s failed due to page_info aggregation; retrying without page_info",
+                        query_name,
                     )
                     use_page_info = False
                     continue
-                logger.warning(f"Query {query_name} failed or returned no data: {response.errors}")
+                logger.error(
+                    "Query %s failed after retries: %s",
+                    query_name,
+                    response.errors,
+                )
+                break
+
+            rate_limit_attempts = 0
+
+            if not response.data:
+                logger.error("Query %s returned no data payload", query_name)
                 break
             container = response.data.get(query_name)
             if not container:
@@ -485,9 +581,20 @@ class SonarGraphQLBackup:
             if not entities:
                 logger.info(f"No more entities for {query_name} (downloaded {total_downloaded} total)")
                 break
+            if total_downloaded == 0:
+                table_name = self.writer.ensure_table(query_name)
+            assert table_name is not None
             written = self.writer.write_entities(table_name, entities)
             total_downloaded += written
             logger.info(f"Stored {written} entities from {query_name} (cumulative {total_downloaded})")
+
+            if self.sample_size is not None and total_downloaded >= self.sample_size:
+                logger.info(
+                    "Reached sample size %s for %s; stopping early",
+                    self.sample_size,
+                    query_name,
+                )
+                break
 
             if use_page_info and collection.has_page_info:
                 page_info = container.get(collection.page_info_field_name) or {}
@@ -587,5 +694,15 @@ __all__ = [
     "SonarGraphQLBackup",
     "GraphQLSchema",
     "SelectionBuilder",
-    "SQLiteBackupWriter",
+    "PostgresBackupWriter",
 ]
+
+
+def _is_rate_limit_error(errors: Optional[List[Dict[str, Any]]]) -> bool:
+    if not errors:
+        return False
+    for error in errors:
+        message = str((error or {}).get("message", "")).lower()
+        if "rate limit" in message or "too many" in message or "429" in message:
+            return True
+    return False

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI tool to back up Sonar GraphQL data into SQLite."""
+"""CLI tool to back up Sonar GraphQL data into PostgreSQL."""
 
 import argparse
 import os
@@ -32,27 +32,74 @@ def _parse_set(value: Optional[str]) -> Optional[Set[str]]:
     return set(items) if items else None
 
 
+def _resolve_database_url(explicit_url: Optional[str]) -> str:
+    """Resolve the Postgres connection string from CLI args or environment variables."""
+    if explicit_url:
+        return explicit_url
+
+    env_url = os.getenv("BACKUP_DATABASE_URL")
+    if env_url:
+        return env_url
+
+    host = os.getenv("BACKUP_DB_HOST")
+    port = os.getenv("BACKUP_DB_PORT")
+    name = os.getenv("BACKUP_DB_NAME")
+    user = os.getenv("BACKUP_DB_USER")
+    password = os.getenv("BACKUP_DB_PASSWORD")
+
+    if all([host, port, name, user, password]):
+        return f"postgresql://{user}:{password}@{host}:{port}/{name}"
+
+    raise ValueError(
+        "PostgreSQL connection string is required. Provide --database-url, BACKUP_DATABASE_URL, "
+        "or BACKUP_DB_* environment variables."
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Full backup of Sonar GraphQL entities into SQLite",
+        description="Full backup of Sonar GraphQL entities into PostgreSQL",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
-        "--output",
-        default="sonar_graphql_backup.sqlite",
-        help="Path to the SQLite database that will store the backup",
+        "--database-url",
+        default=os.getenv("BACKUP_DATABASE_URL"),
+        help="PostgreSQL connection URL (defaults to BACKUP_DATABASE_URL environment variable)",
     )
     parser.add_argument(
         "--page-size",
         type=int,
-        default=200,
+        default=1000,
         help="Number of records to request per GraphQL page",
     )
     parser.add_argument(
         "--max-depth",
         type=int,
-        default=2,
+        default=0,
         help="Maximum depth for nested object selection when building GraphQL queries",
+    )
+    parser.add_argument(
+        "--sample-size",
+        type=int,
+        help="Limit the number of records fetched per collection (useful for smoke tests)",
+    )
+    parser.add_argument(
+        "--request-timeout",
+        type=float,
+        default=30.0,
+        help="Timeout (in seconds) for each GraphQL HTTP request",
+    )
+    parser.add_argument(
+        "--rate-limit-delay",
+        type=float,
+        default=5.0,
+        help="Seconds to wait before retrying when the API signals rate limiting",
+    )
+    parser.add_argument(
+        "--rate-limit-retries",
+        type=int,
+        default=5,
+        help="Maximum consecutive rate-limit retries per collection",
     )
     parser.add_argument(
         "--include",
@@ -79,14 +126,20 @@ def main() -> None:
     include = _parse_set(args.include)
     exclude = _parse_set(args.exclude)
 
-    logger.info("Initializing Sonar GraphQL backup (output=%s)", args.output)
+    database_url = _resolve_database_url(args.database_url)
 
-    client = SonarGraphQLClient(config)
+    logger.info("Initializing Sonar GraphQL backup")
+
+    client = SonarGraphQLClient(config, request_timeout=args.request_timeout)
     backup = SonarGraphQLBackup(
         client=client,
-        output_path=args.output,
+        database_url=database_url,
         page_size=args.page_size,
         max_depth=args.max_depth,
+        sample_size=args.sample_size,
+        request_timeout=args.request_timeout,
+        rate_limit_delay=args.rate_limit_delay,
+        rate_limit_retries=args.rate_limit_retries,
         include=include,
         exclude=exclude,
     )

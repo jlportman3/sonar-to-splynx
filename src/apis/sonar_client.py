@@ -21,9 +21,10 @@ class GraphQLResponse:
 
 class SonarGraphQLClient:
     """GraphQL client for Sonar API interactions."""
-    
-    def __init__(self, config: MigrationConfig):
+
+    def __init__(self, config: MigrationConfig, request_timeout: float = 30.0):
         self.config = config
+        self.request_timeout = request_timeout
         self.client: Optional[Client] = None
         self.transport: Optional[RequestsHTTPTransport] = None
         self._setup_client()
@@ -97,11 +98,17 @@ class SonarGraphQLClient:
                 "variables": variables or {}
             }
             
+            request_kwargs = {
+                "headers": headers,
+                "json": payload,
+                "timeout": self.request_timeout,
+            }
+
             if self.config.sonar_username and self.config.sonar_password and not self.config.sonar_token and not self.config.sonar_api_key:
                 auth = (self.config.sonar_username, self.config.sonar_password)
-                response = requests.post(url, headers=headers, json=payload, auth=auth)
-            else:
-                response = requests.post(url, headers=headers, json=payload)
+                request_kwargs["auth"] = auth
+
+            response = requests.post(url, **request_kwargs)
             
             response.raise_for_status()
             result = response.json()

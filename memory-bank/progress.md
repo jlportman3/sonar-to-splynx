@@ -105,7 +105,7 @@ Planned Achievements:
 ```
 2025-09-13: Sonar GraphQL Backup Tool Ready
 ├── Introspection-driven query discovery implemented
-├── SQLite backup schema with run metadata created
+├── PostgreSQL backup schema with run metadata created
 ├── CLI entry point (backup_sonar_graphql.py) documented
 └── Usage integrated into main README / tech context
 

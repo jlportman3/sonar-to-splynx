@@ -145,21 +145,34 @@ python migration_runner.py all [OPTIONS]
 
 ### Back Up Sonar Data with GraphQL Only
 
-Use the dedicated backup utility to snapshot every accessible Sonar GraphQL collection into a SQLite database before running any migrations:
+Use the dedicated backup utility to snapshot every accessible Sonar GraphQL collection into PostgreSQL before running any migrations:
 
 ```bash
-# direct invocation
-python backup_sonar_graphql.py --output backups/sonar_graphql.sqlite --page-size 200 --max-depth 2
+# start the storage container (runs Postgres on localhost:5433)
+make docker-up
 
-# or via Makefile (supports extra args)
+# direct invocation (defaults to scalar-only field selection)
+BACKUP_DATABASE_URL="postgresql://sonar:sonar_pass@localhost:5433/sonar_backup" \
+python backup_sonar_graphql.py --page-size 200
+
+# or via Makefile with additional arguments
 make backup BACKUP_ARGS="--include accounts,services --page-size 100"
+
+# smoke-test only ~100 rows per collection
+make backup-test
+
+# clear previously cached backup data (metadata + per-collection tables)
+make backup-clean
 ```
 
 - Set `SONAR_URL` and either `SONAR_API_KEY` or `SONAR_USERNAME`/`SONAR_PASSWORD` in your `.env` file.
-- Ensure the target directory exists (e.g., `mkdir -p backups`) before running the command above.
+- Export `BACKUP_DATABASE_URL` (or pass `--database-url`) so the backup process knows where to write data.
 - Activate the local virtual environment first (`source venv/bin/activate`) or let the Makefile auto-detect `venv/bin/python`.
 - Adjust `--include`/`--exclude` to target specific root queries (e.g. `--include accounts,services`).
-- The tool introspects the schema, paginates through each list-style query using the GraphQL API only, and stores JSON payloads per query in the specified SQLite database.
+- Increase `--max-depth` if you need nested relationships in the backup (default `0` captures top-level scalar fields only).
+- The tool introspects the schema, paginates through each list-style query using the GraphQL API only, and stores JSON payloads per query in Postgres tables (one table per root query) along with run metadata. Use `--sample-size` (as in `make backup-test`) when you only need a limited sample per collection.
+- Use `--request-timeout` to fail fast if Sonar stops responding (defaults to 30 seconds per HTTP request).
+- Use `--rate-limit-delay` / `--rate-limit-retries` to automatically pause when Sonar signals rate limiting (defaults: 5 s delay, 5 attempts).
 
 ## 📊 Migration Phases
 

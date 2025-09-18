@@ -10,7 +10,9 @@ This repository is maintained with AI assistance. Use this guide as the canonica
 ## Core Scripts & Entry Points
 | Purpose | Command | Notes |
 | --- | --- | --- |
-| GraphQL backup (preferred) | `make backup BACKUP_ARGS="--include accounts --page-size 100"` | Runs `backup_sonar_graphql.py` through the venv-aware Makefile. Creates/updates `backups/sonar_graphql.sqlite`. |
+| GraphQL backup (preferred) | `make backup BACKUP_ARGS="--include accounts --page-size 100"` | Runs `backup_sonar_graphql.py` through the venv-aware Makefile. Writes JSON payloads to the Postgres instance (`make docker-up` starts it). Defaults to scalar-only snapshots; raise `--max-depth` to include relationships. Use `--request-timeout`/`--rate-limit-delay` options when Sonar throttles. |
+| GraphQL backup sample | `make backup-test` | Same backup engine but capped at 100 rows per collection (`--sample-size`) for quick inspection or schema discovery. |
+| Clear backup tables | `make backup-clean` | Drops all per-collection tables recorded in `backup_tables` and truncates metadata so the next run starts from a clean slate. |
 | GraphQL smoke test | `venv/bin/python test_graphql_major_entities.py` | Verifies Sonar API access for major collections. Update query shapes if Sonar schema changes. |
 | Migration CLI | `python migration_runner.py ...` | Supports `single`, `batch`, `all` commands. Relies on the incremental migration stack under `src/migration/`. |
 

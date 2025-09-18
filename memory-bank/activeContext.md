@@ -10,15 +10,15 @@
 ### **Focus Area: Sonar GraphQL Backup Tooling**
 - **Objective:** Capture a complete, API-only snapshot of Sonar data prior to migration
 - **Deliverable:** `backup_sonar_graphql.py` CLI with supporting backup engine
-- **Storage:** SQLite database (default `sonar_graphql_backup.sqlite`) holding JSON payloads per query
-- **Usage Notes:** Supports include/exclude filters, configurable pagination, depth-limited field selection
+- **Storage:** PostgreSQL database (`sonar_backup` on localhost:5433) holding JSON payloads per query
+- **Usage Notes:** Supports include/exclude filters, configurable pagination, depth-limited field selection, request timeouts (`--request-timeout`), automatic rate-limit handling (`--rate-limit-delay` / `--rate-limit-retries`), and `--sample-size` for capped snapshots (`make backup-test` grabs 100 rows per collection)
 
 ### **Sessions & Progress**
 ```
 Session A: Schema-driven design
 ├── Reviewed existing GraphQL client utilities
 ├── Planned introspection + auto-selection strategy
-└── Defined SQLite layout for per-query JSON storage
+└── Defined PostgreSQL layout for per-query JSON storage
 
 Session B: Implementation
 ├── Added src/backup/sonar_graphql_backup.py (introspection + pagination)
@@ -39,7 +39,9 @@ Session C: Verification
 - **Depth Limit Defaults:** Cap nested selection at depth 2 to prevent runaway recursion while capturing core fields
 
 ### **Next Steps**
-- Execute initial backup (recommended output `backups/sonar_graphql.sqlite`)
+- Execute initial backup (ensure `BACKUP_DATABASE_URL` points to Postgres instance)
+- Use `make backup-test` to capture a 100-row sample set for schema/transform design before full exports
+- Run `make backup-clean` when you need to clear prior runs (drops all per-collection tables and resets metadata)
 - Review resulting tables and adjust include/exclude filters if needed
 - Integrate backup artifacts into broader migration validation workflow
 

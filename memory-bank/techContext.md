@@ -1,7 +1,7 @@
 # 💻 TECHNICAL CONTEXT
 **Technology Stack & Technical Decisions**  
 **Last Updated:** September 12, 2025  
-**Tech Stack:** Python 3.8+, GraphQL, Splynx REST API, MySQL
+**Tech Stack:** Python 3.8+, GraphQL, Splynx REST API, MySQL, PostgreSQL (for GraphQL backups)
 
 ---
 
@@ -15,13 +15,14 @@ Reason: Excellent API client libraries, data processing capabilities
 Status: ✅ Production ready
 
 # Key Libraries
-requests==2.31.0      # REST API communication (Splynx)
-gql==3.4.1           # GraphQL client (Sonar)
-pydantic==2.4.2      # Data modeling and validation
-python-dotenv==1.0.0 # Environment configuration
+requests==2.31.0            # REST API communication (Splynx)
+gql==3.4.1                 # GraphQL client (Sonar)
+pydantic==2.4.2            # Data modeling and validation
+python-dotenv==1.0.0       # Environment configuration
 mysql-connector-python==9.0.0  # MySQL database access
-loguru==0.7.2        # Advanced logging
-pytest==7.4.2       # Testing framework
+psycopg[binary]==3.1.0+    # PostgreSQL access for GraphQL backups
+loguru==0.7.2              # Advanced logging
+pytest==7.4.2             # Testing framework
 ```
 
 ### **API Integration Technologies**
@@ -47,7 +48,8 @@ typing: Type hints for better code quality
 dataclasses: Simple data containers
 
 # Database Access
-mysql-connector-python: Direct MySQL connections
+mysql-connector-python: Direct MySQL connections for Splynx DB analysis/inserts
+psycopg (binary build): PostgreSQL writes for GraphQL backup snapshots
 Raw SQL: For performance-critical operations
 ORM Alternative: Direct SQL for migration precision
 ```
@@ -135,7 +137,7 @@ json: Schema serialization and documentation
 analyze_sonar_schema.py: GraphQL schema documentation  
 analyze_splynx_database.py: Database structure analysis
 investigate_405_errors.py: HTTP error investigation
-backup_sonar_graphql.py: GraphQL-only full data backup into SQLite for pre-migration snapshots
+backup_sonar_graphql.py: GraphQL-only full data backup into PostgreSQL for pre-migration snapshots
 docs/sonar/schema.md: High-level GraphQL domain map for quick reference
 ```
 
@@ -153,6 +155,8 @@ MYSQL_HOST=localhost
 MYSQL_USER=debian-sys-maint
 MYSQL_PASSWORD=secure_password
 MYSQL_SOCKET=/var/run/mysqld/mysqld.sock
+# Backup Storage
+BACKUP_DATABASE_URL=postgresql://sonar:sonar_pass@localhost:5433/sonar_backup
 ```
 
 ---

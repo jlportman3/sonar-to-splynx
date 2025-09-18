@@ -1,13 +1,29 @@
 VENV_PYTHON := venv/bin/python
 PYTHON ?= $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),python3)
-BACKUP_DIR ?= backups
-BACKUP_DB ?= $(BACKUP_DIR)/sonar_graphql.sqlite
 BACKUP_ARGS ?=
 
-.PHONY: backup backup-dir
+COMPOSE ?= docker compose
+COMPOSE_FILE ?= docker-compose.yml
 
-backup: backup-dir
-	$(PYTHON) backup_sonar_graphql.py --output $(BACKUP_DB) $(BACKUP_ARGS)
+.PHONY: backup backup-test backup-clean docker-up docker-down docker-logs docker-status
 
-backup-dir:
-	mkdir -p $(BACKUP_DIR)
+backup:
+	$(PYTHON) backup_sonar_graphql.py $(BACKUP_ARGS)
+
+backup-test:
+	$(PYTHON) backup_sonar_graphql.py --sample-size 100 --page-size 100 $(BACKUP_ARGS)
+
+backup-clean:
+	$(PYTHON) scripts/clean_backup_db.py
+
+docker-up:
+	$(COMPOSE) -f $(COMPOSE_FILE) up -d postgres
+
+docker-down:
+	$(COMPOSE) -f $(COMPOSE_FILE) down
+
+docker-logs:
+	$(COMPOSE) -f $(COMPOSE_FILE) logs -f postgres
+
+docker-status:
+	$(COMPOSE) -f $(COMPOSE_FILE) ps
