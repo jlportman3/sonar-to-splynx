@@ -7,10 +7,12 @@ import hashlib
 import uuid
 import textwrap
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 from urllib.parse import urlsplit, urlunsplit
+import threading
 
 from psycopg import connect, sql
 from psycopg.types.json import Json
@@ -304,6 +306,12 @@ class PostgresBackupWriter:
         self.conn.autocommit = True
         self._init_metadata()
 
+    def close(self) -> None:
+        try:
+            self.conn.close()
+        except Exception:  # pragma: no cover - best effort close
+            pass
+
     def _init_metadata(self) -> None:
         with self.conn.cursor() as cur:
             cur.execute(
@@ -339,8 +347,43 @@ class PostgresBackupWriter:
                 )
                 """
             )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS backup_progress (
+                    query_name TEXT PRIMARY KEY,
+                    next_page INT NOT NULL,
+                    per_page INT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL,
+                    run_id TEXT,
+                    FOREIGN KEY(run_id) REFERENCES backup_runs(id)
+                )
+                """
+            )
 
-    def start_run(self) -> str:
+    def get_running_run(self) -> Optional[str]:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "SELECT id FROM backup_runs WHERE status = %s ORDER BY started_at DESC LIMIT 1",
+                ("running",),
+            )
+            row = cur.fetchone()
+        return row[0] if row else None
+
+    def get_completed_queries(self, run_id: str) -> Set[str]:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "SELECT query_name FROM backup_table_stats WHERE run_id = %s",
+                (run_id,),
+            )
+            rows = cur.fetchall()
+        return {row[0] for row in rows}
+
+    def start_run(self) -> Tuple[str, bool]:
+        existing = self.get_running_run()
+        if existing:
+            logger.info("Resuming previous backup run %s", existing)
+            return existing, True
+
         run_id = str(uuid.uuid4())
         started_at = datetime.utcnow()
         with self.conn.cursor() as cur:
@@ -348,7 +391,7 @@ class PostgresBackupWriter:
                 "INSERT INTO backup_runs (id, started_at, status) VALUES (%s, %s, %s)",
                 (run_id, started_at, "running"),
             )
-        return run_id
+        return run_id, False
 
     def complete_run(self, run_id: str, status: str = "completed", notes: Optional[str] = None) -> None:
         completed_at = datetime.utcnow()
@@ -424,6 +467,36 @@ class PostgresBackupWriter:
                 (run_id, query_name, records, duration_seconds),
             )
 
+    def get_progress(self, query_name: str) -> Optional[Dict[str, Any]]:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                "SELECT next_page, per_page FROM backup_progress WHERE query_name = %s",
+                (query_name,),
+            )
+            row = cur.fetchone()
+        if not row:
+            return None
+        return {"next_page": row[0], "per_page": row[1]}
+
+    def update_progress(self, query_name: str, next_page: int, per_page: int, run_id: str) -> None:
+        with self.conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO backup_progress (query_name, next_page, per_page, updated_at, run_id)
+                VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (query_name)
+                DO UPDATE SET next_page = EXCLUDED.next_page,
+                              per_page = EXCLUDED.per_page,
+                              updated_at = EXCLUDED.updated_at,
+                              run_id = EXCLUDED.run_id
+                """,
+                (query_name, next_page, per_page, datetime.utcnow(), run_id),
+            )
+
+    def clear_progress(self, query_name: str) -> None:
+        with self.conn.cursor() as cur:
+            cur.execute("DELETE FROM backup_progress WHERE query_name = %s", (query_name,))
+
 
 class SonarGraphQLBackup:
     """Coordinates full GraphQL backup into PostgreSQL."""
@@ -440,6 +513,7 @@ class SonarGraphQLBackup:
         rate_limit_retries: int = 5,
         include: Optional[Set[str]] = None,
         exclude: Optional[Set[str]] = None,
+        thread_pool_size: int = 1,
     ) -> None:
         self.request_timeout = request_timeout
         if client is None:
@@ -459,14 +533,39 @@ class SonarGraphQLBackup:
         self.rate_limit_retries = max(1, rate_limit_retries)
         self.include = include
         self.exclude = exclude or set()
+        self.thread_pool_size = max(1, thread_pool_size)
         self.schema: Optional[GraphQLSchema] = None
-        self.writer = PostgresBackupWriter(database_url)
+        self.primary_writer = PostgresBackupWriter(database_url)
+        self._thread_local: threading.local = threading.local()
+        self._worker_writers: Set[PostgresBackupWriter] = set()
+        self._worker_writers_lock = threading.Lock()
 
     def load_schema(self) -> None:
         logger.info("Fetching GraphQL schema via introspection...")
         schema_data = self.client.get_schema_info()
         self.schema = GraphQLSchema(schema_data)
         logger.info(f"GraphQL schema loaded: {len(self.schema.type_map)} types")
+
+    def _get_worker_writer(self) -> PostgresBackupWriter:
+        if self.thread_pool_size == 1:
+            return self.primary_writer
+        writer = getattr(self._thread_local, "writer", None)
+        if writer is None:
+            writer = PostgresBackupWriter(self.database_url)
+            self._thread_local.writer = writer
+            with self._worker_writers_lock:
+                self._worker_writers.add(writer)
+        return writer
+
+    def _close_worker_writers(self) -> None:
+        writers: List[PostgresBackupWriter] = []
+        with self._worker_writers_lock:
+            writers.extend(self._worker_writers)
+            self._worker_writers.clear()
+        for writer in writers:
+            writer.close()
+        self.primary_writer.close()
+
 
     def run(self) -> None:
         if not self.schema:
@@ -481,22 +580,61 @@ class SonarGraphQLBackup:
         if self.exclude:
             collection_fields = [cf for cf in collection_fields if cf.name not in self.exclude]
 
-        run_id = self.writer.start_run()
+        run_id, resuming_run = self.primary_writer.start_run()
         logger.info(
             "Backup run {} started (writing to {})",
             run_id,
             self.database_label,
         )
 
+        completed_queries: Set[str] = set()
+        if resuming_run:
+            completed_queries = self.primary_writer.get_completed_queries(run_id)
+            if completed_queries:
+                logger.info(
+                    f"Skipping {len(completed_queries)} previously completed collection(s)"
+                )
+
+        collections_to_process: List[CollectionField] = []
+        for collection in collection_fields:
+            if collection.name in completed_queries:
+                logger.info(
+                    f"Skipping {collection.name}; already completed in run {run_id}"
+                )
+                continue
+            collections_to_process.append(collection)
+
         try:
-            for collection in collection_fields:
-                self._backup_collection(collection, selection_builder, run_id)
-            self.writer.complete_run(run_id, status="completed")
+            if self.thread_pool_size > 1 and collections_to_process:
+                logger.info(
+                    "Backing up %s collections with thread pool size %s",
+                    len(collections_to_process),
+                    self.thread_pool_size,
+                )
+                with ThreadPoolExecutor(max_workers=self.thread_pool_size) as executor:
+                    futures = [
+                        executor.submit(
+                            self._backup_collection,
+                            collection,
+                            selection_builder,
+                            run_id,
+                        )
+                        for collection in collections_to_process
+                    ]
+                    for future in as_completed(futures):
+                        future.result()
+            else:
+                for collection in collections_to_process:
+                    self._backup_collection(collection, selection_builder, run_id)
+            self.primary_writer.complete_run(run_id, status="completed")
             logger.info(f"Backup run {run_id} completed")
         except Exception as exc:  # pragma: no cover - defensive logging
             logger.exception(f"GraphQL backup failed: {exc}")
-            self.writer.complete_run(run_id, status="failed", notes=str(exc))
+            self.primary_writer.complete_run(run_id, status="failed", notes=str(exc))
             raise
+        finally:
+            if self.thread_pool_size > 1:
+                self._close_worker_writers()
 
     def _backup_collection(
         self,
@@ -508,6 +646,7 @@ class SonarGraphQLBackup:
         logger.info(f"Backing up query '{query_name}'")
         selection = selection_builder.build(collection.entity_type["name"])
         query_alias = f"backup_{query_name}"
+        writer = self._get_worker_writer()
 
         query_with_page_info = self._build_collection_query(
             collection, query_alias, selection, include_page_info=True
@@ -519,12 +658,24 @@ class SonarGraphQLBackup:
         total_downloaded = 0
         table_name: Optional[str] = None
         started_at = datetime.utcnow()
-        current_page = 1
         per_page = self.page_size
         if self.sample_size is not None:
             per_page = min(per_page, max(1, self.sample_size))
+        current_page = 1
+        resume_progress: Optional[Dict[str, Any]] = None
+        if collection.supports_paginator:
+            resume_progress = writer.get_progress(query_name)
+            if resume_progress:
+                current_page = max(1, int(resume_progress.get("next_page", 1)))
+                stored_per_page = int(resume_progress.get("per_page", per_page))
+                if stored_per_page > 0:
+                    per_page = stored_per_page
+                logger.info(
+                    f"Resuming {query_name} at page {current_page} (per_page={per_page})"
+                )
         use_page_info = collection.has_page_info
         rate_limit_attempts = 0
+        successfully_completed = False
         while True:
             variables = {}
             if collection.supports_paginator:
@@ -579,14 +730,22 @@ class SonarGraphQLBackup:
                 break
             entities = container.get(collection.entities_field_name, [])
             if not entities:
-                logger.info(f"No more entities for {query_name} (downloaded {total_downloaded} total)")
+                logger.info(
+                    f"No more entities for {query_name} (downloaded {total_downloaded} total)"
+                )
+                successfully_completed = True
                 break
             if total_downloaded == 0:
-                table_name = self.writer.ensure_table(query_name)
+                table_name = writer.ensure_table(query_name)
             assert table_name is not None
-            written = self.writer.write_entities(table_name, entities)
+            written = writer.write_entities(table_name, entities)
             total_downloaded += written
-            logger.info(f"Stored {written} entities from {query_name} (cumulative {total_downloaded})")
+            logger.info(
+                f"Stored {written} entities from {query_name} (cumulative {total_downloaded})"
+            )
+
+            if collection.supports_paginator:
+                writer.update_progress(query_name, current_page + 1, per_page, run_id)
 
             if self.sample_size is not None and total_downloaded >= self.sample_size:
                 logger.info(
@@ -594,6 +753,7 @@ class SonarGraphQLBackup:
                     self.sample_size,
                     query_name,
                 )
+                successfully_completed = True
                 break
 
             if use_page_info and collection.has_page_info:
@@ -608,24 +768,36 @@ class SonarGraphQLBackup:
                         per_page = records_per_page
                     if isinstance(total_pages, int) and total_pages > 0:
                         if current_page >= total_pages:
+                            successfully_completed = True
                             break
                     elif written < per_page:
+                        successfully_completed = True
                         break
                     current_page += 1
                     continue
             elif collection.supports_paginator:
                 if written < per_page:
+                    successfully_completed = True
                     break
                 current_page += 1
                 continue
 
             # Non-paginated paths exit after first batch
+            successfully_completed = True
             break
 
         logger.info(f"Finished backing up {query_name} ({total_downloaded} records)")
         duration = (datetime.utcnow() - started_at).total_seconds()
-        self.writer.record_table_stats(query_name, run_id, total_downloaded, duration)
-        self.writer.mark_table_run(query_name, run_id)
+        writer.record_table_stats(query_name, run_id, total_downloaded, duration)
+        if successfully_completed:
+            if collection.supports_paginator:
+                writer.clear_progress(query_name)
+            writer.mark_table_run(query_name, run_id)
+        else:
+            logger.warning(
+                "Backup for %s exited early; progress stored for resume",
+                query_name,
+            )
 
     def _build_collection_query(
         self,

@@ -102,6 +102,12 @@ def main() -> None:
         help="Maximum consecutive rate-limit retries per collection",
     )
     parser.add_argument(
+        "--threads",
+        type=int,
+        default=1,
+        help="Number of collections to back up concurrently",
+    )
+    parser.add_argument(
         "--include",
         help="Comma-separated list of root query names to include (others skipped)",
     )
@@ -129,6 +135,9 @@ def main() -> None:
     database_url = _resolve_database_url(args.database_url)
 
     logger.info("Initializing Sonar GraphQL backup")
+    logger.info(
+        "Existing pagination progress will be reused; run make backup-clean to reset."
+    )
 
     client = SonarGraphQLClient(config, request_timeout=args.request_timeout)
     backup = SonarGraphQLBackup(
@@ -142,6 +151,7 @@ def main() -> None:
         rate_limit_retries=args.rate_limit_retries,
         include=include,
         exclude=exclude,
+        thread_pool_size=args.threads,
     )
     backup.run()
 

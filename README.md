@@ -163,6 +163,14 @@ make backup-test
 
 # clear previously cached backup data (metadata + per-collection tables)
 make backup-clean
+
+# capture current Splynx MariaDB state (before running migrations)
+source venv/bin/activate
+python scripts/dump_splynx_db.py
+
+# optionally mirror Sonar company + custom field definitions into Splynx config
+python scripts/migrate_company.py
+python scripts/migrate_custom_fields.py
 ```
 
 - Set `SONAR_URL` and either `SONAR_API_KEY` or `SONAR_USERNAME`/`SONAR_PASSWORD` in your `.env` file.

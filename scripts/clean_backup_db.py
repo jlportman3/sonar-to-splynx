@@ -56,7 +56,18 @@ def truncate_metadata(conn_kwargs: Dict[str, str]) -> None:
     with connect(**conn_kwargs) as conn:
         with conn.cursor() as cur:
             cur.execute(
-                "TRUNCATE TABLE backup_runs, backup_tables, backup_table_stats RESTART IDENTITY CASCADE"
+                """
+                CREATE TABLE IF NOT EXISTS backup_progress (
+                    query_name TEXT PRIMARY KEY,
+                    next_page INT NOT NULL,
+                    per_page INT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL,
+                    run_id TEXT
+                )
+                """
+            )
+            cur.execute(
+                "TRUNCATE TABLE backup_runs, backup_tables, backup_table_stats, backup_progress RESTART IDENTITY CASCADE"
             )
 
 

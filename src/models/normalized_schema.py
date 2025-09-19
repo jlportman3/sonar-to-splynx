@@ -29,6 +29,9 @@ class EntityType(Enum):
     TARIFF = "tariff"
     NETWORK = "network"
     IP_ADDRESS = "ip_address"
+    ROLE = "role"
+    PERMISSION = "permission"
+    ROLE_PERMISSION = "role_permission"
 
 class MigrationStatus(Enum):
     """Migration status for entities."""
@@ -156,7 +159,58 @@ class NormalizedInternetService(NormalizedService):
             'login': '',
             'password': '',
             'router_id': 0,
-            'taking_ipv4': 0,  # 0=None, 1=Permanent, 2=Dynamic
+            'taking_ipv4': 0,
             'ipv4': '',
             'ipv4_pool_id': 0,
             'mac': '',
+            'additional_attributes': {}
+        })
+
+
+@dataclass
+class NormalizedRole(NormalizedEntity):
+    """Normalized security role."""
+
+    def __post_init__(self):
+        self.entity_type = EntityType.ROLE
+        if not self.data:
+            self.data = {
+                'name': '',
+                'description': '',
+                'scope': 'global',
+                'is_system': False,
+                'additional_attributes': {}
+            }
+
+
+@dataclass
+class NormalizedPermission(NormalizedEntity):
+    """Normalized permission definition."""
+
+    def __post_init__(self):
+        self.entity_type = EntityType.PERMISSION
+        if not self.data:
+            self.data = {
+                'code': '',
+                'category': '',
+                'description': '',
+                'is_active': True,
+                'additional_attributes': {}
+            }
+
+
+@dataclass
+class NormalizedRolePermission(NormalizedEntity):
+    """Normalized role ↔ permission assignment."""
+
+    def __post_init__(self):
+        self.entity_type = EntityType.ROLE_PERMISSION
+        if not self.data:
+            self.data = {
+                'role_id': '',
+                'permission_id': '',
+                'granted_at': None,
+                'granted_by': None,
+                'inherited_from': None,
+                'additional_attributes': {}
+            }
