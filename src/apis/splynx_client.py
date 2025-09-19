@@ -190,6 +190,13 @@ class SplynxAPIClient:
         response = self._make_request('POST', 'admin/administration/administrators', json=admin_data)
         return self._handle_response(response)
 
+    def set_role_permissions(self, role: str, permissions: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Update permissions for a specific Splynx role."""
+        payload = {"permissions": permissions}
+        endpoint = f"admin/administration/roles/{role}/permissions"
+        response = self._make_request('POST', endpoint, json=payload)
+        return self._handle_response(response)
+
     def get_tariff_onetime_schema(self) -> Dict[str, Any]:
         """Get one-time tariff schema via OPTIONS - CONFIRMED WORKING"""
         response = self._make_request('OPTIONS', 'admin/tariffs/one-time')

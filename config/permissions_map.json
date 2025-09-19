@@ -1,5 +1,714 @@
 {
   "administrator": [
-    {"module": "administration", "controller": "administrators", "action": "*", "rule": "allow"}
+    {
+      "module": "administration",
+      "controller": "administrators",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "assign_account_inventory": [
+    {
+      "module": "inventory",
+      "controller": "items",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "check_in_own_job": [
+    {
+      "module": "scheduling",
+      "controller": "jobs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "complete_own_job": [
+    {
+      "module": "scheduling",
+      "controller": "jobs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_account": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_account_transactions": [
+    {
+      "module": "finance",
+      "controller": "transactions",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_call_log": [
+    {
+      "module": "support",
+      "controller": "call_logs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_contact": [
+    {
+      "module": "customers",
+      "controller": "contacts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_contract": [
+    {
+      "module": "finance",
+      "controller": "contracts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_data_usage": [
+    {
+      "module": "networking",
+      "controller": "data_usage",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_file": [
+    {
+      "module": "support",
+      "controller": "files",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_ip_assignment": [
+    {
+      "module": "networking",
+      "controller": "ip_addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_note": [
+    {
+      "module": "support",
+      "controller": "notes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_payment": [
+    {
+      "module": "finance",
+      "controller": "payments",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_payment_method": [
+    {
+      "module": "finance",
+      "controller": "payment_methods",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_radius_account": [
+    {
+      "module": "networking",
+      "controller": "radius",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_scheduled_event": [
+    {
+      "module": "scheduling",
+      "controller": "calendar",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_serviceable_address": [
+    {
+      "module": "customers",
+      "controller": "addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_snmp_override": [
+    {
+      "module": "networking",
+      "controller": "snmp",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_task": [
+    {
+      "module": "support",
+      "controller": "tasks",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_tax_override": [
+    {
+      "module": "finance",
+      "controller": "taxes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_ticket": [
+    {
+      "module": "support",
+      "controller": "tickets",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "create_uninventoried_mac_address": [
+    {
+      "module": "inventory",
+      "controller": "items",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_account_transactions": [
+    {
+      "module": "finance",
+      "controller": "transactions",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_call_log": [
+    {
+      "module": "support",
+      "controller": "call_logs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_contact": [
+    {
+      "module": "customers",
+      "controller": "contacts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_contract": [
+    {
+      "module": "finance",
+      "controller": "contracts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_file": [
+    {
+      "module": "support",
+      "controller": "files",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_ip_assignment": [
+    {
+      "module": "networking",
+      "controller": "ip_addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_note": [
+    {
+      "module": "support",
+      "controller": "notes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_payment_method": [
+    {
+      "module": "finance",
+      "controller": "payment_methods",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_radius_account": [
+    {
+      "module": "networking",
+      "controller": "radius",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_scheduled_event": [
+    {
+      "module": "scheduling",
+      "controller": "calendar",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_task": [
+    {
+      "module": "support",
+      "controller": "tasks",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_tax_override": [
+    {
+      "module": "finance",
+      "controller": "taxes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "modify_account_services": [
+    {
+      "module": "customers",
+      "controller": "services",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "override_account_status_proration": [
+    {
+      "module": "finance",
+      "controller": "billing",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_account": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_account_group": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_account_status": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_account_transactions": [
+    {
+      "module": "finance",
+      "controller": "transactions",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_account_type": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_address_list": [
+    {
+      "module": "customers",
+      "controller": "addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_alerting_rotation": [
+    {
+      "module": "scheduling",
+      "controller": "alerts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_all_inventory": [
+    {
+      "module": "inventory",
+      "controller": "*",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_call_log": [
+    {
+      "module": "support",
+      "controller": "call_logs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_contract": [
+    {
+      "module": "finance",
+      "controller": "contracts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_custom_field": [
+    {
+      "module": "customers",
+      "controller": "custom_fields",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_custom_link": [
+    {
+      "module": "administration",
+      "controller": "custom_links",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_data_usage_history": [
+    {
+      "module": "networking",
+      "controller": "data_usage",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_email_domain": [
+    {
+      "module": "support",
+      "controller": "communications",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_email_message": [
+    {
+      "module": "support",
+      "controller": "communications",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_file": [
+    {
+      "module": "support",
+      "controller": "files",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_ip_assignment": [
+    {
+      "module": "networking",
+      "controller": "ip_addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_message_category": [
+    {
+      "module": "support",
+      "controller": "communications",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_network_monitoring_template": [
+    {
+      "module": "networking",
+      "controller": "monitoring",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_network_site": [
+    {
+      "module": "networking",
+      "controller": "sites",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_payment_method": [
+    {
+      "module": "finance",
+      "controller": "payment_methods",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_phone_number_type": [
+    {
+      "module": "customers",
+      "controller": "contacts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_poller": [
+    {
+      "module": "networking",
+      "controller": "pollers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_radius_account": [
+    {
+      "module": "networking",
+      "controller": "radius",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_scheduled_event": [
+    {
+      "module": "scheduling",
+      "controller": "calendar",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_serviceable_address": [
+    {
+      "module": "customers",
+      "controller": "addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_snmp_override": [
+    {
+      "module": "networking",
+      "controller": "snmp",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_task_template": [
+    {
+      "module": "support",
+      "controller": "tasks",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_ticket": [
+    {
+      "module": "support",
+      "controller": "tickets",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_timeseries_data": [
+    {
+      "module": "networking",
+      "controller": "monitoring",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "read_triggered_email": [
+    {
+      "module": "support",
+      "controller": "communications",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "refund_payments": [
+    {
+      "module": "finance",
+      "controller": "payments",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "reverse_account_transactions": [
+    {
+      "module": "finance",
+      "controller": "transactions",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_account": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_account_billing_parameters": [
+    {
+      "module": "finance",
+      "controller": "billing",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_account_link": [
+    {
+      "module": "customers",
+      "controller": "customers",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_account_service_parameters": [
+    {
+      "module": "customers",
+      "controller": "services",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_account_transactions": [
+    {
+      "module": "finance",
+      "controller": "transactions",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_call_log": [
+    {
+      "module": "support",
+      "controller": "call_logs",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_contact": [
+    {
+      "module": "customers",
+      "controller": "contacts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_contract": [
+    {
+      "module": "finance",
+      "controller": "contracts",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_file": [
+    {
+      "module": "support",
+      "controller": "files",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_ip_assignment": [
+    {
+      "module": "networking",
+      "controller": "ip_addresses",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_note": [
+    {
+      "module": "support",
+      "controller": "notes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_payment_method": [
+    {
+      "module": "finance",
+      "controller": "payment_methods",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_radius_account": [
+    {
+      "module": "networking",
+      "controller": "radius",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_scheduled_event": [
+    {
+      "module": "scheduling",
+      "controller": "calendar",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_snmp_override": [
+    {
+      "module": "networking",
+      "controller": "snmp",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_task": [
+    {
+      "module": "support",
+      "controller": "tasks",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_tax_override": [
+    {
+      "module": "finance",
+      "controller": "taxes",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "update_ticket": [
+    {
+      "module": "support",
+      "controller": "tickets",
+      "action": "*",
+      "rule": "allow"
+    }
+  ],
+  "delete_snmp_override": [
+    {
+      "module": "networking",
+      "controller": "snmp",
+      "action": "*",
+      "rule": "allow"
+    }
   ]
 }
