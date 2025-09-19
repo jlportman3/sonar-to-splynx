@@ -1,0 +1,5 @@
+{
+  "administrator": [
+    {"module": "administration", "controller": "administrators", "action": "*", "rule": "allow"}
+  ]
+}

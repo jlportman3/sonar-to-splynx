@@ -168,9 +168,17 @@ make backup-clean
 source venv/bin/activate
 python scripts/dump_splynx_db.py
 
-# optionally mirror Sonar company + custom field definitions into Splynx config
-python scripts/migrate_company.py
-python scripts/migrate_custom_fields.py
+# run Foundation migration (company, custom fields, roles normalization)
+python scripts/migrations/migrate_foundation.py
+
+# interactive menu to perform backups and phases step-by-step
+python scripts/migrations/migrate_menu.py
+
+# restore Splynx from latest backup (prompted)
+python scripts/migrations/migrate_restore_splynx.py
+
+> ℹ️ Role permission mapping comes from `config/permissions_map.json`. Extend this
+> file to align Sonar permission slugs with Splynx modules/controllers.
 ```
 
 - Set `SONAR_URL` and either `SONAR_API_KEY` or `SONAR_USERNAME`/`SONAR_PASSWORD` in your `.env` file.
@@ -209,6 +217,8 @@ The migration follows a priority-based approach:
 - Contact information
 - Service assignments
 - Billing data
+- Splynx admin users are never overwritten; the Sonar `admin` account is skipped by policy.
+- When roles are migrated, existing Splynx defaults (administrator, manager, etc.) are reused via `config/role_map.json` so duplicates are never created.
 
 ## 🔍 Examples
 

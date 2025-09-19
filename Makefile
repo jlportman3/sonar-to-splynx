@@ -5,7 +5,7 @@ BACKUP_ARGS ?=
 COMPOSE ?= docker compose
 COMPOSE_FILE ?= docker-compose.yml
 
-.PHONY: backup backup-test backup-clean backup-splynx docker-up docker-down docker-logs docker-status
+.PHONY: backup backup-test backup-clean backup-splynx splynx-restore docker-up docker-down docker-logs docker-status
 
 backup:
 	$(PYTHON) backup_sonar_graphql.py $(BACKUP_ARGS)
@@ -18,6 +18,9 @@ backup-clean:
 
 backup-splynx:
 	$(PYTHON) scripts/dump_splynx_db.py
+
+splynx-restore:
+	$(PYTHON) scripts/migrations/migrate_restore_splynx.py
 
 docker-up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d postgres
