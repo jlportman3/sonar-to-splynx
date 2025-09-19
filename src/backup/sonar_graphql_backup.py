@@ -579,6 +579,13 @@ class SonarGraphQLBackup:
             collection_fields = [cf for cf in collection_fields if cf.name in self.include]
         if self.exclude:
             collection_fields = [cf for cf in collection_fields if cf.name not in self.exclude]
+        if not self.include:
+            skipped_logs = [cf.name for cf in collection_fields if "log" in cf.name.lower()]
+            if skipped_logs:
+                logger.info(
+                    "Skipping %s log collection(s); use --include to back them up", len(skipped_logs)
+                )
+                collection_fields = [cf for cf in collection_fields if cf.name not in skipped_logs]
 
         run_id, resuming_run = self.primary_writer.start_run()
         logger.info(

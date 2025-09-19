@@ -1,6 +1,14 @@
+
 # AGENTS GUIDE
 
 This repository is maintained with AI assistance. Use this guide as the canonical reference for how automation agents should operate inside the project.
+NEVER USE %s as formatting in python files. Use fstrings
+NEVER USE %s as formatting in python files. Use fstrings
+NEVER USE %s as formatting in python files. Use fstrings
+NEVER USE %s as formatting in python files. Use fstrings
+NEVER USE %s as formatting in python files. Use fstrings
+NEVER USE %s as formatting in python files. Use fstrings
+
 
 ## Mission
 - Focus on **Sonar → Splynx** migration tooling.

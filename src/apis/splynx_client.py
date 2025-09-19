@@ -179,7 +179,17 @@ class SplynxAPIClient:
         """Create one-time tariff - CONFIRMED WORKING"""
         response = self._make_request('POST', 'admin/tariffs/one-time', json=tariff_data)
         return self._handle_response(response)
-    
+
+    def list_administrators(self) -> Dict[str, Any]:
+        """List existing Splynx administrators."""
+        response = self._make_request('GET', 'admin/administration/administrators')
+        return self._handle_response(response)
+
+    def create_administrator(self, admin_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Create a Splynx administrator."""
+        response = self._make_request('POST', 'admin/administration/administrators', json=admin_data)
+        return self._handle_response(response)
+
     def get_tariff_onetime_schema(self) -> Dict[str, Any]:
         """Get one-time tariff schema via OPTIONS - CONFIRMED WORKING"""
         response = self._make_request('OPTIONS', 'admin/tariffs/one-time')

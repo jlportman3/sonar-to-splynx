@@ -1,4 +1,8 @@
 {
   "admin": "administrator",
-  "super_admin": "super-administrator"
+  "super_admin": "super-administrator",
+  "supervisor": "super-administrator",
+  "read_only": "manager",
+  "technician": "technician",
+  "sales": "customer-creator"
 }

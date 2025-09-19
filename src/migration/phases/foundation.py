@@ -221,6 +221,19 @@ _TYPE_MAP = {
 }
 
 
+_SKIP_ROLE_SLUGS = {
+    "portal",
+    "portalv2",
+    "batcher",
+    "minim",
+    "netflow_on_premises",
+    "serge",
+    "no_permissions",
+    "preseem",
+    "serverplus",
+}
+
+
 def _load_role_mapping() -> Dict[str, str]:
     mapping_path = Path("config/role_map.json")
     if not mapping_path.exists():
@@ -247,21 +260,31 @@ def _apply_roles_to_splynx(normalized_roles: Iterable[NormalizedRole]) -> Dict[s
     role_mapping = _load_role_mapping()
 
     created = 0
+    mapped_existing = 0
     role_map: Dict[str, str] = {}
 
     for entity in normalized_roles:
         name_value = entity.data.get("name") or entity.metadata.get("raw", {}).get("name") or entity.source_id
         title_value = entity.data.get("description") or entity.data.get("name") or name_value
         base_slug = _slugify(name_value)
+
+        if base_slug in _SKIP_ROLE_SLUGS:
+            logger.info(
+                "Skipping Sonar role %s (slug=%s); configured to ignore",
+                name_value,
+                base_slug,
+            )
+            continue
+
         slug = role_mapping.get(base_slug, base_slug)
         title_formatted = title_value.strip() or slug.replace("_", " ").title()
         is_system = entity.data.get("is_system", False)
         is_base = "1" if is_system else "0"
 
-        role_map[entity.source_id] = slug
-
         if slug in existing:
             logger.debug("Role %s already exists in Splynx; preserving existing title", slug)
+            mapped_existing += 1
+            role_map[entity.source_id] = slug
             continue
 
         if slug in default_roles:
@@ -270,6 +293,8 @@ def _apply_roles_to_splynx(normalized_roles: Iterable[NormalizedRole]) -> Dict[s
                 name_value,
                 slug,
             )
+            mapped_existing += 1
+            role_map[entity.source_id] = slug
             continue
 
         sanitized_title = title_formatted.replace("'", "''")
@@ -277,8 +302,13 @@ def _apply_roles_to_splynx(normalized_roles: Iterable[NormalizedRole]) -> Dict[s
             f"INSERT INTO roles (name, title, is_base) VALUES ('{slug}', '{sanitized_title}', '{is_base}');"
         )
         created += 1
+        role_map[entity.source_id] = slug
 
-    logger.info(f"Applied roles to Splynx: created={created}")
+    logger.info(
+        "Applied roles to Splynx: created=%s, mapped_to_existing=%s",
+        created,
+        mapped_existing,
+    )
     return role_map
 
 
@@ -583,6 +613,18 @@ def run_foundation_phase(output_roles: Optional[str] = None) -> None:
     migrate_company()
     migrate_custom_fields()
     normalize_roles(output_roles, apply_to_splynx=True)
+    try:
+        from src.migration.phases.admin_users import import_sonar_administrators
+
+        result = import_sonar_administrators()
+        logger.info(
+            "Imported Sonar administrators: created=%s, skipped=%s, failed=%s",
+            len(result.created),
+            len(result.skipped),
+            len(result.failed),
+        )
+    except Exception as exc:
+        logger.warning(f"Administrator import skipped due to error: {exc}")
 
 
 __all__ = [
